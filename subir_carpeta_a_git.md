@@ -10,14 +10,10 @@
 `cp -r /home/elena/Escritorio/University\ stuff/2º/1º\ Cuatrimestre/ED/Reto3\(Elena\)/ .`
 
 5. Se van añadiendo al repositorio los ficheros dentro de la carpeta que queremos copiar, en mi caso tenía ficheros .cpp, .h y un makefile:
-`git add Reto3\(Elena\)/*.cpp`
+`git add Reto3\(Elena\)/*.cpp`, `git add Reto3\(Elena\)/*.h`, `git add Reto3\(Elena\)/Makefile`
 
-`git add Reto3\(Elena\)/*.h`
+6. `git status` para comprobar que lo hemos hecho bien.
 
-`git add Reto3\(Elena\)/Makefile`
+7. Se hace commit de lo añadido, si no es como si no hubiérmos hecho nada: `git commit -am "Comentario"`
 
-6. `git status` para comprobar que lo hemos hecho bien
-
-7.Se hace commit de lo añadido, si no es como si no hubiérmos hecho nada: `git commit -am "Comentario"`
-
-8. Finalmente escribe en la terminal `git push` para que se suba a Github.
+8. Finalmente se escribe en la terminal `git push` para que se suba a Github.
