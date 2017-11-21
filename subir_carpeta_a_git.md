@@ -1,4 +1,4 @@
-**Pasos a seguir: **
+### Pasos a seguir: 
 1. Hacemos git clone *repositorio al que queramos subir la carpeta*, por ejemplo en mi caso:
 `git clone https://github.com/ElenaMerelo/Estructura-de-Datos`
 
