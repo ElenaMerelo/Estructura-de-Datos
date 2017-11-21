@@ -1,5 +1,5 @@
-#Reto 3 (TDA lineales)
-###Implementación de una pila a partir de list<class T>
+# Reto 3 (TDA lineales)
+### Implementación de una pila a partir de list<class T>
 
 El reto 3 tiene un planteamiento muy sencillo. Se trata de implementar la clase
 `stack` a partir de la clase `list`. La idea es que disponéis de la clase `list` con toda la
