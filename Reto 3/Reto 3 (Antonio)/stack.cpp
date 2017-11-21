@@ -1,5 +1,5 @@
 /**
-  * @file pila.cpp
+  * @file stack.cpp
   * @brief Implementación del TDA Pila a partir de list<>.
   *
   */
