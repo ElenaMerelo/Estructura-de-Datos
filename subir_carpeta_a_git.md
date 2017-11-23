@@ -14,6 +14,6 @@
 
 6. `git status` para comprobar que lo hemos hecho bien.
 
-7. Se hace commit de lo añadido, si no es como si no hubiérmos hecho nada: `git commit -am "Comentario"`
+7. Se hace commit de lo añadido, si no es como si no hubiéramos hecho nada: `git commit -am "Comentario"`
 
 8. Finalmente se escribe en la terminal `git push` para que se suba a Github.
