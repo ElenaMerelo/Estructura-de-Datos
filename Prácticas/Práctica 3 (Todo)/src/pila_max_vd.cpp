@@ -31,7 +31,8 @@ void Pila_max::push(int number){
       v[v.size()-1].maximo= number;
     else
       v[v.size()-1].maximo= v[size()-2].maximo;
-  } else{
+  } 
+ else{
     v[0].maximo=number;
   }
 }
