@@ -1,10 +1,15 @@
 #include <iostream>
-#include "pila_max_vd.h"
 
+#define CUAL_COMPILA 2
+#if CUAL_COMPILA==1
+#include<pila_max_vd.h>
+#else
+#include<pila_max_cola.h>
+#endif
 using namespace std;
 
 int main(){
-  pila_max_vd p;
+  Pila_max p;
 
   p.push(2);
   p.push(1);
@@ -19,5 +24,5 @@ int main(){
   cout << "Elemento: " << p.top().element << " Máximo: " << p.top().maximo << endl; p.pop();
   cout << "Elemento: " << p.top().element << " Máximo: " << p.top().maximo << endl; p.pop();
   cout << "Elemento: " << p.top().element << " Máximo: " << p.top().maximo << endl; p.pop();
-
+  
 }

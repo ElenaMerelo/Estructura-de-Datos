@@ -13,7 +13,7 @@ using namespace std;
 
 void Pila_max::push(int num){
     struct elemento aux;
-    aux.ele=num;
+    aux.element=num;
     if(empty()){
         aux.maximo=num;
         queue.poner(aux);

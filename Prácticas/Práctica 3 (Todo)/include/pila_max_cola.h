@@ -43,7 +43,7 @@
  */
 
 struct elemento{
-    int ele;    ///< Elemento.
+    int element;    ///< Elemento.
     int maximo; ///< Máximo asociado a @e ele
 };
 

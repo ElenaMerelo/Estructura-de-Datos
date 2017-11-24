@@ -1,5 +1,5 @@
 /**
-  * @file pila_max_vd.h
+  * @file Pila_max.h
   * @brief Fichero cabecera del TDA Pila con
   * máximo creada a partir de un vector dinámico
   * @author Elena Merelo Molina y Antonio Gámiz Delgado
@@ -27,7 +27,7 @@
    int maximo;
  };
 
-class pila_max_vd{
+class Pila_max{
   private:
     Vector_Dinamico <elemento> v;   //Vector dinámico que almacenará los elementos
 
@@ -35,13 +35,13 @@ class pila_max_vd{
     /**
      * @brief Constructor por defecto
      */
-    pila_max_vd(): v(0){}
+    Pila_max(): v(0){}
 
     /**
      * @brief Constructor de copia
      * @param otra Pila de la que se hará la copia.
      */
-    pila_max_vd(const pila_max_vd &otra){
+    Pila_max(const Pila_max &otra){
       v= otra.v;
     };
 
@@ -49,7 +49,7 @@ class pila_max_vd{
      * @brief Operador de asignación
      * @param otra Pila que se va a asignar.
      */
-    pila_max_vd& operator=(const pila_max_vd  &otra){
+    Pila_max& operator=(const Pila_max  &otra){
       v= otra.v;
     };
 
