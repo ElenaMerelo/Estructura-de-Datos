@@ -1,6 +1,6 @@
 /**
   * @file pila.cpp
-  * @brief Implementaci�n del TDA Pila
+  * @brief Implementación del TDA Pila
   *
   */
 #include <cassert>
