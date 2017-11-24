@@ -1,9 +1,6 @@
 /**
   * @file vectordinamico.h
   * @brief Fichero cabecera del TDA Vector Dinamico
-  *
-  * Se crea un vector con capacidad de crecer y decrecer
-  *
   */
 #ifndef _vectordinamico_h
 #define _vectordinamico_h
@@ -30,14 +27,13 @@ class Vector_Dinamico{
   private:
     T * data;    // Apunta a los elementos del vector
     int num_elements;   // Indica el número de elementos en @c datos
-    void copy(const Vector_Dinamico<T> &other);
-    void freeMemory();
+    void copy(const Vector_Dinamico<T> &other); //Copia un vector dinámico en otro
+    void freeMemory(); //Libera memoria dinámica
 
   public:
     /**
      * @brief Constructor por defecto
-     * @param n indica el número de componentes iniciales reservados
-     *          para el vector
+     * @param n indica el número de componentes iniciales reservados para el vector
      */
     Vector_Dinamico(int n=0);
 
@@ -60,8 +56,7 @@ class Vector_Dinamico{
 
     /**
      * @brief Número de componentes del vector
-     * @return Devuelve el número de componentes que puede almacenar en este
-     * instante el vector
+     * @return Devuelve el número de componentes que tiene el vector
      */
     int size() const;
 
