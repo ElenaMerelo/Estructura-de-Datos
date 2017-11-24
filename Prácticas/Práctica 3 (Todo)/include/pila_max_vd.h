@@ -42,7 +42,7 @@ class Pila_max{
      * @param otra Pila de la que se hará la copia.
      */
     Pila_max(const Pila_max &otra){
-      v= otra.v;
+      v(otra.v);
     };
 
     /**
