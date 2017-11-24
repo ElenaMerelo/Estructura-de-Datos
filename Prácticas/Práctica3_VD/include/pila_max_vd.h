@@ -56,7 +56,7 @@ class pila_max_vd{
     /**
      * @brief Comprueba si la pila está vacía
      */
-    bool empty() const;
+    bool empty() const{ return v.size() == 0;};
 
     /**
      * @brief Devuelve el elemento del tope de la pila
