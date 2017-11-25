@@ -1,13 +1,21 @@
-SRC = src
-INC = include
-OBJ = obj
-BIN = bin
+SRC=./src
+INC=./include
+OBJ=./obj
+BIN=./bin
 CXX = g++
-CPPFLAGS = -Wall -g  -I$(INC) -c
+CPPFLAGS = -Wall -g -c
 
 
-all: $(BIN)/pruebacronologia
-# ************ Generación de documentación ******************
+all: $(BIN)/fecha_historica_test
+
+
+$(BIN)/fecha_historica_test : $(SRC)/fecha_historica_test.cpp $(OBJ)/fecha_historica.o
+	g++ -g -o $(BIN)/fecha_historica_test $(SRC)/fecha_historica_test.cpp -I$(INC) $(OBJ)/fecha_historica.o
+
+
+$(OBJ)/fecha_historica.o : $(SRC)/fecha_historica.cpp
+	g++ $(CPPFLAGS) -o $(OBJ)/fecha_historica.o $(SRC)/fecha_historica.cpp -I$(INC)
+
 documentacion:
 	doxygen doc/doxys/Doxyfile
 
