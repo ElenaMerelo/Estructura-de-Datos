@@ -9,9 +9,12 @@ CPPFLAGS = -Wall -g -c
 all: $(BIN)/fecha_historica_test
 
 
-$(BIN)/fecha_historica_test : $(SRC)/fecha_historica_test.cpp $(OBJ)/fecha_historica.o
-	g++ -g -o $(BIN)/fecha_historica_test $(SRC)/fecha_historica_test.cpp -I$(INC) $(OBJ)/fecha_historica.o
+$(BIN)/fecha_historica_test : $(SRC)/fecha_historica_test.cpp $(OBJ)/cronologia.o $(OBJ)/fecha_historica.o
+	g++ -g -o $(BIN)/fecha_historica_test $(SRC)/fecha_historica_test.cpp -I$(INC) $(OBJ)/cronologia.o $(OBJ)/fecha_historica.o
 
+
+$(OBJ)/cronologia.o : $(SRC)/cronologia.cpp
+	g++ $(CPPFLAGS) -o $(OBJ)/cronologia.o $(SRC)/cronologia.cpp -I$(INC)
 
 $(OBJ)/fecha_historica.o : $(SRC)/fecha_historica.cpp
 	g++ $(CPPFLAGS) -o $(OBJ)/fecha_historica.o $(SRC)/fecha_historica.cpp -I$(INC)

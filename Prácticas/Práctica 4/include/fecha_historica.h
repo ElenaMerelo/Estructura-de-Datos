@@ -125,6 +125,26 @@ class fecha_historica{
         */        
         typedef typename set<string>::const_iterator const_iterator;
 
+        /**
+         * @brief Inicio del conjunto de eventos.
+         */
+        iterator begin (){ return data.second.begin(); }
+        
+        /**
+         * @brief Inicio del conjunto de eventos (constante).
+         */
+        const_iterator begin () const{ return data.second.begin(); }
+        
+        /**
+         * @brief Final del conjunto de eventos.
+         */
+        iterator end (){ return data.second.end(); }
+
+        /**
+         * @brief Final del conjunto de eventos (constante).
+         */
+        const_iterator end () const{ return data.second.end(); }
+
 };
 
 #endif

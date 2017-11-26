@@ -36,7 +36,7 @@ using namespace std;
 
 class cronologia{
     private:
-        map<int, fecha_historica, less<int> > data; //Mapa que representa un conjunto de objetos de tipo fecha_historica.
+        map<int, fecha_historica> data; //Mapa que representa un conjunto de objetos de tipo fecha_historica.
     public:
 
         /*--------------CONSTRUCTORES--------------*/
@@ -52,7 +52,7 @@ class cronologia{
         * @param e objeto de la clase que se quiere copiar
         * @return Crea el evento con los datos de e
         */
-        cronologia(const map<int, fecha_historica, less<int> > &d){ data = d; }
+        cronologia(const map<int, fecha_historica> &d){ data = d; }
 
         /*--------------FUNCIONES--------------*/
         
@@ -61,7 +61,7 @@ class cronologia{
         * @param e objeto de la clase que se quiere copiar
         * @return Crea la cronología con los datos de e
         */
-        cronologia& operator=(const map<int, fecha_historica, less<int> > &d){ data = d; return *this; }
+        cronologia& operator=(const map<int, fecha_historica> &d){ data = d; return *this; }
         
         /**
         * @brief Añade una fecha_historica.
@@ -70,11 +70,11 @@ class cronologia{
         void addEvent(fecha_historica& f);
 
         /**
-        * @brief Devuelve los eventos ocurridos en un año
-        * @param a año del que se quieren saber los eventos
-        * @return string* vector de string con los eventos
+        * @brief Devuelve un objeto fecha_historica con año a, si existe.
+        * @param a año del objeto fecha_historica.
+        * @return fecha_historica vector de string con los eventos
         */
-        fecha_historica getEventos(int a);
+        fecha_historica& search_fecha_historica(int a);
 
         /*--------------OPERADORES E/S--------------*/
 
@@ -98,16 +98,34 @@ class cronologia{
         friend istream& operator>> (istream& is, cronologia& c);
 
         /*--------------ITERADORES--------------*/
-        
+
         /**
          * @brief Iterador para recorrer el set<string> que contiene los eventos.
         */
-        typedef typename map<int, fecha_historica, less<int> >::iterator iterator;
+        typedef map<int, fecha_historica>::iterator it;
 
         /**
          * @brief Iterador constante para recorrer el set<string> que contiene los eventos.
         */        
-        typedef typename map<int, fecha_historica, less<int> >::const_iterator const_iterator;
+        typedef map<int, fecha_historica>::const_iterator const_it;
+
+
+        it begin (){ return data.begin(); }
+        
+        /**
+         * @brief Inicio del conjunto de eventos (constante).
+         */
+        const_it begin () const{ return data.begin(); }
+        
+        /**
+         * @brief Final del conjunto de eventos.
+         */
+        it end (){ return data.end(); }
+
+        /**
+         * @brief Final del conjunto de eventos (constante).
+         */
+        const_it end () const{ return data.end(); }        
 
 };
 
