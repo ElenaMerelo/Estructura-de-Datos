@@ -1,3 +1,9 @@
+/**
+  * @file fecha_historica.h
+  * @brief Fichero cabecera del TDA fecha_historica
+  *
+  */
+
 #ifndef _FECHA_HISTORICA_
 #define _FECHA_HISTORICA_
 
@@ -12,7 +18,7 @@ using namespace std;
 /**
   *  @brief T.D.A. Fecha_Historica
   *
-  * Una instancia @e c del tipo de datos abstracto @c Fecha_Historica es un objeto
+  * Una instancia @e c del tipo de datos abstracto @c fecha_historica es un objeto
   * con una instancia de un objeto pair, formado por un int y por una instancia de
   * un objeto set.
   *
