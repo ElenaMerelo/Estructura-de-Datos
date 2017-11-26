@@ -5,11 +5,13 @@
 
 using namespace std;
 
+//Añade un evento a set<string>.
 void fecha_historica::addEvent(string event){ 
     if( data.second.count(event) == 0 )
         data.second.insert(event);
 }
 
+//Operador de salida.
 ostream& operator<<( ostream& os, const fecha_historica& f){
     os << f.getAge();
     fecha_historica::const_iterator i;
@@ -18,6 +20,7 @@ ostream& operator<<( ostream& os, const fecha_historica& f){
     return os;
 }
 
+//Operador de entrada.
 istream& operator>>( istream& is, fecha_historica& f){
     string aux;
     getline(is, aux, '#');
