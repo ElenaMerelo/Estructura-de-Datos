@@ -161,6 +161,21 @@ using namespace std;
        }
      }
 
+     /**
+      * @brief Acceso al elemento n de un set
+      * @return Devuelve una referencia al elemento que se quiere consultar, si no existe el índice
+      * al que se quiere acceder se aborta el programa
+      * @param n posición de la que se quiere obtener el elemento
+      * @param s set del que se quiere obtener el elemento
+      */
+      template <class T>
+      T getElement(const set<T> &s, int n){
+        assert(n>= 0 && n< s.size());
+        typename set<T>::iterator it= s.begin();  //Me posiciono en el primer elemento del conjunto
+        advance(it, n); //Avanzo, muevo el iterador para posicionarme en la posición deseada
+        return *it; //Devuelvo el elemento al que apunta el iterador, el que está en la posición n
+      }
+
 int main(){
   set<int> s1, s2, s3;
 
@@ -171,6 +186,8 @@ int main(){
   }
 
   cout << "Conjunto 1: " << s1 << "\nConjunto 2: " << s2 << "\nConjunto 3: " << s3;
+  cout << "El décimo elemento del conjunto 1(empezando a contar desde cero) es: " << getElement(s1, 10);
+
   //Probamos que funciona la unión de conjuntos
   set<int> u;
   union_(s1, s2, u);
