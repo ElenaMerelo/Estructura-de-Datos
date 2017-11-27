@@ -1,6 +1,11 @@
 /**
   * @file fecha_historica.h
-  * @brief Fichero cabecera del TDA fecha_historica
+  * @brief Fichero cabecera del TDA Fecha_Historica
+  *
+  * Una instancia @e c del tipo de datos abstracto @c fecha_historica es un objeto
+  * con una instancia de un objeto pair, formado por un int y por una instancia de
+  * un objeto set.
+  * @author Antonio Gámiz Delgado y Elena Merelo Molina
   *
   */
 
@@ -15,29 +20,9 @@
 
 using namespace std;
 
-/**
-  *  @brief T.D.A. Fecha_Historica
-  *
-  * Una instancia @e c del tipo de datos abstracto @c fecha_historica es un objeto
-  * con una instancia de un objeto pair, formado por un int y por una instancia de
-  * un objeto set.
-  *
-  * Año
-  * num_eventos
-  * evento/s:
-  * *)Fecha_Historica_1
-  * ...
-  * ...
-  * *)Fecha_Historica_N
-  *
-  * @author Elena Merelo Molina
-  * @author Antonio Gámiz Delgado
-  * @date 31 de Noviembre de 2017
-  */
-
-class fecha_historica{
+class Fecha_Historica{
     private:
-        pair<int, set<string> > data; //Par que representa el año de los eventos históricos, y un set de string para almacenar los eventos.
+        pair<int, set<string> > fecha; //Par que representa el año de los eventos históricos, y un set de string para almacenar los eventos.
     public:
         
         /*--------------CONSTRUCTORES--------------*/
@@ -46,35 +31,35 @@ class fecha_historica{
         * @brief Constructor vacío.
         * @return Instancia de la clase.
         */
-        fecha_historica(){};
+        Fecha_Historica(){};
         
         /**
         * @brief Constructor de copia de la clase
-        * @param e objeto de la clase que se quiere copiar
-        * @return Crea el evento con los datos de e
+        * @param f objeto de la clase que se quiere copiar
+        * @return Crea la fecha con los datos de f
         */
-        fecha_historica(const pair<int, set<string> > &d){ data = d; }
+        Fecha_Historica(const pair<int, set<string> > &f){ fecha = f; }
         
         /*--------------FUNCIONES--------------*/
         
         /**
         * @brief Operador de asignación de la clase
-        * @param e objeto de la clase que se quiere copiar
-        * @return Crea el evento con los datos de e
+        * @param f objeto de la clase que se quiere copiar
+        * @return Crea el evento con los datos de f
         */
-        fecha_historica& operator=(const pair<int, set<string> > &d){ data = d; return *this; }
+        Fecha_Historica& operator=(const pair<int, set<string> > &f){ data = d; return *this; }
         
         /**
         * @brief Método de acceso al año de la Fecha_Historica
         * @return int con el valor del campo int del pair<int, set<string> >.
         */
-        int getAge() const { return data.first; }
+        int getYear() const { return data.first; }
         
         /**
         * @brief Método de establecimiento del año de la Fecha_Historica
         * @param a año de la Fecha_Historica
         */
-        void setAge(int a){ data.first = a;}
+        void setYear(int a){ data.first = a;}
         
         /**
         * @brief Devuelve los eventos ocurridos en una fecha histórica
