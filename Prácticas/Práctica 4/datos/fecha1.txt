@@ -1,0 +1,1 @@
+1962#AVL trees#Quicksort developed by C. A. R. Hoare#Ford–Fulkerson algorithm developed by L. R. Ford, Jr. and D. R. Fulkerson#Bresenham's line algorithm developed by Jack E. Bresenham#Karatsuba multiplication#A Fast Fourier Transform algorithm presented by Carle David Tolmé Runge
