@@ -112,11 +112,19 @@ class fecha_historica{
 
 
       /**
-        * @brief Dadas dos fechas históricas crea otra con los eventos que están en ambos
-        * @param f  fecha história cuyos eventos vamos a intesectar con los de la fecha que invoca a la función
-        * @param i fecha histórica resultante de la intersección
-        */
-        void interseccionEventos(fecha_historica f, fecha_historica &i);
+      * @brief Dadas dos fechas históricas crea otra con los eventos que están en ambos
+      * @param f  fecha história cuyos eventos vamos a intesectar con los de la fecha que invoca a la función
+      * @param i fecha histórica resultante de la intersección
+      */
+      void interseccionEventos(fecha_historica f, fecha_historica &i);
+
+
+      /**
+      * @brief Busca un evento dentro de todos los de una fecha histórica.
+      * @param event string con el evento a buscar
+      * @return Devuelve true o false indicando si está o no repetido
+      */
+      bool searchEvent(string s, fecha_historica &matches);
 
 
       /*--------------OPERADORES E/S--------------*/

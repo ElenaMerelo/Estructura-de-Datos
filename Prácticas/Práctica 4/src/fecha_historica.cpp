@@ -60,6 +60,22 @@ void fecha_historica::addEvent(string event){
       }
     }
 
+//Buscador de eventos
+  bool fecha_historica::searchEvent(string s, fecha_historica &matches){
+    bool encontrado= false;
+    fecha_historica::const_iterator i;
+    for (i= events.second.begin(); i!= events.second.end(); i++){
+      if((*i).find(s) != -1 ){
+        matches.addEvent(*i);
+        encontrado = true;
+      }
+    }
+    if (encontrado)
+      matches.events.first=events.first;
+
+    return encontrado;
+  }
+
 //Operador de salida.
 ostream& operator<<( ostream& os, const fecha_historica& f){
     os << f.getYear();

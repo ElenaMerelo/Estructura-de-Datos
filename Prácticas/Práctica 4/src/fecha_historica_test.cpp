@@ -67,4 +67,12 @@ int main(int argc, char * argv[]){
     fecha_historica inter;
     a.interseccionEventos(u, inter);
     cout << "\nLa fecha histórica resultante de la intersección de la fecha a y su unión con b es: \n" << inter;
+
+    //Prueba del buscador de eventos
+    fecha_historica matches;
+    if(a.searchEvent("AVL trees", matches))
+      cout << "\nEl evento AVL trees ha sido encontrado en la fecha histórica a";
+    else
+      cout << "\nEl evento AVL trees no ha sido encontrado en la fecha a";
+
 }
