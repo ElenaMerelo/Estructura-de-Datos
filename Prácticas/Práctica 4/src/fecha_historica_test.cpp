@@ -61,6 +61,10 @@ int main(int argc, char * argv[]){
     cout << "\nEl evento 3 de la fecha a es: " << a.getElement(3);
     fecha_historica u;
     a.unionEventos(b, u);
-    cout << "\nLa fecha histórica resultante de la unión de la fecha a: " << a << "\ny b: " << b << "\nes: " << u;
+    cout << "\nLa fecha histórica resultante de la unión de la fecha a: " << a << "\ny b: " << b << "\nes: \n" << u;
 
+    //Prueba de la intersección de eventos
+    fecha_historica inter;
+    a.interseccionEventos(u, inter);
+    cout << "\nLa fecha histórica resultante de la intersección de la fecha a y su unión con b es: \n" << inter;
 }

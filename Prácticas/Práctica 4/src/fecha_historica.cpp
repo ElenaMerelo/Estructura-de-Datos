@@ -22,7 +22,7 @@ void fecha_historica::addEvent(string event){
   }
 
 //Método de acceso al evento n
-  string fecha_historica::  getElement(int n){
+  string fecha_historica::getElement(int n){
     assert(n>= 0 && n< events.second.size());
     fecha_historica::const_iterator i= events.second.begin();  //Me posiciono en el primer elemento del conjunto
     advance(i, n); //Avanzo, muevo el iterador para posicionarme en la posición deseada
@@ -42,6 +42,23 @@ void fecha_historica::addEvent(string event){
         u.addEvent(*i);
     }
   }
+
+  //Dadas dos fechas históricas crea una con los eventos que ambas tienen en común
+  void fecha_historica::interseccionEventos(fecha_historica f, fecha_historica &i){
+    fecha_historica::const_iterator j;
+      if(events.second.size() < f.events.second.size()){
+        for(j= events.second.begin(); j!= events.second.end(); j++){
+          if(f.estaRepetido(*j))
+            i.addEvent(*j);
+        }
+      }
+      else{
+        for(j= f.events.second.begin(); j!= f.events.second.end(); j++){
+          if(estaRepetido(*j))
+            i.addEvent(*j);
+        }
+      }
+    }
 
 //Operador de salida.
 ostream& operator<<( ostream& os, const fecha_historica& f){

@@ -2,6 +2,13 @@
   * @file fecha_historica.h
   * @brief Fichero cabecera del TDA fecha_historica
   *
+  * Una instancia @e c del tipo de datos abstracto @c fecha_historica es un objeto
+  * con una instancia de un objeto pair, formado por un int y por una instancia de
+  * un objeto set.
+  * @author Elena Merelo Molina
+  * @author Antonio Gámiz Delgado
+  * @date 31 de Noviembre de 2017
+  *
   */
 
 #ifndef _FECHA_HISTORICA_
@@ -15,28 +22,17 @@
 
 using namespace std;
 
-/**
-  *  @brief T.D.A. Fecha_Historica
-  *
-  * Una instancia @e c del tipo de datos abstracto @c fecha_historica es un objeto
-  * con una instancia de un objeto pair, formado por un int y por una instancia de
-  * un objeto set.
-  * @author Elena Merelo Molina
-  * @author Antonio Gámiz Delgado
-  * @date 31 de Noviembre de 2017
-  */
-
 class fecha_historica{
     private:
       pair<int, set<string> > events; //Par que representa el año de los eventos históricos, y un set de string para almacenar los eventos.
     public:
       /*--------------CONSTRUCTORES--------------*/
-
       /**
       * @brief Constructor vacío.
       * @return Instancia de la clase.
       */
       fecha_historica(){};
+
 
       /**
       * @brief Constructor de copia de la clase
@@ -45,8 +41,8 @@ class fecha_historica{
       */
       fecha_historica(const pair<int, set<string> > &e){ events = e; }
 
-      /*--------------FUNCIONES--------------*/
 
+      /*--------------FUNCIONES--------------*/
       /**
       * @brief Operador de asignación de la clase
       * @param e objeto de la clase que se quiere copiar
@@ -54,11 +50,13 @@ class fecha_historica{
       */
       fecha_historica& operator=(const pair<int, set<string> > &e){ events = e; return *this; }
 
+
       /**
       * @brief Método de acceso al año de la Fecha_Historica
       * @return int con el valor del campo int del pair<int, set<string> >.
       */
       inline int getYear() const { return events.first; }
+
 
       /**
       * @brief Método de establecimiento del año de la Fecha_Historica
@@ -66,17 +64,20 @@ class fecha_historica{
       */
       void setYear(int a){ events.first = a;}
 
+
       /**
       * @brief Devuelve los eventos ocurridos en una fecha histórica
       * @return set<string> con los eventos
       */
       inline set<string>& getEvents(){ return events.second; }
 
+
       /**
       * @brief Método de acceso al número de eventos de la Fecha_Historica
       * @return int con el valor del campo numeventos
       */
       inline int getNumEvents(){ return events.second.size(); }
+
 
       /**
       * @brief Añade un evento
@@ -108,6 +109,14 @@ class fecha_historica{
       * @param u fecha histórica resultante de la unión de f1 y f2
       */
       void unionEventos(const fecha_historica &f, fecha_historica &u);
+
+
+      /**
+        * @brief Dadas dos fechas históricas crea otra con los eventos que están en ambos
+        * @param f  fecha história cuyos eventos vamos a intesectar con los de la fecha que invoca a la función
+        * @param i fecha histórica resultante de la intersección
+        */
+        void interseccionEventos(fecha_historica f, fecha_historica &i);
 
 
       /*--------------OPERADORES E/S--------------*/
