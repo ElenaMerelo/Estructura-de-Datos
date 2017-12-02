@@ -2,6 +2,7 @@
 #include<fecha_historica.h>
 #include<cassert>
 #include<string>
+#include<sstream>
 
 using namespace std;
 
@@ -37,7 +38,9 @@ void fecha_historica::addEvent(string event){
 
 //Dadas dos fechas históricas crea otra con la unión ordenada y sin eventos repetidos de ambas
   void fecha_historica::unionEventos(const fecha_historica &f, fecha_historica &u ){
+    assert(events.first == f.getYear());
     fecha_historica::const_iterator i;
+    u.setYear(f.getYear());
     for(i= f.events.second.begin(); i!= f.events.second.end(); i++){
       if(! u.estaRepetido(*i))
         u.addEvent(*i);
@@ -93,12 +96,16 @@ ostream& operator<<( ostream& os, const fecha_historica& f){
 
 //Operador de entrada.
 istream& operator>>( istream& is, fecha_historica& f){
+    f.clear();
     string aux;
     getline(is, aux, '#');
     f.events.first = atoi(aux.c_str());
 
-    while(!is.eof()){
-        getline(is, aux, '#');
+    getline(is,aux);
+    stringstream ss(aux);
+
+    while(!ss.eof()){
+        getline(ss, aux, '#');
         f.addEvent(aux);
     }
 

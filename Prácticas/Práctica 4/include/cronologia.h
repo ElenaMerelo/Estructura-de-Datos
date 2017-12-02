@@ -76,6 +76,20 @@ class cronologia{
         */
         fecha_historica& search_fecha_historica(int a);
 
+        /**
+        * @brief Dadas dos cronologías une sus eventos sin que haya ninguno repetido
+        * @param c1, c2 cronologías cuyos elementos vamos a unir
+        * @param u cronologia resultante de la unión de c1 y c2
+        */
+        void unionCronologias(const cronologia &c, cronologia &u);
+
+        /**
+        * @brief Dadas dos cronologías interseca sus eventos sin que haya ninguno repetido
+        * @param c1, c2 cronologías cuyos elementos vamos a intersecar
+        * @param u cronologia resultante de la interseccion de c1 y c2
+        */
+        void interseccionCronologias(const cronologia& c, cronologia &u);
+
         /*--------------OPERADORES E/S--------------*/
 
         /**
@@ -102,12 +116,12 @@ class cronologia{
         /**
          * @brief Iterador para recorrer el set<string> que contiene los eventos.
         */
-        typedef map<int, fecha_historica>::iterator it;
+        typedef typename map<int, fecha_historica>::iterator it;
 
         /**
          * @brief Iterador constante para recorrer el set<string> que contiene los eventos.
         */        
-        typedef map<int, fecha_historica>::const_iterator const_it;
+        typedef typename map<int, fecha_historica>::const_iterator const_it;
 
 
         it begin (){ return data.begin(); }
