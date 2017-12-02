@@ -92,6 +92,12 @@ class fecha_historica{
       * @return Devuelve true si está repetido, false si no lo está
       */
       bool estaRepetido(string evento);
+      
+      
+      /**
+       * @brief Borra los datos de la fecha_historica.
+       */
+      void clear(){ events.second.erase(events.second.begin(), events.second.end()); };
 
 
       /**
