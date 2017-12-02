@@ -14,7 +14,7 @@ fecha_historica::fecha_historica(int a, string *s, int n){
 
 //Añade un evento a set<string>.
 void fecha_historica::addEvent(string event){
-        events.second.insert(event);
+  events.second.insert(event);
 }
 
 //Dado un evento busca si está en los de la fecha histórica
