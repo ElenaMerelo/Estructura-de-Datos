@@ -5,6 +5,12 @@
 
 using namespace std;
 
+//Dado un vector de strings s, un año a y el tamaño n de s crea una fecha con dichos datos
+fecha_historica::fecha_historica(int a, string *s, int n){
+  for(int i= 0; i< n; i++)
+    events.second.insert(s[i]);
+}
+
 //Añade un evento a set<string>.
 void fecha_historica::addEvent(string event){
         events.second.insert(event);

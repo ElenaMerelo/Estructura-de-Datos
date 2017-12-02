@@ -42,6 +42,16 @@ class fecha_historica{
       fecha_historica(const pair<int, set<string> > &e){ events = e; }
 
 
+      /**
+      * @brief Constructor de la clase
+      * @param a año del evento a construir
+      * @param s vector de string con el evento o eventos de ese año
+      * @param n número de eventos que contienen el vector s que se pasa como parámetro
+      * @return Crea el evento con año a y n eventos asociados
+      */
+      fecha_historica(int a, string *s, int n);
+
+
       /*--------------FUNCIONES--------------*/
       /**
       * @brief Operador de asignación de la clase
