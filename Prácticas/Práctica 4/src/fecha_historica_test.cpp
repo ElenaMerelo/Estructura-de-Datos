@@ -52,13 +52,13 @@ int main(int argc, char * argv[]){
     cout << a;
 
     //Probamos fecha_historica::estaRepetido(string evento)
-    if(a.estaRepetido("AVL trees"))
-      cout << "\nAVL trees está en la fecha histórica a";
+    if(a.findEvent("AVL tr"))
+      cout << "\nAVL tr está en la fecha histórica a";
     else
-      cout << "AVL trees no está en la fecha histórica a";
+      cout << "AVL tr no está en la fecha histórica a";
 
     //Prueba de fecha_historica::getElement(int n) y de la unión de eventos
-    cout << "\nEl evento 3 de la fecha a es: " << a.getElement(3);
+    cout << "\nEl evento 3 de la fecha a es: " << a.getEvent(3);
     fecha_historica u;
     a.unionEventos(b, u);
     cout << "\nLa fecha histórica resultante de la unión de la fecha a: " << a << "\ny b: " << b << "\nes: \n" << u;
@@ -70,8 +70,8 @@ int main(int argc, char * argv[]){
 
     //Prueba del buscador de eventos
     fecha_historica matches;
-    if(a.searchEvent("AVL trees", matches))
-      cout << "\nEl evento AVL trees ha sido encontrado en la fecha histórica a";
+    if(a.findWords("AVL", matches))
+      cout << "\nLa palabra AVL ha sido encontrado en la fecha histórica a";
     else
       cout << "\nEl evento AVL trees no ha sido encontrado en la fecha a";
 

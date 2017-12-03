@@ -1,4 +1,3 @@
-
 /**
   * @file cronologia.h
   * @brief Fichero cabecera del TDA cronologia
@@ -64,15 +63,17 @@ class cronologia{
 
     /**
     * @brief Dadas dos cronologías une sus eventos sin que haya ninguno repetido
-    * @param c1, c2 cronologías cuyos elementos vamos a unir
+    * @param c cronología cuyo elemento vamos a unir a los de la cronología que
+    * invoca a la función
     * @param u cronologia resultante de la unión de c1 y c2
     */
     void unionCronologias(const cronologia &c, cronologia &u);
 
     /**
     * @brief Dadas dos cronologías interseca sus eventos sin que haya ninguno repetido
-    * @param c1, c2 cronologías cuyos elementos vamos a intersectar
-    * @param u cronologia resultante de la intersección de c1 y c2
+    * @param c cronología cuyos elementos vamos a intersectar a los de la cronología
+    * que invoca a la función
+    * @param u cronologia resultante de la intersección
     */
     void interseccionCronologias(cronologia& c, cronologia &u);
 

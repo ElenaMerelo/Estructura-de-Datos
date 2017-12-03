@@ -36,7 +36,7 @@ fecha_historica& cronologia::searchFechaHistorica(int a){
 
 //Une dos cronologías
 void cronologia::unionCronologias(const cronologia &f, cronologia &u){
-u=f;
+  u=f;
   cronologia::it i;
   for(i=data.begin(); i!=data.end(); ++i)
     u.addFechaHistorica((*i).second);

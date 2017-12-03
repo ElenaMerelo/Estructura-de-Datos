@@ -97,11 +97,11 @@ class fecha_historica{
 
 
       /**
-      * @brief Comprueba si un evento está repetido en la fecha_historica
+      * @brief Comprueba si un evento está en la fecha_historica
       * @param evento evento que queremos saber si aparece más de una vez o no
       * @return Devuelve true si está repetido, false si no lo está
       */
-      bool estaRepetido(string evento);
+      bool findEvent(string evento);
 
 
       /**
@@ -116,7 +116,7 @@ class fecha_historica{
       * al que se quiere acceder se aborta el programa
       * @param n posición de la que se quiere obtener el elemento
       */
-      string getElement(int n);
+      string getEvent(int n);
 
 
       /**
@@ -141,7 +141,7 @@ class fecha_historica{
       * @param matches fecha histórica que contiene el evento s
       * @return Devuelve true o false indicando si está o no repetido
       */
-      bool searchEvent(string s, fecha_historica &matches);
+      bool findWords(string s, fecha_historica &matches);
 
 
       /*--------------OPERADORES E/S--------------*/

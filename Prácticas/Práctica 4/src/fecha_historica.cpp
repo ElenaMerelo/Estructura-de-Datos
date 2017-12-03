@@ -2,7 +2,7 @@
 #include<fecha_historica.h>
 #include<cassert>
 #include<string>
-#include<sstream>
+#include <sstream>
 
 using namespace std;
 
@@ -18,7 +18,7 @@ void fecha_historica::addEvent(string event){
 }
 
 //Dado un evento busca si está en los de la fecha histórica
-  bool fecha_historica::estaRepetido(string evento){
+  bool fecha_historica::findEvent(string evento){
     bool repetido=false;
     fecha_historica::const_iterator i;
     for(i= events.second.begin(); i!= events.second.end()  && !repetido; i++){
@@ -29,7 +29,7 @@ void fecha_historica::addEvent(string event){
   }
 
 //Método de acceso al evento n
-  string fecha_historica::getElement(int n){
+  string fecha_historica::getEvent(int n){
     assert(n>= 0 && n< events.second.size());
     fecha_historica::const_iterator i= events.second.begin();  //Me posiciono en el primer elemento del conjunto
     advance(i, n); //Avanzo, muevo el iterador para posicionarme en la posición deseada
@@ -42,48 +42,49 @@ void fecha_historica::addEvent(string event){
     fecha_historica::const_iterator i;
     u.setYear(f.getYear());
     for(i= f.events.second.begin(); i!= f.events.second.end(); i++){
-      if(! u.estaRepetido(*i))
+      if(! u.findEvent(*i))
         u.addEvent(*i);
     }
 
     for(i= events.second.begin(); i!= events.second.end(); i++){
-      if(! u.estaRepetido(*i))
+      if(! u.findEvent(*i))
         u.addEvent(*i);
     }
   }
 
   //Dadas dos fechas históricas crea una con los eventos que ambas tienen en común
   void fecha_historica::interseccionEventos(fecha_historica f, fecha_historica &i){
+    assert(events.first == f.getYear());
     fecha_historica::const_iterator j;
+    i.setYear(f.getYear());
     if(events.second.size() < f.events.second.size()){
       for(j= events.second.begin(); j!= events.second.end(); j++){
-        if(f.estaRepetido(*j))
+        if(f.findEvent(*j))
           i.addEvent(*j);
       }
     }
     else{
       for(j= f.events.second.begin(); j!= f.events.second.end(); j++){
-        if(estaRepetido(*j))
+        if(findEvent(*j))
           i.addEvent(*j);
       }
     }
   }
 
 //Buscador de eventos
-  bool fecha_historica::searchEvent(string s, fecha_historica &matches){
-    bool encontrado= false;
-    fecha_historica::const_iterator i;
-    for (i= events.second.begin(); i!= events.second.end(); i++){
-      if((*i).find(s) != -1 ){
-        matches.addEvent(*i);
-        encontrado = true;
-      }
-    }
-    if (encontrado)
+bool fecha_historica::findWords(string s, fecha_historica &matches){
+  bool encontrado= false;
+  fecha_historica::const_iterator i;
+  for (i= events.second.begin(); i!= events.second.end(); i++){
+    if((*i).find(s) != -1){
+      matches.addEvent(*i);
       matches.events.first=events.first;
-
-    return encontrado;
+      encontrado = true;
+    }
   }
+
+  return encontrado;
+}
 
 //Operador de salida
 ostream& operator<<( ostream& os, const fecha_historica& f){
