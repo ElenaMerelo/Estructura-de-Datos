@@ -12,7 +12,7 @@ fecha_historica::fecha_historica(int a, string *s, int n){
     events.second.insert(s[i]);
 }
 
-//Añade un evento a set<string>.
+//Añade un evento a set<string>
 void fecha_historica::addEvent(string event){
   events.second.insert(event);
 }
@@ -55,19 +55,19 @@ void fecha_historica::addEvent(string event){
   //Dadas dos fechas históricas crea una con los eventos que ambas tienen en común
   void fecha_historica::interseccionEventos(fecha_historica f, fecha_historica &i){
     fecha_historica::const_iterator j;
-      if(events.second.size() < f.events.second.size()){
-        for(j= events.second.begin(); j!= events.second.end(); j++){
-          if(f.estaRepetido(*j))
-            i.addEvent(*j);
-        }
-      }
-      else{
-        for(j= f.events.second.begin(); j!= f.events.second.end(); j++){
-          if(estaRepetido(*j))
-            i.addEvent(*j);
-        }
+    if(events.second.size() < f.events.second.size()){
+      for(j= events.second.begin(); j!= events.second.end(); j++){
+        if(f.estaRepetido(*j))
+          i.addEvent(*j);
       }
     }
+    else{
+      for(j= f.events.second.begin(); j!= f.events.second.end(); j++){
+        if(estaRepetido(*j))
+          i.addEvent(*j);
+      }
+    }
+  }
 
 //Buscador de eventos
   bool fecha_historica::searchEvent(string s, fecha_historica &matches){
@@ -85,7 +85,7 @@ void fecha_historica::addEvent(string event){
     return encontrado;
   }
 
-//Operador de salida.
+//Operador de salida
 ostream& operator<<( ostream& os, const fecha_historica& f){
     os << f.getYear();
     fecha_historica::const_iterator i;
@@ -94,7 +94,7 @@ ostream& operator<<( ostream& os, const fecha_historica& f){
     return os;
 }
 
-//Operador de entrada.
+//Operador de entrada
 istream& operator>>( istream& is, fecha_historica& f){
     f.clear();
     string aux;

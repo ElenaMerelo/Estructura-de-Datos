@@ -28,8 +28,8 @@ class fecha_historica{
     public:
       /*--------------CONSTRUCTORES--------------*/
       /**
-      * @brief Constructor vacío.
-      * @return Instancia de la clase.
+      * @brief Constructor vacío
+      * @return Instancia de la clase
       */
       fecha_historica(){};
 
@@ -62,15 +62,15 @@ class fecha_historica{
 
 
       /**
-      * @brief Método de acceso al año de la Fecha_Historica
+      * @brief Método de acceso al año de la fecha_historica
       * @return int con el valor del campo int del pair<int, set<string> >.
       */
       inline int getYear() const { return events.first; }
 
 
       /**
-      * @brief Método de establecimiento del año de la Fecha_Historica
-      * @param a año de la Fecha_Historica
+      * @brief Método de establecimiento del año de la fecha_historica
+      * @param a año de la fecha_historica
       */
       void setYear(int a){ events.first = a;}
 
@@ -83,8 +83,8 @@ class fecha_historica{
 
 
       /**
-      * @brief Método de acceso al número de eventos de la Fecha_Historica
-      * @return int con el valor del campo numeventos
+      * @brief Método de acceso al número de eventos de la fecha_historica
+      * @return int con el valor del tamaño del conjunto de eventos
       */
       inline int getNumEvents(){ return events.second.size(); }
 
@@ -97,16 +97,16 @@ class fecha_historica{
 
 
       /**
-      * @brief Comprueba si un evento está repetido en la Fecha_Historica.
+      * @brief Comprueba si un evento está repetido en la fecha_historica
       * @param evento evento que queremos saber si aparece más de una vez o no
       * @return Devuelve true si está repetido, false si no lo está
       */
       bool estaRepetido(string evento);
-      
-      
+
+
       /**
-       * @brief Borra los datos de la fecha_historica.
-       */
+      * @brief Borra los datos de la fecha_historica
+      */
       void clear(){ events.second.erase(events.second.begin(), events.second.end()); };
 
 
@@ -128,71 +128,78 @@ class fecha_historica{
 
 
       /**
-      * @brief Dadas dos fechas históricas crea otra con los eventos que están en ambos
-      * @param f  fecha história cuyos eventos vamos a intesectar con los de la fecha que invoca a la función
+      * @brief Dadas dos fechas históricas crea otra con los eventos que están en ambas
+      * @param f  fecha histórica cuyos eventos vamos a intersectar con los de la fecha que invoca a la función
       * @param i fecha histórica resultante de la intersección
       */
       void interseccionEventos(fecha_historica f, fecha_historica &i);
 
 
       /**
-      * @brief Busca un evento dentro de todos los de una fecha histórica.
-      * @param event string con el evento a buscar
+      * @brief Busca un evento dentro de todos los de una fecha histórica
+      * @param s string con el evento a buscar
+      * @param matches fecha histórica que contiene el evento s
       * @return Devuelve true o false indicando si está o no repetido
       */
       bool searchEvent(string s, fecha_historica &matches);
 
 
       /*--------------OPERADORES E/S--------------*/
-
       /**
-      * @brief Salida de un Fecha_Historica a ostream
+      * @brief Salida de un fecha_historica a ostream
       * @param os stream de salida
-      * @param e Fecha_Historica a escribir
-      * @post Se muestra la Fecha_Historica en formato "año#evento1#evento2#...#eventoN"
+      * @param f fecha_historica a escribir
+      * @post Se muestra la fecha_historica en formato "año#evento1#evento2#...#eventoN"
       */
       friend ostream& operator<<( ostream& os, const fecha_historica& f);
 
+
       /**
-      * @brief Entrada de un Fecha_Historica desde istream
+      * @brief Entrada de un fecha_historica desde istream
       * @param is stream de entrada
-      * @param e Fecha_Historica que recibe el valor
-      * @retval El Fecha_Historica leído en e
+      * @param f fecha_historica que recibe el valor
+      * @retval La fecha_historica leído en f
       * @pre La entrada tiene el formato "año#evento1#evento2#...#eventoN
       */
       friend istream& operator>>( istream& is, fecha_historica& f);
 
-      /*--------------ITERADORES--------------*/
 
+      /*--------------ITERADORES--------------*/
       /**
-       * @brief Iterador para recorrer el set<string> que contiene los eventos.
+       * @brief Iterador para recorrer el set<string> que contiene los eventos
       */
       typedef typename set<string>::iterator iterator;
 
+
       /**
-       * @brief Iterador constante para recorrer el set<string> que contiene los eventos.
+       * @brief Iterador constante para recorrer el set<string> que contiene los eventos
       */
       typedef typename set<string>::const_iterator const_iterator;
 
+
       /**
-       * @brief Inicio del conjunto de eventos.
+       * @brief Inicio del conjunto de eventos
        */
       iterator begin (){ return events.second.begin(); }
 
+
       /**
-       * @brief Inicio del conjunto de eventos (constante).
+       * @brief Inicio del conjunto de eventos (constante)
        */
       const_iterator begin () const{ return events.second.begin(); }
 
+
       /**
-       * @brief Final del conjunto de eventos.
+       * @brief Final del conjunto de eventos
        */
       iterator end (){ return events.second.end(); }
 
+
       /**
-       * @brief Final del conjunto de eventos (constante).
+       * @brief Final del conjunto de eventos (constante)
        */
       const_iterator end () const{ return events.second.end(); }
+
 
 };
 
