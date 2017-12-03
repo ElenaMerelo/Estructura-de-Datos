@@ -36,7 +36,7 @@ fecha_historica& cronologia::searchFechaHistorica(int a){
 
 //Une dos cronologías
 void cronologia::unionCronologias(const cronologia &f, cronologia &u){
-  u=f;
+u=f;
   cronologia::it i;
   for(i=data.begin(); i!=data.end(); ++i)
     u.addFechaHistorica((*i).second);
@@ -44,11 +44,13 @@ void cronologia::unionCronologias(const cronologia &f, cronologia &u){
 }
 
 //Interseca dos cronologías
-void cronologia::interseccionCronologias(const cronologia& c, cronologia &u){
+void cronologia::interseccionCronologias(cronologia& c, cronologia &u){
   cronologia::it i;
   for(i=data.begin(); i!=data.end(); ++i){
-    if( c.data.count((*i).second.getYear()) > 0 )
+    if( c.data.count((*i).second.getYear()) > 0 ){
       u.addFechaHistorica((*i).second);
+      u.addFechaHistorica(c.data[(*i).second.getYear()]);
+    }
   }
 }
 
