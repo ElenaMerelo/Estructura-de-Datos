@@ -38,6 +38,4 @@ int main(int argc, char * argv[]){
 
     // cout << a.search_fecha_historica(19334) << endl;
 
-    return 0;
 }
-
