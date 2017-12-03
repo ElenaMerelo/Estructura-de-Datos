@@ -74,7 +74,7 @@ class cronologia{
     * @param c1, c2 cronologías cuyos elementos vamos a intersectar
     * @param u cronologia resultante de la intersección de c1 y c2
     */
-    void interseccionCronologias(const cronologia& c, cronologia &u);
+    void interseccionCronologias(cronologia& c, cronologia &u);
 
     /*--------------OPERADORES E/S--------------*/
 
