@@ -21,9 +21,9 @@ void cronologia::addFechaHistorica(fecha_historica& f){
     data.erase(i);
     data.insert(par(f.getYear(),aux));
   }
-  else{
+  else
      data.insert(par(f.getYear(), f));
-  }
+
 }
 
 //Devuelve una fecha histórica en la cronología con año a
@@ -38,12 +38,12 @@ fecha_historica& cronologia::searchFechaHistorica(int a){
 void cronologia::unionCronologias(const cronologia &f, cronologia &u){
   u=f;
   cronologia::it i;
-  for(i=data.begin(); i!=data.end(); ++i){
+  for(i=data.begin(); i!=data.end(); ++i)
     u.addFechaHistorica((*i).second);
-  }
+
 }
 
-//Intersecta dos cronologías
+//Interseca dos cronologías
 void cronologia::interseccionCronologias(const cronologia& c, cronologia &u){
   cronologia::it i;
   for(i=data.begin(); i!=data.end(); ++i){
