@@ -87,27 +87,27 @@ void fecha_historica::addEvent(string event){
 
 //Operador de salida
 ostream& operator<<( ostream& os, const fecha_historica& f){
-    os << f.getYear();
-    fecha_historica::const_iterator i;
-    for(i= f.events.second.begin(); i!= f.events.second.end(); ++i)
-        os << '#' << (*i);
-    return os;
+  os << f.getYear();
+  fecha_historica::const_iterator i;
+  for(i= f.events.second.begin(); i!= f.events.second.end(); ++i)
+    os << '#' << (*i);
+  return os;
 }
 
 //Operador de entrada
 istream& operator>>( istream& is, fecha_historica& f){
-    f.clear();
-    string aux;
-    getline(is, aux, '#');
-    f.events.first = atoi(aux.c_str());
+  f.clear();
+  string aux;
+  getline(is, aux, '#');
+  f.events.first = atoi(aux.c_str());
 
-    getline(is,aux);
-    stringstream ss(aux);
+  getline(is,aux);
+  stringstream ss(aux);
 
-    while(!ss.eof()){
-        getline(ss, aux, '#');
-        f.addEvent(aux);
-    }
+  while(!ss.eof()){
+    getline(ss, aux, '#');
+    f.addEvent(aux);
+  }
 
-    return is;
+  return is;
 }
