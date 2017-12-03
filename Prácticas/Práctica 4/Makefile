@@ -6,11 +6,11 @@ CXX = g++
 CPPFLAGS = -Wall -g -c
 
 
-all: $(BIN)/fecha_historica_test
+all: $(BIN)/cronologia_test
 
 
-$(BIN)/fecha_historica_test : $(SRC)/fecha_historica_test.cpp $(OBJ)/cronologia.o $(OBJ)/fecha_historica.o
-	g++ -g -o $(BIN)/fecha_historica_test $(SRC)/fecha_historica_test.cpp -I$(INC) $(OBJ)/cronologia.o $(OBJ)/fecha_historica.o
+$(BIN)/cronologia_test : $(SRC)/cronologia_test.cpp $(OBJ)/cronologia.o $(OBJ)/fecha_historica.o
+	g++ -g -o $(BIN)/cronologia_test $(SRC)/cronologia_test.cpp -I$(INC) $(OBJ)/cronologia.o $(OBJ)/fecha_historica.o
 
 
 $(OBJ)/cronologia.o : $(SRC)/cronologia.cpp
