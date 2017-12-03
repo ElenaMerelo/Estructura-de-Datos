@@ -82,7 +82,6 @@ bool fecha_historica::findWords(string s, fecha_historica &matches){
       encontrado = true;
     }
   }
-
   return encontrado;
 }
 

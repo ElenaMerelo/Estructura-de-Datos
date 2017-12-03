@@ -75,7 +75,16 @@ class cronologia{
     * que invoca a la función
     * @param u cronologia resultante de la intersección
     */
-    void interseccionCronologias(cronologia& c, cronologia &u);
+    void interseccionCronologias(cronologia &c, cronologia &u);
+
+
+    /**
+    * @brief Crea una cronología con las fechas históricas que contengan una palabra clave
+    * @param c cronología con las fechas cuyos eventos contengan la palabra pasada como argumento
+    * @param s palabra o palabras claves a buscar
+    */
+    void filtroPorPalabrasClaves(string s, cronologia &c);
+
 
     /*--------------OPERADORES E/S--------------*/
 

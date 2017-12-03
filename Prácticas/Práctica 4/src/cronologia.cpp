@@ -38,13 +38,13 @@ fecha_historica& cronologia::searchFechaHistorica(int a){
 void cronologia::unionCronologias(const cronologia &f, cronologia &u){
   u=f;
   cronologia::it i;
-  for(i=data.begin(); i!=data.end(); ++i)
+  for(i=data.begin(); i!=data.end(); ++i){
     u.addFechaHistorica((*i).second);
-
+  }
 }
 
 //Interseca dos cronologías
-void cronologia::interseccionCronologias(cronologia& c, cronologia &u){
+void cronologia::interseccionCronologias(cronologia &c, cronologia &u){
   cronologia::it i;
   for(i=data.begin(); i!=data.end(); ++i){
     if( c.data.count((*i).second.getYear()) > 0 ){
@@ -54,17 +54,28 @@ void cronologia::interseccionCronologias(cronologia& c, cronologia &u){
   }
 }
 
+//Crea una cronología con los eventos que contienen el string pasado como argumento
+void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
+  cronologia::it i;
+  for(i= data.begin(); i!= data.end(); i++){
+    fecha_historica matches;
+    if((*i).second.findWords(s, matches))
+      c.addFechaHistorica(matches);
+  }
+}
+
 //Operador de salida
 ostream& operator<< (ostream& os, const cronologia& c){
   cronologia::const_it i;
-  for(i=c.begin(); i!=c.end(); ++i){
+  for(i=c.begin(); i!=c.end(); ++i)
     cout << (*i).second  << endl;
-  }
+
   return os;
 }
 
 //Operador de entrada
 istream& operator>> (istream& is, cronologia& c){
+  //c.data.clear();
   fecha_historica b;
   while ( is >> b){
     c.addFechaHistorica(b);
