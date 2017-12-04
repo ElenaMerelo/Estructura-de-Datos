@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char * argv[]){
   cout << "Programa de prueba" << endl;
-  if( argc!= 4){
+  if( argc!= 3){
       cout << "Número de argumentos incorrecto. Ha de introducir tres ficheros, dos con cronologías y uno con una fecha histórica." << endl;
       return 1;
   }
@@ -21,12 +21,6 @@ int main(int argc, char * argv[]){
   ifstream c2 (argv[2]);
   if (!c2){
     cout<<"Error al abrir el fichero "<< argv[2] << endl;
-    return 1;
-  }
-
-  ifstream f1 (argv[3]);
-  if (!f1){
-    cout<<"Error al abrir el fichero "<< argv[3] << endl;
     return 1;
   }
 
@@ -46,6 +40,7 @@ int main(int argc, char * argv[]){
   cout << "\nCronología d: \n" << d;*/
 
   //Prueba de los métodos addFechaHistorica y searchFechaHistorica
+  /*
   fecha_historica fecha;
   f1 >> fecha;
   cout << "\nFecha a introducir a la cronología: \n" << fecha;
@@ -53,6 +48,7 @@ int main(int argc, char * argv[]){
   cout << "\nCronología a tras haber introducido fecha: \n" << a;
   cout <<"\nBúsqueda de la fecha histórica 1962: ";
   cout << a.searchFechaHistorica(1962);
+  */
 
   //Prueba de la intersección de cronologías
   cronologia interseccion;
@@ -76,7 +72,7 @@ int main(int argc, char * argv[]){
   cin >> anio_inicio;
   cin >> anio_fin;
   a.filtroPorIntervalo(anio_inicio, anio_fin, acotada);
-  cout << "\nCronología a filtrada: \n" << filtrada;
+  cout << "\nCronología a filtrada: \n" << acotada << endl;
 
 
 //Estadisticas de la cronología
