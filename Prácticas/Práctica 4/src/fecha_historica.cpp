@@ -71,7 +71,7 @@ void fecha_historica::addEvent(string event){
     }
   }
 
-//Buscador de eventos
+//Buscador por palabras clave
 bool fecha_historica::findWords(string s, fecha_historica &matches){
   bool encontrado= false;
   fecha_historica::const_iterator i;
