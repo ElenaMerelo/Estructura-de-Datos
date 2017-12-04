@@ -85,6 +85,11 @@ class cronologia{
     */
     void filtroPorPalabrasClaves(string s, cronologia &c);
 
+    /**
+     * @brief Calcula el número total de acontecimientos de la cronología.
+     * @return número total de acontecimientos de la cronologia
+     */
+    int numeroAcontecimientos();
 
     /**
      * @brief Imprime por pantalla las estadísticas básicas de una cronología.

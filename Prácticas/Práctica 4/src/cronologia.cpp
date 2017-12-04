@@ -64,8 +64,17 @@ void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
   }
 }
 
+int cronologia::numeroAcontecimientos(){
+  cronologia::it i;
+  int sum=0;
+  for(i=data.begin(); i!=data.end(); ++i)
+    sum+=(*i).second.getNumEvents();
+  return sum;
+}
+
 void cronologia::estadisticas(){
-  cout << "Número total de eventos en la cronología: " << data.size() << endl;
+  cout << "Número total de fechas históricas: " << data.size() << endl;
+  cout << "Número total de acontecimientos: " << numeroAcontecimientos() << endl;
 }
 
 //Operador de salida
