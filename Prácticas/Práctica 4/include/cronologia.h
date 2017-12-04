@@ -85,6 +85,11 @@ class cronologia{
     */
     void filtroPorPalabrasClaves(string s, cronologia &c);
 
+    /**
+     * @brief Calcula el número total de acontecimientos de la cronología.
+     * @return número total de acontecimientos de la cronologia
+     */
+    int numeroAcontecimientos();
 
     /**
   * @brief Crea una cronología con las fechas históricas acontecidas en ese intervalo de tiempo
