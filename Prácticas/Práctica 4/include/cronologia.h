@@ -86,6 +86,10 @@ class cronologia{
     void filtroPorPalabrasClaves(string s, cronologia &c);
 
 
+    /**
+     * @brief Imprime por pantalla las estadísticas básicas de una cronología.
+     */
+    void estadisticas();
     /*--------------OPERADORES E/S--------------*/
 
     /**
