@@ -66,6 +66,7 @@ void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
 
 //Crea una cronología con los eventos que pasaron en dicho intervalo de tiempo
 void cronologia::filtroPorIntervalo(int anio_inicio, int anio_fin, cronologia &c){
+  assert(anio_inicio< anio_fin);
   cronologia::it i= data.lower_bound(anio_inicio);
   while(i != data.upper_bound(anio_fin)){
     c.addFechaHistorica(i->second);
@@ -103,7 +104,7 @@ void cronologia::estadisticas(){
   cout << "Número total de fechas históricas: " << data.size() << endl;
   cout << "Número total de acontecimientos: " << numeroAcontecimientos() << endl;
   fecha_historica aux=fechaMax();
-  cout << "Fecha histórica con mayor número de acontecimientos: " << aux.getNumEvents() << " acontecimientos. Fecha: " << aux <<endl; 
+  cout << "Fecha histórica con mayor número de acontecimientos: " << aux.getNumEvents() << " acontecimientos. Fecha: " << aux <<endl;
   double media=numeroAcontecimientos()/(double)data.size();
   cout << "Media de acontecimientos por año: " << media << endl;
 }
