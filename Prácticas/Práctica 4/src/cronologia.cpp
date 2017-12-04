@@ -71,6 +71,7 @@ void cronologia::filtroPorIntervalo(int anio_inicio, int anio_fin, cronologia &c
     c.addFechaHistorica(i->second);
     i++;
   }
+}
 
 //Calcula el número de acontecimientos.
 int cronologia::numeroAcontecimientos(){
