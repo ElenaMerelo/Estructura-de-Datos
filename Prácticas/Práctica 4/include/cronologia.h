@@ -92,6 +92,12 @@ class cronologia{
     int numeroAcontecimientos();
 
     /**
+     * @brief Busca la fecha_historica con mas acontecimientos en la cronologia.
+     * @return fecha_historica con mayor número de acontecimientos.
+     */
+    fecha_historica& fechaMax();
+
+    /**
      * @brief Imprime por pantalla las estadísticas básicas de una cronología.
      */
     void estadisticas();

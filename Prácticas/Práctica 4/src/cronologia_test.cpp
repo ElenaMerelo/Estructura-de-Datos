@@ -34,10 +34,10 @@ int main(int argc, char * argv[]){
   // y salida, así como de los constructores vacíos, de copia y operator=
   cronologia a, b;
   c1 >> a;
-  cout << "\nCronología a: \n" << a;
+  // cout << "\nCronología a: \n" << a;
 
   c2 >> b;
-  cout << "\nCronología b: \n" << b;
+  // cout << "\nCronología b: \n" << b;
 
   // cronologia c(a);
   // cronologia d= b;

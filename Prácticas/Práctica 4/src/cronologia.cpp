@@ -64,6 +64,7 @@ void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
   }
 }
 
+//Calcula el número de acontecimientos.
 int cronologia::numeroAcontecimientos(){
   cronologia::it i;
   int sum=0;
@@ -72,9 +73,27 @@ int cronologia::numeroAcontecimientos(){
   return sum;
 }
 
+//Cálcula la fecha_historica con mayor número de acontecimientos.
+fecha_historica& cronologia::fechaMax(){
+  cronologia::it i;
+  cronologia::it f_max;
+  int max=0;
+  int n=0;
+  for(i=data.begin(); i!=data.end(); ++i){
+    n=(*i).second.getNumEvents();
+    if( n > max ){
+      max=n;
+      f_max=i;
+    }
+  }
+  return (*f_max).second;
+}
+
 void cronologia::estadisticas(){
   cout << "Número total de fechas históricas: " << data.size() << endl;
   cout << "Número total de acontecimientos: " << numeroAcontecimientos() << endl;
+  fecha_historica aux=fechaMax();
+  cout << "Fecha histórica con mayor número de acontecimientos: " << aux.getNumEvents() << " acontecimientos. Fecha: " << aux <<endl; 
 }
 
 //Operador de salida
