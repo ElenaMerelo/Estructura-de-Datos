@@ -99,10 +99,13 @@ fecha_historica& cronologia::fechaMax(){
 }
 
 void cronologia::estadisticas(){
+  cout << "-------Estadísticas de la cronología-------" << endl;
   cout << "Número total de fechas históricas: " << data.size() << endl;
   cout << "Número total de acontecimientos: " << numeroAcontecimientos() << endl;
   fecha_historica aux=fechaMax();
   cout << "Fecha histórica con mayor número de acontecimientos: " << aux.getNumEvents() << " acontecimientos. Fecha: " << aux <<endl; 
+  double media=numeroAcontecimientos()/(double)data.size();
+  cout << "Media de acontecimientos por año: " << media << endl;
 }
 
 //Operador de salida
