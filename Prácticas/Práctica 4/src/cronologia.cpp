@@ -64,6 +64,10 @@ void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
   }
 }
 
+void cronologia::estadisticas(){
+  cout << "Número total de eventos en la cronología: " << data.size() << endl;
+}
+
 //Operador de salida
 ostream& operator<< (ostream& os, const cronologia& c){
   cronologia::const_it i;
