@@ -107,7 +107,7 @@ class fecha_historica{
       /**
       * @brief Borra los datos de la fecha_historica
       */
-      void clear(){ events.second.erase(events.second.begin(), events.second.end()); };
+      void clear(){ events.second.clear(); };
 
 
       /**
