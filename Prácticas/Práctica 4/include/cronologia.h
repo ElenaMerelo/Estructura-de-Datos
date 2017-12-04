@@ -87,6 +87,15 @@ class cronologia{
 
 
     /**
+  * @brief Crea una cronología con las fechas históricas acontecidas en ese intervalo de tiempo
+  * @param c cronología que queremos filtrar
+  * @param anio_inicio año a partir del cual vamos a filtrar
+  * @param anio_fin año hasta el cual vamos a filtrar
+  */
+  void filtroPorIntervalo(int anio_inicio, int anio_fin, cronologia &c);
+
+
+    /**
      * @brief Imprime por pantalla las estadísticas básicas de una cronología.
      */
     void estadisticas();

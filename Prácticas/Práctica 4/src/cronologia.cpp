@@ -64,6 +64,15 @@ void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
   }
 }
 
+//Crea una cronología con los eventos que pasaron en dicho intervalo de tiempo
+void cronologia::filtroPorIntervalo(int anio_inicio, int anio_fin, cronologia &c){
+  cronologia::it i= data.lower_bound(anio_inicio);
+  while(i != data.upper_bound(anio_fin)){
+    c.addFechaHistorica(i->second);
+    i++;
+  }
+}
+
 void cronologia::estadisticas(){
   cout << "Número total de eventos en la cronología: " << data.size() << endl;
 }
