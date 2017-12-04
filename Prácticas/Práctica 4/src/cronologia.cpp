@@ -64,7 +64,6 @@ void cronologia::filtroPorPalabrasClaves(string s, cronologia &c){
   }
 }
 
-<<<<<<< HEAD
 //Crea una cronología con los eventos que pasaron en dicho intervalo de tiempo
 void cronologia::filtroPorIntervalo(int anio_inicio, int anio_fin, cronologia &c){
   cronologia::it i= data.lower_bound(anio_inicio);
@@ -72,14 +71,13 @@ void cronologia::filtroPorIntervalo(int anio_inicio, int anio_fin, cronologia &c
     c.addFechaHistorica(i->second);
     i++;
   }
-=======
+
 int cronologia::numeroAcontecimientos(){
   cronologia::it i;
   int sum=0;
   for(i=data.begin(); i!=data.end(); ++i)
     sum+=(*i).second.getNumEvents();
   return sum;
->>>>>>> 6b5706d487e7fbd4859a22502a4bbfe050d1d4af
 }
 
 void cronologia::estadisticas(){
