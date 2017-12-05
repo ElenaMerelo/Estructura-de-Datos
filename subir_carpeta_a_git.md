@@ -2,9 +2,9 @@
 1. Hacemos git clone *repositorio al que queramos subir la carpeta*, por ejemplo en mi caso:
 `git clone https://github.com/ElenaMerelo/Estructura-de-Datos`
 
-2. Luego `git pull`
-3. Nos metemos en el repositorio que hemos clonado, situado en el directorio en el que se encuentra la terminal:
+2. Nos metemos en el repositorio que hemos clonado, situado en el directorio en el que se encuentra la terminal:
 `cd Estructura-de-Datos`
+3. Luego `git pull`
 
 4. Una vez dentro copiamos la carpeta deseada(/home/blablabla) en el repositorio clonado , en el que nos encontramos, indicándolo con un punto:
 `cp -r /home/elena/Escritorio/University\ stuff/2º/1º\ Cuatrimestre/ED/Reto3\(Elena\)/ .`
