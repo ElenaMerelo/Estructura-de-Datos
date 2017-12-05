@@ -76,6 +76,8 @@ int main(int argc, char * argv[]){
 
 
 //Estadisticas de la cronología
+  cout << "\n" << argv[1] << "\n";
   a.estadisticas();
+  cout << "\n" << argv[1] << "\n";
   b.estadisticas();
 }
