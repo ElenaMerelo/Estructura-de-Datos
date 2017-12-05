@@ -22,7 +22,7 @@ $(OBJ)/fecha_historica.o : $(SRC)/fecha_historica.cpp
 documentacion:
 	doxygen doc/doxys/Doxyfile
 
-	
+
 # ************ Compilación de módulos ************
 $(BIN)/pruebacronologia:
 
