@@ -150,7 +150,7 @@ ostream& operator << (ostream& os, const QuienEsQuien &quienEsQuien){
 	}
 	os << "Nombre personaje" << endl;
 
-	//Rellenamos con ceros y unos cada línea y al final ponemos el nombre del personaje.
+	//Rellenamos con ceros y unos cada lï¿½nea y al final ponemos el nombre del personaje.
 	for(int indice_personaje=0;indice_personaje<quienEsQuien.personajes.size();indice_personaje++){
 		for(int indice_atributo=0;indice_atributo<quienEsQuien.atributos.size();indice_atributo++){
 
@@ -163,15 +163,15 @@ ostream& operator << (ostream& os, const QuienEsQuien &quienEsQuien){
 }
 
 /**
-  * @brief Convierte un número a un vector de bool que corresponde 
-  *        con su representación en binario con un numero de digitos
+  * @brief Convierte un nï¿½mero a un vector de bool que corresponde 
+  *        con su representaciï¿½n en binario con un numero de digitos
   *        fijo.
   *
-  * @param n Número a convertir en binario.
-  * @param digitos Número de dígitos de la representación binaria.
+  * @param n Nï¿½mero a convertir en binario.
+  * @param digitos Nï¿½mero de dï¿½gitos de la representaciï¿½n binaria.
   *
-  * @return Vector de booleanos con la representación en binario de @e n 
-  *      con el número de elementos especificado por @e digitos. 
+  * @return Vector de booleanos con la representaciï¿½n en binario de @e n 
+  *      con el nï¿½mero de elementos especificado por @e digitos. 
 
   */
 vector<bool> convertir_a_vector_bool(int n, int digitos) {
@@ -268,7 +268,7 @@ void QuienEsQuien::tablero_aleatorio(int numero_de_personajes){
 
 	int numero_de_atributos = ceil(log_2_numero_de_personajes);
 
-	cout << "Petición para generar "<< numero_de_personajes<<" personajes ";
+	cout << "Peticiï¿½n para generar "<< numero_de_personajes<<" personajes ";
 	cout << "con "<<numero_de_atributos<< " atributos"<<endl;
 	cout << "Paso 1: generar "<< pow(2,numero_de_atributos) << " personajes"<<endl;
 
