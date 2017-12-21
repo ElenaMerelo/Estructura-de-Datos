@@ -6,13 +6,13 @@
 #include <algorithm>
 
 QuienEsQuien::QuienEsQuien(){
-	//TODO :)
+	//TODO :,)
 }
 QuienEsQuien::QuienEsQuien(const QuienEsQuien &quienEsQuien){
-	//TODO :)
+	//TODO :,)
 }
 QuienEsQuien& QuienEsQuien::operator= (const QuienEsQuien &quienEsQuien){
-	//TODO :)
+	//TODO :,)
 	return *this;
 }
 QuienEsQuien::~QuienEsQuien(){
