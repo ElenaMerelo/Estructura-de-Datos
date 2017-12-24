@@ -51,34 +51,34 @@ pila_doble<T>& pila_doble<T>::operator=(pila_doble<T> &other){
 }
 
 template<class T>
-ostream& pila_doble<T>::operator<<(ostream &os, pila_doble<T> &p){
+void pila_doble<T>::show_elements(){
   stack<T> aux0, aux1;
   int i;
 
   //Pasamos los elementos de p.pila 0 a aux0
-  for(i= 0; i< p.pila0.size(); i++){
-    aux0.push(p.pila0.top());
-    p.pila0.pop();
+  for(i= 0; i< pila0.size(); i++){
+    aux0.push(pila0.top());
+    pila0.pop();
   }
 
   //Ahora ya podemos mostrarlos en el orden correcto, a la vez que restauramos p.pila0
   for(i= 0; i< aux0.size(); i++){
-    os << aux0.top();
-    p.pila0.push(aux0.top());
+    cout << aux0.top();
+    pila0.push(aux0.top());
   }
 
   T element;
   //Mostramos ahora los elementos de p.pila1, a la vez que los metemos en aux1
-  for(i= 0; i< p.pila1.size(); i++){
-    element= p.pila1.top();
-    os << element;
+  for(i= 0; i< pila1.size(); i++){
+    element= pila1.top();
+    cout << element;
     aux1.push(element);
-    p.pila1.pop();
+    pila1.pop();
   }
 
   //Restablecemos p.pila1
   for(i= 0; i< aux1.size(); i++){
-    p.pila1.push(aux1.top());
+    pila1.push(aux1.top());
     aux1.pop();
   }
 }

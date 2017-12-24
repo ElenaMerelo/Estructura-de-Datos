@@ -23,6 +23,8 @@ public:
   //Operador de asignación
   pila_doble& operator=(pila_doble<T> &other);
 
+  void show_elements();
+
   //Método que elimina el elemento tope de una pila u otra según el índice pasado como argumento
   void pop(int indice_pila);
 

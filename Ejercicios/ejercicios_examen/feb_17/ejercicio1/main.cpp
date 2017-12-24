@@ -10,5 +10,5 @@ int main(){
   for(int i= 0; i< 5; i++)
     p.push(i+1);
 
-  cout<< p;
+  p.show_elements();
 }
