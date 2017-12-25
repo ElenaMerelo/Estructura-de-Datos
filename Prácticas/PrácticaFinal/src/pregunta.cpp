@@ -1,6 +1,6 @@
 #include "../include/pregunta.h"
 
-void Pregunta::copiar(const string atributo, const int num_personajes){
+void Pregunta::copiar_pregunta(const string atributo, const int num_personajes){
 	this->atributo= atributo;
 	this->num_personajes= num_personajes;
 }

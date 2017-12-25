@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <string.h>
 
-QuienEsQuien::copiar_quien_es_quien(const QuienEsQuien &quienEsQuien){
+void QuienEsQuien::copiar_quien_es_quien(const QuienEsQuien &quienEsQuien){
 	this->personajes= quienEsQuien.personajes;
 	this->atributos= quienEsQuien.atributos;
 	this->tablero= quienEsQuien.tablero;
@@ -238,14 +238,14 @@ int QuienEsQuien::count_personajes(string atributo){
 	return n;
 }
 
-void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index){
+void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
 	if(!n.null() && index < atributos.size()){
 		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(atributos[index])));
 		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(atributos[index])));
 
 		if(!n.left().null() && !n.right().null()){
-		crear_arbol_recursivo(n.left(), 1+index);
-		crear_arbol_recursivo(n.right(), 1+index);
+		crear_arbol_recursivo(n.left(), 1+index, at);
+		crear_arbol_recursivo(n.right(), 1+index, at);
 		}
 	}
 }
@@ -253,10 +253,13 @@ void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index){
 
 bintree<Pregunta> QuienEsQuien::crear_arbol()
 {
+	vector<bool> aux;
 	if( arbol.empty() ){
 		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[0])));
 	}
-	crear_arbol_recursivo(arbol.root(), 1);
+
+	crear_arbol_recursivo(arbol.root(), 1, aux);
+	
 	return arbol;
 }
 
