@@ -233,7 +233,7 @@ int QuienEsQuien::count_personajes(string atributo, vector<bool> &at){
 	return n;
 }
 
-void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> &at){
+void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
 	if(!n.null() && index < atributos.size()){
 		at.push_back(1);
 		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
@@ -241,11 +241,15 @@ void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, v
 		at.push_back(0);
 		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
 
+		at.pop_back();
+
 		at.push_back(1);
 		crear_arbol_recursivo(n.left(), 1+index, at);
 		at.pop_back(); 
 		at.push_back(0);
 		crear_arbol_recursivo(n.right(), 1+index, at);
+
+		cout << at << endl;
 	}
 }
 
@@ -257,7 +261,7 @@ bintree<Pregunta> QuienEsQuien::crear_arbol()
 		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[0], aux)));
 	}
 
-	crear_arbol_recursivo(arbol.root(), 0, aux);
+	crear_arbol_recursivo(arbol.root(), 1, aux);
 	
 	return arbol;
 }

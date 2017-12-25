@@ -139,7 +139,7 @@ public:
 	 */
 	int count_personajes(string atributo, vector<bool> &at);
 
-	void crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> &at);
+	void crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at);
 
 	/**
 	  * @brief Este método construye el árbol de preguntas para todos los personajes del tablero.
