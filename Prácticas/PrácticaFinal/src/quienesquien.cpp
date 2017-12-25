@@ -6,7 +6,10 @@
 #include <algorithm>
 
 QuienEsQuien::QuienEsQuien(){
-	//TODO :,)
+	personajes = quienEsQuien.personajes;
+	atributos = quienEsQuien.atributos;
+	tablero = quienEsQuien.tablero;
+	arbol = quienEsQuien.arbol;
 }
 QuienEsQuien::QuienEsQuien(const QuienEsQuien &quienEsQuien){
 	//TODO :,)
