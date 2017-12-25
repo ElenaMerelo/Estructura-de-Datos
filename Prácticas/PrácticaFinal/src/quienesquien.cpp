@@ -241,10 +241,11 @@ void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, v
 		at.push_back(0);
 		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
 
-		if(!n.left().null() && !n.right().null()){			
-			crear_arbol_recursivo(n.left(), 1+index, at);
-			crear_arbol_recursivo(n.right(), 1+index, at);
-		}
+		at.push_back(1);
+		crear_arbol_recursivo(n.left(), 1+index, at);
+		at.pop_back(); 
+		at.push_back(0);
+		crear_arbol_recursivo(n.right(), 1+index, at);
 	}
 }
 
@@ -256,7 +257,7 @@ bintree<Pregunta> QuienEsQuien::crear_arbol()
 		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[0], aux)));
 	}
 
-	crear_arbol_recursivo(arbol.root(), 1, aux);
+	crear_arbol_recursivo(arbol.root(), 0, aux);
 	
 	return arbol;
 }
