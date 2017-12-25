@@ -4,6 +4,7 @@
 #include <iterator>
 #include <math.h>
 #include <algorithm>
+#include <string.h>
 
 QuienEsQuien::QuienEsQuien(){}
 
@@ -204,12 +205,35 @@ vector<bool> convertir_a_vector_bool(int n, int digitos) {
   return ret;
 }
 
+int QuienEsQuien::count_personajes(string atributo){
+	//Buscamos el índice del atributo.
+	int indice=0;
+	bool encontrado=false;
+	for(int i=0; i < atributos.size() && !encontrado; i++){
+		if( atributo.compare(atributos[i]) == 0){
+			encontrado=true;
+			indice=i;
+		}
+	}
+	assert( indice != atributos.size());
+	
+	//Contamos el número de veces que se encuentra en 'tablero'.
+	int n=0;
+	for(vector<vector<bool> >::iterator i=tablero.begin();
+	i!=tablero.end();
+	++i){
+		if((*i)[indice])
+			n++;
+	}
+
+	return n;
+}
+
 bintree<Pregunta> QuienEsQuien::crear_arbol()
 {
-	
-	//TODO :D:D
-
-	bintree<Pregunta> arbol;
+	if( arbol.empty() ){
+		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[1])));
+	}
 	return arbol;
 }
 
