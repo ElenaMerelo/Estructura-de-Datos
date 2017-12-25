@@ -8,14 +8,14 @@
 using namespace std;
 
 /**
-  * @brief En cada estructura pregunta se almacena la cadena de la pregunta y el 
-  *        número de personajes que aún no han sido eliminados. Si el 
-  *        número de personajes es 1, entonces la cadena pregunta 
+  * @brief En cada estructura pregunta se almacena la cadena de la pregunta y el
+  *        número de personajes que aún no han sido eliminados. Si el
+  *        número de personajes es 1, entonces la cadena pregunta
   *        contiene el nombre del personaje.
   */
 class Pregunta{
 
-	private: 
+	private:
 		/**
 		  * @brief Atributo sobre el que se pregunta en este nodo. En el caso de que haya un único
 		  *        personaje restante, este campo almacena su nombre.
@@ -27,6 +27,11 @@ class Pregunta{
 		  */
 		int num_personajes;
 
+		/**
+		  * @brief Copia en this el atributo y número de personajes pasados como argumento
+		  */
+		void copiar_pregunta(const string atributo, const int num_personajes);
+
 	public:
 		/**
 		  * @brief Constructor por defecto de la pregunta.
@@ -37,12 +42,12 @@ class Pregunta{
 
 		/**
 	      * @brief Constructor de copias
-	      * @param pregunta Pregunta a copiar
-	      * 
-	      * Construye la pregunta duplicando el contenido de @e pregunta en la pregunta
+	      * @param p Pregunta a copiar
+	      *
+	      * Construye la pregunta duplicando el contenido de @e p en la pregunta
 	      * receptora.
 	      */
-		Pregunta(const Pregunta & pregunta);
+		Pregunta(const Pregunta & p);
 
 		/**
 		  * @brief Constructor de la pregunta
@@ -54,20 +59,21 @@ class Pregunta{
 
 		/**
 		  * @brief Destructor
-      	  *
-      	  * Libera los recursos ocupados por la pregunta receptora.
-      	  */
+  	  *
+  	  * Libera los recursos ocupados por la pregunta receptora.
+  	  */
 		~Pregunta();
 
 		/**
-	      * @brief Operador de asignación
-	      * @param pregunta Pregunta a copiar
-	      * @return Referencia a la pregunta receptora.
-	      *
-	      * Asigna el valor de la pregunta duplicando el contenido de @e pregunta en la
-	      * pregunta receptora.
-	      */
-		Pregunta & operator = (const Pregunta & pregunta);
+      * @brief Operador de asignación
+      * @param p Pregunta a copiar
+      * @return Referencia a la pregunta receptora.
+      *
+      * Asigna el valor de la pregunta duplicando el contenido de @e p en la
+      * pregunta receptora.
+      */
+		Pregunta & operator=(const Pregunta & p);
+
 		/**
 		  * @brief Operador de inserción de flujo.
 		  * @param os Stream de salida.
@@ -82,14 +88,14 @@ class Pregunta{
 		/**
 		  * @brief Devuelve el atributo sobre el que se pregunta en el nodo.
 		  *
-		  * @pre El nodo debe ser un nodo de pregunta (num_personaje>1).
+		  * @pre El nodo debe ser un nodo de pregunta (num_personajes>1).
 		  */
 		string obtener_pregunta() const;
 
 		/**
 		  * @brief Devuelve el personaje del nodo
 		  *
-		  * @pre El nodo debe ser un nodo de personaje (num_personaje==1).
+		  * @pre El nodo debe ser un nodo de personaje (num_personajes==1).
 		  */
 		string obtener_personaje() const;
 

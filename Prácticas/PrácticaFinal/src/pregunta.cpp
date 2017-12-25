@@ -1,28 +1,31 @@
 #include "../include/pregunta.h"
 
+void Pregunta::copiar(const string atributo, const int num_personajes){
+	this->atributo= atributo;
+	this->num_personajes= num_personajes;
+}
+
 Pregunta::Pregunta(){
-	atributo       = "";
+	atributo= "";
 	num_personajes = 0;
 }
 
-Pregunta::Pregunta(const Pregunta & pregunta){
-	this->atributo       = pregunta.atributo;
-	this->num_personajes = pregunta.num_personajes;
+Pregunta::Pregunta(const Pregunta & p){
+	copiar_pregunta(p.atributo, p.num_personajes);
 }
 
 Pregunta::Pregunta(const string atributo,const int num_personajes){
-	this->atributo       = atributo;
-	this->num_personajes = num_personajes;
+	copiar_pregunta(atributo, num_personajes);
 }
 
 Pregunta::~Pregunta(){
-	atributo       = "";
+	atributo= "";
 	num_personajes = 0;
 }
 
-Pregunta & Pregunta::operator = (const Pregunta & pregunta){
-	this->atributo       = pregunta.atributo;
-	this->num_personajes = pregunta.num_personajes;
+Pregunta & Pregunta::operator = (const Pregunta & p){
+	if(&p != this)
+		copiar_pregunta(p.atributo, p.num_personajes);
 	return *this;
 }
 
