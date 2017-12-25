@@ -214,38 +214,36 @@ vector<bool> convertir_a_vector_bool(int n, int digitos) {
   return ret;
 }
 
-int QuienEsQuien::count_personajes(string atributo){
-	//Buscamos el índice del atributo.
-	int indice=0;
-	bool encontrado=false;
-	for(int i=0; i < atributos.size() && !encontrado; i++){
-		if( atributo.compare(atributos[i]) == 0){
-			encontrado=true;
-			indice=i;
-		}
-	}
-	assert( indice != atributos.size());
-
-	//Contamos el número de veces que se encuentra en 'tablero'.
+int QuienEsQuien::count_personajes(string atributo, vector<bool> &at){
 	int n=0;
+	int x=0;
 	for(vector<vector<bool> >::iterator i=tablero.begin();
 	i!=tablero.end();
 	++i){
-		if((*i)[indice])
+		for(int j=0; j<at.size(); j++){
+			if( (*i)[j] == at[j] )
+				x++;
+		}
+		if ( x==at.size() ){
 			n++;
+		}
+		x=0;
 	}
 
 	return n;
 }
 
-void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
+void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> &at){
 	if(!n.null() && index < atributos.size()){
-		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(atributos[index])));
-		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(atributos[index])));
+		at.push_back(1);
+		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
+		at.pop_back();
+		at.push_back(0);
+		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
 
-		if(!n.left().null() && !n.right().null()){
-		crear_arbol_recursivo(n.left(), 1+index, at);
-		crear_arbol_recursivo(n.right(), 1+index, at);
+		if(!n.left().null() && !n.right().null()){			
+			crear_arbol_recursivo(n.left(), 1+index, at);
+			crear_arbol_recursivo(n.right(), 1+index, at);
 		}
 	}
 }
@@ -255,7 +253,7 @@ bintree<Pregunta> QuienEsQuien::crear_arbol()
 {
 	vector<bool> aux;
 	if( arbol.empty() ){
-		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[0])));
+		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[0], aux)));
 	}
 
 	crear_arbol_recursivo(arbol.root(), 1, aux);
