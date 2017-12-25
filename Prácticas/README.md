@@ -1,5 +1,5 @@
 # Práctica 4 ~ STL e iteradores
-####Enunciado:
+#### Enunciado:
 Con la finalidad de mejorar nuestros conocimientos sobre Historia, queremos desarrollar una
 aplicación que nos permita obtener acontecimientos históricos sucedidos en una fecha y
 viceversa, averiguar el año en el que sucedió algún acontecimiento. Con este fin,
