@@ -33,6 +33,23 @@ int main(){
   advance(other, 5);
   cout << "\nAvanzando 5 posiciones el iterador apuntamos al elemento: " << *other;
 
+  /*Queremos ahora devolver el segundo elemento de la diagonal principal. Para ello
+  avanzamos n posiciones el iterador de las filas y luego el de las columnas
+  el mismo número de posiciones(los elementos de la diagonal principal son los de las posiciones [n][n])*/
+  vector<vector<int> >::iterator rows= v.begin()+2;
+  vector<int>::iterator columns= rows->begin();
+  advance(columns,2);
 
+  //Vemos ahora como sería borrar un vector de vectores
+  for(i= v.begin(); i != v.end(); i++)
+    i->clear();
 
+  //Volvemos a devolver el vector y vemos como en efecto se ha eliminado el vector de vectores
+  for(i= v.begin(); i != v.end(); i++){
+    for(j= i->begin(); j != i->end(); j++)
+      cout << *j << " ";
+    cout << "\n";
+  }
+
+  cout << "\nEl tercer elemento(el que está en la posición 2) de la diagonal principal es: " << *columns;
 }
