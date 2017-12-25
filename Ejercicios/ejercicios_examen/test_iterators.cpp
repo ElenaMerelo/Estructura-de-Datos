@@ -44,6 +44,8 @@ int main(){
   for(i= v.begin(); i != v.end(); i++)
     i->clear();
 
+  v.clear();
+
   //Volvemos a devolver el vector y vemos como en efecto se ha eliminado el vector de vectores
   for(i= v.begin(); i != v.end(); i++){
     for(j= i->begin(); j != i->end(); j++)
