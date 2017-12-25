@@ -5,17 +5,21 @@
 #include <math.h>
 #include <algorithm>
 
-QuienEsQuien::QuienEsQuien(){
+QuienEsQuien::QuienEsQuien(){}
+
+QuienEsQuien::QuienEsQuien(const QuienEsQuien &quienEsQuien){
 	personajes = quienEsQuien.personajes;
 	atributos = quienEsQuien.atributos;
 	tablero = quienEsQuien.tablero;
 	arbol = quienEsQuien.arbol;
 }
-QuienEsQuien::QuienEsQuien(const QuienEsQuien &quienEsQuien){
-	//TODO :,)
-}
 QuienEsQuien& QuienEsQuien::operator= (const QuienEsQuien &quienEsQuien){
-	//TODO :,)
+	if(this!=&quienEsQuien){
+		personajes = quienEsQuien.personajes;
+		atributos = quienEsQuien.atributos;
+		tablero = quienEsQuien.tablero;
+		arbol = quienEsQuien.arbol;
+	}
 	return *this;
 }
 QuienEsQuien::~QuienEsQuien(){
@@ -23,7 +27,11 @@ QuienEsQuien::~QuienEsQuien(){
 }
 
 void QuienEsQuien::limpiar(){
-	//TODO :)
+	personajes.clear();
+	atributos.clear();
+	tablero.clear();
+	arbol.clear();
+	jugada_actual.remove();
 }
 
 template <typename T>
