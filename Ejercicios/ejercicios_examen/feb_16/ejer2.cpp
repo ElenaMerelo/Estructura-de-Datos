@@ -16,22 +16,21 @@ Author: Elena Merelo Molina
 using namespace std;
 
 bool suma_igual(const list<list<int> > &l){
-  list<list<int> >::const_iterator i;
-  list<int>::const_iterator j;
+  typename list<list<int> >::const_iterator i= l.begin();
+  typename list<int>::const_iterator j;
   int suma, suma_anterior= 0;
 
   //Sumamos la primera columna para tener punto de partida con el que comparar
-  for(i= l.begin(); i!= l.end(); i++){
-    for(j= i->begin(); j != i->begin()+1; j++)
-      suma_anterior += *j;
-  }
+  for(j= i->begin(); j != i->end(); j++)
+    suma_anterior += *j;
+
 
   //Sumamos las columnas
   for(i= l.begin(); i!= l.end(); i++){
     suma= 0;
-    for(j= i->begin()+1; j!= i->end(); j++)
+    for(j= i->begin(); j!= i->end(); j++)
       suma += *j;
-      cout << suma << " " << suma_anterior;
+
     if(suma != suma_anterior)
       return false;
 
@@ -55,14 +54,26 @@ void show_elements(const list<list<int> > &l){
 
 int main(){
   list<int> columnas(3,5);
+  list<int> new_column(3,4);
+
   list<list<int> > filas(3, columnas);
 
   show_elements(filas);
 
   if(suma_igual(filas))
-    cout << "\nEl resultado de sumar las filas y columnas es el mismo";
+    cout << "\nEl resultado de sumar las filas y columnas es el mismo\n";
   else
-    cout << "\nNo suman los mismo las filas y las columnas";
+    cout << "\nNo suman los mismo las filas y las columnas\n";
+
+  filas.push_back(new_column);
+
+  show_elements(filas);
+
+  if(suma_igual(filas))
+    cout << "\nEl resultado de sumar las filas y columnas es el mismo\n";
+  else
+    cout << "\nNo suman los mismo las filas y las columnas\n";
+
 
 
 }
