@@ -29,7 +29,7 @@ int main(){
 
   string telefono= "958 09 05 08";
   string persona= mi_agenda.find_telephone(telefono);
-  cout << "\nLa persona con teléfono " << telefono << "es: " << persona;
+  cout << "\nLa persona con teléfono " << telefono << " es: " << persona;
 
 
 

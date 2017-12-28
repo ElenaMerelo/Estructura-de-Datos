@@ -9,7 +9,7 @@ string agenda::find_telephone(string num){
   people::iterator i;
 
   for(i= p.begin(); i!= p.end(); i++){
-    if(i->compare(num) == 0)
+    if((i->second).first.compare(num) == 0)
       return i->first;
   }
   return "nadie";

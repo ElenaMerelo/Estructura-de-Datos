@@ -20,13 +20,9 @@ private:
 public:
   agenda(){}
 
-  agenda(const agenda &a){
-    p= a;
-  }
+  agenda(const agenda &a){ p = a.p; }
 
-  agenda& operator=(const agenda &a){
-    p= a;
-  }
+  agenda& operator=(const agenda &a){ p= a.p; }
 
   //Dado el nombre de una persona devuelve su teléfono y dirección
   info& find_name(string name);
@@ -36,14 +32,6 @@ public:
 
   //Inserta una persona en la agenda
   void insert(pair<string, info> person);
-
-
-
-
-
-
-
-
 
 };
 #endif
