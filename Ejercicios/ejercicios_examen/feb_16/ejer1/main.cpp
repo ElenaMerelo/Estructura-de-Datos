@@ -6,13 +6,6 @@ Implementa las funciones: persona buscar_nombre(string nom), persona
 buscar_telefono(string num), void insertar(persona p).
 Author: Elena Merelo Molina
 */
-
-/*#include <map>
-#include <utility>
-#include <iostream>
-#include <string>
-
-using namespace std;*/
 #include <ejer1.h>
 
 int main(){
