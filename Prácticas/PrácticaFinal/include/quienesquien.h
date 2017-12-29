@@ -136,9 +136,16 @@ public:
 
   /**
 	 * @brief Cuenta el número de personajes que tiene el atributo @ e atributo.
+	 * @param at Vector de 'bool' que contiene los atributos que deben cumplir los personajes a contar.
 	 */
-	int count_personajes(string atributo, vector<bool> &at);
+	int count_personajes(vector<bool> &at);
 
+	/**
+	 * @brief Crea el árbol de preguntas disponibles.
+	 * @param n Nodo a partir del cuál se crea el árbol.
+	 * @param index Índice que va desde 0 hasta número_de_atributos-1 para parar la recursividad.
+	 * @param at Vector de 'bool' que contiene los atributos que deben cumplir los personajes a contar.
+	 */
 	void crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at);
 
 	/**

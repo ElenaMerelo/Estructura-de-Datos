@@ -35,11 +35,6 @@ QuienEsQuien::~QuienEsQuien(){
 void QuienEsQuien::limpiar(){
 	personajes.clear();
 	atributos.clear();
-
-	vector<vector<bool> >::iterator i;
-
-	for(i= tablero.begin(); i != tablero.end(); i++)
-		i->clear();
 	tablero.clear();
 	arbol.clear();
 	jugada_actual.remove();
@@ -214,7 +209,7 @@ vector<bool> convertir_a_vector_bool(int n, int digitos) {
   return ret;
 }
 
-int QuienEsQuien::count_personajes(string atributo, vector<bool> &at){
+int QuienEsQuien::count_personajes(vector<bool> &at){
 	int n=0;
 	int x=0;
 	for(vector<vector<bool> >::iterator i=tablero.begin();
@@ -236,10 +231,10 @@ int QuienEsQuien::count_personajes(string atributo, vector<bool> &at){
 void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
 	if(!n.null() && index < atributos.size()){
 		at.push_back(1);
-		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
+		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(at)));
 		at.pop_back();
 		at.push_back(0);
-		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(atributos[index], at)));
+		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(at)));
 
 		at.pop_back();
 
@@ -258,7 +253,7 @@ bintree<Pregunta> QuienEsQuien::crear_arbol()
 {
 	vector<bool> aux;
 	if( arbol.empty() ){
-		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(atributos[0], aux)));
+		arbol=bintree<Pregunta>(Pregunta(atributos[0], count_personajes(aux)));
 	}
 
 	crear_arbol_recursivo(arbol.root(), 1, aux);
