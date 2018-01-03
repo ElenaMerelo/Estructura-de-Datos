@@ -37,7 +37,6 @@ void QuienEsQuien::limpiar(){
 	atributos.clear();
 	tablero.clear();
 	arbol.clear();
-	jugada_actual.remove();
 }
 
 template <typename T>
