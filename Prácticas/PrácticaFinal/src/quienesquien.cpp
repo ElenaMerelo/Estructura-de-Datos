@@ -228,14 +228,50 @@ int QuienEsQuien::count_personajes(vector<bool> &at){
 	return n;
 }
 
+string QuienEsQuien::buscar_personaje(const vector<bool> &atrib){
+	int indice=0;
+	int x=0;
+	bool found=false;
+	for( int i=0; i < tablero.size() && !found; i++ ){
+		x=0;
+		for( int j=0; j < atrib.size(); j++ ){
+			if(tablero[i][j]==atrib[j]) 
+				x++;
+		}
+		if( x == atrib.size()){
+			found=true;
+			indice=i;	
+		}
+	}
+	return personajes[indice];
+}
+
 void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
 	if(!n.null() && index < atributos.size()){
+
 		at.push_back(1);
-		arbol.insert_left(n, Pregunta(atributos[index], count_personajes(at)));
+		int n_pers=count_personajes(at);
+		
+		if(n_pers){
+			if( n_pers == 1){
+				if( (*n).obtener_num_personajes() > 1 )
+					arbol.insert_left(n, Pregunta(buscar_personaje(at), n_pers));
+			}
+			else
+				arbol.insert_left(n, Pregunta(atributos[index], n_pers));
+		}
 		at.pop_back();
 		at.push_back(0);
-		arbol.insert_right(n, Pregunta(atributos[index], count_personajes(at)));
-
+		n_pers=count_personajes(at);
+		
+		if(n_pers){
+			if( n_pers == 1 ){
+				if( (*n).obtener_num_personajes() > 1 )
+					arbol.insert_right(n, Pregunta(buscar_personaje(at), count_personajes(at)));
+			}
+			else
+				arbol.insert_right(n, Pregunta(atributos[index], count_personajes(at)));
+		}
 		at.pop_back();
 
 		at.push_back(1);
@@ -243,8 +279,6 @@ void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, v
 		at.pop_back(); 
 		at.push_back(0);
 		crear_arbol_recursivo(n.right(), 1+index, at);
-
-		cout << at << endl;
 	}
 }
 
@@ -299,8 +333,55 @@ void QuienEsQuien::escribir_arbol_completo() const{
 	escribir_esquema_arbol(cout,this->arbol,this->arbol.root(),pre);
 }
 
+void QuienEsQuien::eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node n){
+	if( !n.null() && (*n).obtener_num_personajes() > 1 ) {	
+		if(!n.left().null() && n.right().null()){
+			if( n == arbol.root() ){
+				arbol.assign_subtree(arbol, n.left());
+				eliminar_nodos_redundantes_recursivo(arbol.root());
+			}		
+			else{
+				bintree<Pregunta> subarbol;
+				subarbol.assign_subtree(arbol, n.left());
+				bintree<Pregunta>::node padre=n.parent();
+				if( padre.left() == n ){
+					arbol.insert_left(padre, subarbol);
+					eliminar_nodos_redundantes_recursivo(padre.left());
+				}else{
+					arbol.insert_right(padre, subarbol);
+					eliminar_nodos_redundantes_recursivo(padre.right());
+				}
+			}
+		}
+		else if( n.left().null() && !n.right().null() ){			
+			if( n == arbol.root() ){
+				arbol.assign_subtree(arbol, n.right());
+				eliminar_nodos_redundantes_recursivo(arbol.root());
+			}
+			else{
+				bintree<Pregunta> subarbol;
+				subarbol.assign_subtree(arbol, n.right());
+				bintree<Pregunta>::node padre=n.parent();
+				if( padre.left() == n ){
+					arbol.insert_left(padre, subarbol);
+					eliminar_nodos_redundantes_recursivo(padre.left());
+				}else{
+					arbol.insert_right(padre, subarbol);
+					eliminar_nodos_redundantes_recursivo(padre.right());
+				}
+			}
+		}
+		else if( n.left().null() && n.right().null() ){
+			cerr<<"Arbol mal contruido (dos personajes iguales)."<<endl;
+		}else{
+			eliminar_nodos_redundantes_recursivo(n.left());
+			eliminar_nodos_redundantes_recursivo(n.right());
+		}		
+	}
+}
+
 void QuienEsQuien::eliminar_nodos_redundantes(){
-	// TODO ^^
+	eliminar_nodos_redundantes_recursivo(arbol.root());
 }
 
 float QuienEsQuien::profundidad_promedio_hojas(){

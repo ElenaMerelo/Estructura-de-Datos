@@ -141,6 +141,14 @@ public:
 	int count_personajes(vector<bool> &at);
 
 	/**
+	 * @brief Busca el personaje que tiene los mismos atributos que 'atrib'.
+	 * @param atrib Atributos que tiene el personaje a buscar.
+	 * @return Un string que contiene el nombre del personaje buscado.
+	 */
+  string buscar_personaje(const vector<bool> &atrib);
+
+
+	/**
 	 * @brief Crea el árbol de preguntas disponibles.
 	 * @param n Nodo a partir del cuál se crea el árbol.
 	 * @param index Índice que va desde 0 hasta número_de_atributos-1 para parar la recursividad.
@@ -165,6 +173,8 @@ public:
 	  * @brief Escribe el árbol generado en la salida estándar.
 	  */
 	void escribir_arbol_completo() const;
+
+  void eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node n);
 
 	/**
 	   @brief Método que modifica el árbol de preguntas para que no haya
