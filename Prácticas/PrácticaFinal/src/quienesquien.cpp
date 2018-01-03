@@ -247,7 +247,7 @@ string QuienEsQuien::buscar_personaje(const vector<bool> &atrib){
 }
 
 void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
-	if(!n.null() && index < atributos.size()){
+	if(!n.null() && index <= atributos.size()){
 
 		at.push_back(1);
 		int n_pers=count_personajes(at);
@@ -267,10 +267,10 @@ void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, v
 		if(n_pers){
 			if( n_pers == 1 ){
 				if( (*n).obtener_num_personajes() > 1 )
-					arbol.insert_right(n, Pregunta(buscar_personaje(at), count_personajes(at)));
+					arbol.insert_right(n, Pregunta(buscar_personaje(at), n_pers));
 			}
 			else
-				arbol.insert_right(n, Pregunta(atributos[index], count_personajes(at)));
+				arbol.insert_right(n, Pregunta(atributos[index], n_pers));
 		}
 		at.pop_back();
 
