@@ -32,6 +32,7 @@ Author: Elena Merelo Molina
 #include <iterator>
 
 using namespace std;
+
 /*--------------FUNCIONES AUXILIARES, NO LAS PIDE EL PROBLEMA-----------------*/
 //Construye una pila a partir de un vector
 void create_stack_from_vector(stack<int> &s, int v[], int size){
@@ -45,13 +46,13 @@ void show_stack(stack<int> &s){
 
   //Metemos los elementos de la pila en una auxiliar para mostrarlos en el orden correcto
   while(!s.empty()){
+    cout << " " << s.top();
     aux.push(s.top());
     s.pop();
   }
 
   //Restauramos la pila s a la vez que mostramos los elementos de aux
   while(!aux.empty()){
-    cout << " " << aux.top();
     s.push(aux.top());
     aux.pop();
   }
@@ -59,9 +60,9 @@ void show_stack(stack<int> &s){
 
 //Muestra los elementos de la lista de stacks
 void show_elements(list<stack<int> > &l){
-  typename list<stack<int> >::reverse_iterator i;
+  typename list<stack<int> >::iterator i;
 
-  for(i= l.rbegin(); i != l.rend(); i++){
+  for(i= l.begin(); i != l.end(); i++){
     show_stack(*i);
     cout << "\n";
   }
@@ -69,19 +70,41 @@ void show_elements(list<stack<int> > &l){
 
 /*-------------FUNCIONES PEDIDAS POR EL PROBLEMA--------------*/
 //Ordena la lista de pilas según el valor de los topes, de menor a mayor
-void sort(list<stack<int> > &l){
-  typename list<stack<int> >::iterator i, j;
+struct compare_tops{
+  bool operator()(stack<int> &s1, stack<int> &s2){
+    stack<int> aux1, aux2;
+    int top1, top2;
 
-  for(i= l.begin(); i != l.end(); i++){
-    advance(i,1);
-    for(j= i; j != l.end(); j++){
-      if(i->top() > j->top()){
-        l.insert(i, *j);
-        l.remove(*j);
-      }
+    //Metemos en las pilas auxiliares las pasadas como parámetro
+    while(!s1.empty()){
+      aux1.push(s1.top());
+      s1.pop();
     }
+    top1= aux1.top();
+
+    while(!s2.empty()){
+      aux2.push(s2.top());
+      s2.pop();
+    }
+    top2= aux2.top();
+
+    //Restablecemos las pilas originales
+    while(!aux1.empty()){
+      s1.push(aux1.top());
+      aux1.pop();
+    }
+
+    while(!aux2.empty()){
+      s2.push(aux2.top());
+      aux2.pop();
+    }
+    if(top1 < top2)
+      return true;
+
+    else
+      return false;
   }
-}
+};
 
 //Borra los topes iguales a element
 void erase(list<stack<int> > &l, int element){
@@ -91,7 +114,7 @@ void erase(list<stack<int> > &l, int element){
     if(i->top() == element)
       i->pop();
   }
-  //sort(l);
+  l.sort(compare_tops());
 }
 
 
@@ -122,6 +145,7 @@ int main(){
 
   show_elements(l);
   erase(l,2);
+  //l.sort(compare_tops);
   cout << "\nBorrando el 2 de los topes de las pilas(en nuestra forma de mostrar el list de stacks el tope de la pila es el final): \n";
   show_elements(l);
 
