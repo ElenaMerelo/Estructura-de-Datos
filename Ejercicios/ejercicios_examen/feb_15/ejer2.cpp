@@ -32,35 +32,10 @@ Author: Elena Merelo Molina
 #include <iterator>
 
 using namespace std;
-
-//Ordena la lista de pilas según el valor de los topes, de menor a mayor
-void sort(list<stack<int> > &l){
-  typename list<stack<int> >::iterator i, j;
-
-  for(i= l.begin(); i != l.end(); i++)
-    for(j= ++i; j != l.end(); j++)
-      if(i->top() > j->top()){
-        advance(i,1);
-        l.insert(i, *j);
-        l.remove(*j);
-      }
-}
-
-//Borra los topes iguales a element
-void erase(list<stack<int> > &l, int element){
-  typename list<stack<int> >::iterator i;
-
-  for(i= l.begin(); i != l.end(); i++){
-    if(i->top() == element)
-      i->pop();
-  }
-
-  //sort(l);
-}
-
+/*--------------FUNCIONES AUXILIARES, NO LAS PIDE EL PROBLEMA-----------------*/
 //Construye una pila a partir de un vector
 void create_stack_from_vector(stack<int> &s, int v[], int size){
-  for(int i= 0; i< size; i++)
+  for(int i= size-1; i>= 0; i--)
     s.push(v[i]);
 }
 
@@ -84,13 +59,41 @@ void show_stack(stack<int> &s){
 
 //Muestra los elementos de la lista de stacks
 void show_elements(list<stack<int> > &l){
-  typename list<stack<int> >::iterator i;
+  typename list<stack<int> >::reverse_iterator i;
 
-  for(i= l.begin(); i != l.end(); i++){
+  for(i= l.rbegin(); i != l.rend(); i++){
     show_stack(*i);
     cout << "\n";
   }
 }
+
+/*-------------FUNCIONES PEDIDAS POR EL PROBLEMA--------------*/
+//Ordena la lista de pilas según el valor de los topes, de menor a mayor
+void sort(list<stack<int> > &l){
+  typename list<stack<int> >::iterator i, j;
+
+  for(i= l.begin(); i != l.end(); i++){
+    advance(i,1);
+    for(j= i; j != l.end(); j++){
+      if(i->top() > j->top()){
+        l.insert(i, *j);
+        l.remove(*j);
+      }
+    }
+  }
+}
+
+//Borra los topes iguales a element
+void erase(list<stack<int> > &l, int element){
+  typename list<stack<int> >::iterator i;
+
+  for(i= l.begin(); i != l.end(); i++){
+    if(i->top() == element)
+      i->pop();
+  }
+  //sort(l);
+}
+
 
 int main(){
   int v1[]= {2,9,1};
@@ -119,6 +122,7 @@ int main(){
 
   show_elements(l);
   erase(l,2);
+  cout << "\nBorrando el 2 de los topes de las pilas(en nuestra forma de mostrar el list de stacks el tope de la pila es el final): \n";
   show_elements(l);
 
 
