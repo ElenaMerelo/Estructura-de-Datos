@@ -452,7 +452,7 @@ bool ArbolBinario<Tbase>::mismo_recorrido_in_order(const ArbolBinario<Tbase> &a,
       in_order(b.laraiz, v2);
 
       typename vector<Tbase>::iterator i= v1.begin(), j= v2.begin();
-      while(i != v2.end() && j != v1.end()){
+      while(i != v1.end() && j != v2.end()){
         if(*i != *j)
           return false;
         i++;

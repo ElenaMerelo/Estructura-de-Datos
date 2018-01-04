@@ -35,7 +35,21 @@ int main(){
   cout << ab2;
 
   if(ab1.es_simetrico_a(ab2))
-    cout << "\nLos dos árboles son simétricos";
+    cout << "\nLos árboles 1 y 2 son simétricos";
   else
-    cout << "\nLos dos árboles no son simétricos";
+    cout << "\nLos árboles 1 y 2 no son simétricos";
+
+  //Probamos los otros casos posibles
+  ArbolBinario<int> ab3, ab4;
+  if(ab3.es_simetrico_a(ab4))
+    cout << "\nLos árboles 3 y 4 son simétricos";
+  else
+    cout << "\nLos árboles 3 y 4 no son simétricos";
+
+    if(ab1.es_simetrico_a(ab3))
+      cout << "\nLos árboles 1 y 3 son simétricos";
+    else
+      cout << "\nLos árboles 1 y 3 no son simétricos";
+
+
 }
