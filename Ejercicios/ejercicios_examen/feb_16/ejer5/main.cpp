@@ -9,9 +9,9 @@ Author: Elena Merelo Molina.
 using namespace std;
 
 int main(){
+  //Creamos el primer árbol binario
   ArbolBinario<int> ab1;
   int e;
-
   cout << "\nIntroduzca datos enteros para el árbol binario 1(<0 para terminar): ";
   cin>> e;
   while(e>= 0){
@@ -22,6 +22,7 @@ int main(){
   cout << "\nÁrbol binario 1: \n";
   cout << ab1;
 
+  //Creamos el segundo árbol binario
   ArbolBinario<int> ab2;
   cout << "\nIntroduzca datos enteros para el árbol binario 2(<0 para terminar): ";
   cin>> e;

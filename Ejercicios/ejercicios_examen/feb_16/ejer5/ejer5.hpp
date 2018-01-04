@@ -171,7 +171,7 @@ public:
    @see ArbolBinario<Tbase>::escribe_arbol
    */
   template <class T>
-  friend ostream& operator<<(ostream& flujo, ArbolBinario<T> & t);
+  friend ostream& operator<<(ostream& flujo,const ArbolBinario<T> & t);
 
   /**
    @brief Recorre un árbol binario in order
@@ -224,7 +224,7 @@ private:
 
    Cuenta cuántos nodos cuelgan de n, incluido el propio n
    */
-  int contar(Nodo n);
+  int contar(Nodo n)const;
 
   /**
    @brief Escribe un subárbol
@@ -236,6 +236,7 @@ private:
    es nulo se escribe "n" seguido de un espacio en blanco y la etiqueta del nodo
    */
   void escribe_arbol(ostream& flujo, Nodo n) const;
+
   /**
    @brief Lee un subárbol
    @param flujo stream de entrada desde el que leer
@@ -272,7 +273,7 @@ void ArbolBinario<Tbase>::destruir(Nodo n){
 }
 
 template <class Tbase>
-int ArbolBinario<Tbase>::contar(Nodo n){
+int ArbolBinario<Tbase>::contar(Nodo n) const{
   if (n==0)
     return 0;
   else return 1+ contar(n->izqda) + contar(n->drcha);
@@ -411,7 +412,7 @@ bool ArbolBinario<Tbase>::vacio() const{
 }
 
 template <class Tbase>
-istream & operator>>(istream& flujo, ArbolBinario<Tbase>& t){
+istream& operator>>(istream& flujo, ArbolBinario<Tbase>& t){
   t.clear();
   t.lee_arbol(flujo, t.laraiz);
   return flujo;
