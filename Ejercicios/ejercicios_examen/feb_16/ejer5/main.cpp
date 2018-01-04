@@ -20,7 +20,7 @@ int main(){
     cin >> e;
   }
   cout << "\nÁrbol binario 1: \n";
-  ab1.Esquema();
+  cout << ab1;
 
   ArbolBinario<int> ab2;
   cout << "\nIntroduzca datos enteros para el árbol binario 2(<0 para terminar): ";
@@ -31,9 +31,9 @@ int main(){
     cin >> e;
   }
   cout << "\nÁrbol binario 2: \n";
-  ab2.Esquema();
+  cout << ab2;
 
-  if(son_simetricos(ab1, ab2))
+  if(ab1.es_simetrico_a(ab2))
     cout << "\nLos dos árboles son simétricos";
   else
     cout << "\nLos dos árboles no son simétricos";

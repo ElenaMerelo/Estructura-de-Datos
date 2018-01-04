@@ -173,8 +173,6 @@ public:
   template <class T>
   friend ostream& operator<<(ostream& flujo, ArbolBinario<T> & t);
 
-  void Esquema(const Nodo n, string pre);
-
   /**
    @brief Recorre un árbol binario in order
    @param n nodo a partir del cual se recorre
@@ -191,10 +189,10 @@ public:
 
   /**
    @brief Comprueba si dos árboles binarios son simétricos
-   @param a,b árboles a comparar
+   @param aárbol a comparar con el de la clase
    @return true si son simétricos, false si no lo son
    */
-  bool son_simetricos(const ArbolBinario<Tbase> &a,const ArbolBinario<Tbase> &b);
+  bool es_simetrico_a(const ArbolBinario<Tbase> &a);
 
   /**
    @brief Inserta un nuevo nodo en el árbol
@@ -426,22 +424,6 @@ ostream& operator<<(ostream& flujo, const ArbolBinario<Tbase>& t){
 }
 
 template <class Tbase>
-void ArbolBinario<Tbase>::Esquema(const Nodo n, string pre){
-  if (n==0)
-    cout << pre << "-- x" << endl;
-  else {
-    cout << pre << "-- " << etiqueta(n) << endl;
-    if (derecha(n)!=0 || izquierda(n)!=0) {// Si no es una hoja
-      pre += "   |";
-      Esquema(derecha(n), pre);
-      pre.replace(pre.size()-4, 4, "    ");
-      Esquema (izquierda(n), pre);
-      pre.erase(pre.size()-4, 4);
-    }
-  }
-}
-
-template <class Tbase>
 const typename ArbolBinario<Tbase>::Nodo ArbolBinario<Tbase>::nodonulo = 0;
 
 /*--------------------------RESOLUCIÓN DEL EJERCICIO---------------------------------*/
@@ -468,19 +450,20 @@ bool ArbolBinario<Tbase>::mismo_recorrido_in_order(const ArbolBinario<Tbase> &a,
       in_order(a.laraiz, v1);
       in_order(b.laraiz, v2);
 
-      vector<Tbase>::iterator i;
-      for(i= v1.begin(); i != v2.end(); i++){
-        if(v1[i] != v2[i])
+      typename vector<Tbase>::iterator i= v1.begin(), j= v2.begin();
+      while(i != v2.end() && j != v1.end()){
+        if(*i != *j)
           return false;
+        i++;
+        j++;
       }
       return true;
     }
 }
 
-//El recorrido in order de un ABB produce un listado ordenado de sus etiquetas, por ello recorremos a y b in order y comparamos
 template <class Tbase>
-bool ArbolBinario<Tbase>::son_simetricos(const ArbolBinario<Tbase> &a, const ArbolBinario<Tbase> &b){
-    return mismo_recorrido_in_order(a,b);
+bool ArbolBinario<Tbase>::es_simetrico_a(const ArbolBinario<Tbase> &a){
+    return mismo_recorrido_in_order(a,*this);
 }
 
 template <class Tbase>
@@ -518,7 +501,5 @@ void ArbolBinario<Tbase>::insertar(Tbase elemento, Nodo n){
     }
   }
 }
-
-
 
 #endif /* ArbolBinario_hpp */
