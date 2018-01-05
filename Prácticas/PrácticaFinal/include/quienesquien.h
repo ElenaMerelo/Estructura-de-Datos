@@ -191,6 +191,14 @@ public:
 	void iniciar_juego();
 
 	/**
+	 * @brief Introduce los nombres de los personajes restantes en 'personajes_levantados'.
+	 * @param personajes_levantados Conjunto donde se van a almacenar los nombres de los personajes.
+	 * @param n Nodo del árbol de preguntas donde comenzará la búsqueda de los personajes restantes.
+	 */
+	void personajes_restantes(set<string> & personajes_levantados,bintree<Pregunta>::node n);
+
+
+	/**
 	  * @brief Dado un estado del tablero devuelve los nombres de
 	  *        los personajes que aún no han sido tumbados en el
 	  *        tablero.

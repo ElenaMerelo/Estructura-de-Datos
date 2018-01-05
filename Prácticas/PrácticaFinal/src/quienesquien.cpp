@@ -302,10 +302,24 @@ void QuienEsQuien::iniciar_juego(){
 	//TODO :)
 }
 
-set<string> QuienEsQuien::informacion_jugada(bintree<Pregunta>::node jugada_actual){
+void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bintree<Pregunta>::node n){
+	if( !personajes_levantados.empty() )
+		personajes_levantados.clear();
 
-	//TODO :)
+	if((*n).obtener_num_personajes()==1)		
+		personajes_levantados.insert((*n).obtener_personaje());
+	else{
+		if(!n.left().null())
+			personajes_restantes(personajes_levantados, n.left());
+		if(!n.right().null())		
+			personajes_restantes(personajes_levantados, n.right());
+	}
+
+}
+
+set<string> QuienEsQuien::informacion_jugada(bintree<Pregunta>::node jugada_actual){
 	set<string> personajes_levantados;
+	personajes_restantes(personajes_levantados,jugada_actual);
 	return personajes_levantados;
 }
 
