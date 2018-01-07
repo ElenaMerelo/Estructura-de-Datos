@@ -299,7 +299,38 @@ void QuienEsQuien::usar_arbol(bintree<Pregunta> arbol_nuevo){
 }
 
 void QuienEsQuien::iniciar_juego(){
-	//TODO :)
+	if(!arbol.empty()){
+    	jugada_actual=arbol.root();
+    	string respuesta;
+		while( (*jugada_actual).obtener_num_personajes() != 1 ){
+			cout << (*jugada_actual) << endl;
+			
+			cin >> respuesta;
+			
+			if( respuesta.compare("y") == 0 && !jugada_actual.left().null() )
+				jugada_actual=jugada_actual.left();
+			else if( respuesta.compare("n") == 0 && !jugada_actual.right().null() )
+				jugada_actual=jugada_actual.right();
+			else 
+				cout << "Respuesta incorrecta. Escriba \"y\" o \"n\"." << endl;
+		}
+
+    cout << "¡Ya lo sé! Tu personaje es " << (*jugada_actual).obtener_personaje() << endl;
+    cout << "¿Desea jugar otra partida?" << endl;
+	cin >> respuesta;
+    
+	if( respuesta.compare("y") == 0 )
+    	iniciar_juego();
+    else if( respuesta.compare("n") == 0 ){
+    	cout << "¡Hasta la próxima!" << endl;
+    	jugada_actual=arbol.root();
+    }else{
+    	cout << "Respuesta incorrecta. Se termina el juego." << endl;
+    	jugada_actual=arbol.root();
+	}
+  } else{
+	  cout << "Error: el árbol de preguntas no se ha creado correctamente." << endl;
+  }
 }
 
 void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bintree<Pregunta>::node n){
