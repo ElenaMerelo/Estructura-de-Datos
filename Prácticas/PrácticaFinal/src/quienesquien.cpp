@@ -86,6 +86,41 @@ void QuienEsQuien::mostrar_estructuras_leidas(){
 
 }
 
+int QuienEsQuien::buscar_indice_personaje(string personaje){
+	for(int i=0; i < personajes.size(); i++){
+			if( personajes[i].compare(personaje) == 0 )
+				return i;
+		}
+}
+
+void QuienEsQuien::mostrar_personajes_levantados(const set<string> & personajes_levantados){
+	// Escribe la cabecera del tablero
+	for(vector<string>::iterator it_atributos = this->atributos.begin();
+		it_atributos != this->atributos.end();
+		it_atributos++){
+		cout << *it_atributos << "\t";
+	}
+
+	cout << endl;
+	
+	int indice_personaje;
+	string nombre_personaje;
+	
+	for(set<string>::iterator personaje = personajes_levantados.begin();
+		personaje!= personajes_levantados.end();
+		personaje++){
+
+		indice_personaje=buscar_indice_personaje(*personaje);
+		nombre_personaje = this->personajes[indice_personaje];
+		
+		for(int i = 0; i < tablero[indice_personaje].size(); i++){
+			cout << tablero[indice_personaje][i] << "\t";
+		}
+		
+		cout << nombre_personaje << endl;
+	}
+}
+
 /**
   * @brief Devuelve una copia de la cadena original sin las subcadenas no deseadas.
   *
@@ -311,8 +346,10 @@ void QuienEsQuien::iniciar_juego(){
 				jugada_actual=jugada_actual.left();
 			else if( respuesta.compare("n") == 0 && !jugada_actual.right().null() )
 				jugada_actual=jugada_actual.right();
+			else if( respuesta.compare("p") == 0 )
+				mostrar_personajes_levantados(informacion_jugada(jugada_actual));
 			else 
-				cout << "Respuesta incorrecta. Escriba \"y\" o \"n\"." << endl;
+				cout << "Respuesta incorrecta. Escriba \"y\", \"n\" o \"p\"." << endl;
 		}
 
     cout << "¡Ya lo sé! Tu personaje es " << (*jugada_actual).obtener_personaje() << endl;
@@ -334,9 +371,6 @@ void QuienEsQuien::iniciar_juego(){
 }
 
 void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bintree<Pregunta>::node n){
-	if( !personajes_levantados.empty() )
-		personajes_levantados.clear();
-
 	if((*n).obtener_num_personajes()==1)		
 		personajes_levantados.insert((*n).obtener_personaje());
 	else{
@@ -345,7 +379,6 @@ void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bint
 		if(!n.right().null())		
 			personajes_restantes(personajes_levantados, n.right());
 	}
-
 }
 
 set<string> QuienEsQuien::informacion_jugada(bintree<Pregunta>::node jugada_actual){

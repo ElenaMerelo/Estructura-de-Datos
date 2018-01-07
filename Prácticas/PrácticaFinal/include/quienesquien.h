@@ -134,6 +134,17 @@ public:
 	  */
 	void mostrar_estructuras_leidas();
 
+	/**
+	 * @brief Función auxiliar que, dado un nombre de un personaje, devuelve el índice que ocupa.
+	 * @return Índice que ocupa el personaje.
+	 */
+	int buscar_indice_personaje(string personaje);
+
+	/**
+	 * @brief Escribe en la salida estándar los personajes restantes junto con sus atributos.
+	 */
+	void mostrar_personajes_levantados(const set<string> & personajes_levantados);
+
   /**
 	 * @brief Cuenta el número de personajes que tiene el atributo @ e atributo.
 	 * @param at Vector de 'bool' que contiene los atributos que deben cumplir los personajes a contar.
