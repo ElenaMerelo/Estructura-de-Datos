@@ -21,10 +21,11 @@ de hacer la operación inversa, esto es, el logaritmo en base 2 del número de n
 que tengamos. Si la operación es exacta es que el árbol está completo, sino redondeamos
 para que nos salga el número exacto de niveles.*/
 double APOmin<T>::num_levels(){
+  if(data.size() == 0)
+    return 0.0;
   double num= log2(data.size());
-  double parte_entera;
-  double decimales= modf(num, &parte_entera);
-  if(decimales != 0)
+  double parte_entera, decimales= modf(num, &parte_entera);
+  if(decimales != 0.0)
     parte_entera++;
 
   return parte_entera;
@@ -37,11 +38,18 @@ T& APOmin<T>::maximo(){
   T max= *i;
 
   //Movemos i al último nivel
-  advance(i,pow(2,num_levels()-1)-1);
-  while(i != data.end()){
+  //advance(i,pow(2,num_levels()-1)-1);
+  /*while(i != data.end()){
     if(*i > max)
       max= *i;
-  }
+    i++;
+  }*/
+  advance(i,pow(2,num_levels())-1);
+  cout << *i;
+  for(; i != data.end(); i++)
+    if(*i > max)
+      max= *i;
+
   return max;
 }
 
@@ -64,20 +72,22 @@ void APOmin<T>::swap(T &a, T &b){
 
 template <class T>
 void APOmin<T>::insert(const T& element){
-  typename vector<T>::iterator i= data.begin();
+  data.push_back(element);
+  int i= data.size() -1;
 
-  while(*i < element)
-    i++;
-
-  i= data.insert(i, element);
+  while((data[i]< data[(i-1)/2]) && i>0){
+    swap(data[i], data[(i-1)/2]);
+    i=(i-1)/2;
+  }
 }
 
 
 template <class T>
 void APOmin<T>::show_elements(){
-  typename vector<T>::iterator i;
+  typename vector<T>::iterator i= data.begin();
 
-  cout << "\n";
-  for(i= data.begin(); i != data.end(); i++)
+  while(i != data.end()){
     cout << " " << *i;
+    i++;
+  }
 }
