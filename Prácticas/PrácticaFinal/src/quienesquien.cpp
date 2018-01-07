@@ -582,9 +582,18 @@ void QuienEsQuien::eliminar_nodos_redundantes(){
 }
 
 float QuienEsQuien::profundidad_promedio_hojas(){
-	//TODO :)
+	bintree<Pregunta>::node n(arbol.root());
+	int sum=0;
 
-	return -1;
+	//Guardamos en 'sum' la longitud del camino más corto desde 'arbol.root()' hasta cada nodo hoja.
+	for( int i=0; i < personajes.size(); i++ ){
+		n=arbol.root();
+		for( int j=0; j < atributos.size() && !(*n).es_personaje(); j++ ){
+			tablero[i][j] ? n=n.left() : n=n.right();
+			sum+=1;
+		}
+	}
+	return (float)sum/personajes.size();
 }
 
 void QuienEsQuien::aniade_personaje(string nombre, vector<bool> caracteristicas){
