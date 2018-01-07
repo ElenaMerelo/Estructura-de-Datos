@@ -43,6 +43,11 @@ int Pregunta::obtener_num_personajes() const{
 	return num_personajes;
 }
 
+void Pregunta::set_num_personajes(int n){
+	num_personajes=n;
+}
+
+
 string Pregunta::obtener_pregunta() const{
 	assert(num_personajes >1);
 

@@ -275,6 +275,12 @@ public:
 	void aniade_personaje(string nombre, vector<bool> caracteristicas);
 
 	/**
+	 * @brief Elimina un personaje(modifica el árbol de preguntas)
+	 * @param personaje Nombre del personaje a eliminar.
+	 */
+	void elimina_personaje(string personaje);
+
+	/**
 	  * @brief Rellena los datos del QuienEsQuien con un tablero calculado aleatoriamente.
 	  *
 	  * @param numero_de_personajes Número de personajes que tiene el tablero a crear.

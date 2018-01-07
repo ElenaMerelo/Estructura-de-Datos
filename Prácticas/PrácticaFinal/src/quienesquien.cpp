@@ -93,6 +93,7 @@ int QuienEsQuien::buscar_indice_personaje(string personaje){
 			if( personajes[i].compare(personaje) == 0 )
 				return i;
 		}
+	return -1;
 }
 
 
@@ -411,7 +412,8 @@ void QuienEsQuien::iniciar_juego(){
     	jugada_actual=arbol.root();
     	string respuesta;
 
-		cout << "¿Desea añadir un personaje?" << endl;
+		//AÑADIR PERSONAJE.
+		cout << "¿Desea añadir algún personaje?" << endl;
 		cin >> respuesta;
 		if( respuesta.compare("y") == 0 ){
 			cout << "Introduce el nombre del personaje a añadir: " << endl;
@@ -421,6 +423,22 @@ void QuienEsQuien::iniciar_juego(){
 			aniade_personaje(nombre, at);
 		}
 		
+		//ELIMINAR PERSONAJE.
+		cout << "¿Desea eliminar algún personaje?" << endl;
+		cin >> respuesta;
+
+		if( respuesta.compare("y") == 0 ){
+			cout << "Introduzca el nombre del personaje que quiere eliminar:" << endl;
+			cin >> respuesta;
+			while( buscar_indice_personaje(respuesta) < 0 ){
+				cout << "El personaje introducido no existe. Inténtelo de nuevo:" << endl;
+				cin >> respuesta; 
+			}
+				elimina_personaje(respuesta);
+				escribir_arbol_completo();
+		}
+
+		//MENÚ DEL JUEGO.
 		while( (*jugada_actual).obtener_num_personajes() != 1 ){
 			cout << (*jugada_actual) << endl;
 			
@@ -439,7 +457,9 @@ void QuienEsQuien::iniciar_juego(){
 		}
 
     cout << "¡Ya lo sé! Tu personaje es " << (*jugada_actual).obtener_personaje() << endl;
-    cout << "¿Desea jugar otra partida?" << endl;
+    
+	//REPETECIÓN DEL JUEGO.
+	cout << "¿Desea jugar otra partida?" << endl;
 	cin >> respuesta;
     
 	if( respuesta.compare("y") == 0 )
@@ -630,11 +650,62 @@ void QuienEsQuien::aniade_personaje(string nombre, vector<bool> caracteristicas)
 		subarbol.insert_right(subarbol.root(), Pregunta(nombre, 1));
 	}
 	
-	//Cuarto: Insertamos el subárbol en la misma posición donde se encontraba 'aux'.
+	//Cuarto: insertamos el subárbol en la misma posición donde se encontraba 'aux'.
 	if(aux.parent().left()==aux)
 		arbol.insert_left(aux.parent(), subarbol);
 	else
 		arbol.insert_right(aux.parent(), subarbol);
+
+	//Quinto: añadimos el nuevo personaje a las estructuras.
+	tablero.push_back(caracteristicas);
+	personajes.push_back(nombre);
+
+	//Sexto: aumentamos en una unidad todos los nodos afectados por la insercción.
+	bintree<Pregunta>::node n=arbol.root();
+	int i=0;
+	indice=buscar_indice_personaje(nombre);
+	while( !(*n).es_personaje() ){
+			(*n).set_num_personajes((*n).obtener_num_personajes()+1);
+		if( tablero[indice][i++] )
+			n=n.left();
+		else
+			n=n.right();
+	}
+
+}
+
+void QuienEsQuien::elimina_personaje(string personaje){
+	//Primero: buscamos el nodo hoja donde se encuentra el personaje a borrar.
+	//	- No comprobamos si el personaje existe porque ya se comprueba cuando se pide el nombre.
+	bintree<Pregunta>::node aux=arbol.root();
+	bool nodo_hoja_encontrado=false;
+	int index=buscar_indice_personaje(personaje);
+	for(int i=0; i < tablero[index].size() && !nodo_hoja_encontrado; i++){
+		tablero[index][i] ? aux=aux.left() : aux=aux.right();
+		if( (*aux).es_personaje() )
+			nodo_hoja_encontrado=true;
+	}
+
+	//Segundo: borramos el nodo.
+	if( aux.parent().parent().left() == aux.parent() )
+		arbol.insert_left(aux.parent().parent(), *aux.parent().right());
+	else
+		arbol.insert_right(aux.parent().parent(), *aux.parent().left());
+	
+	//Tercero: bajamos en una unidad todos los nodos afectados por el borrado.
+	aux=arbol.root();
+	int i=0;
+	while( !(*aux).es_personaje() ){
+			(*aux).set_num_personajes((*aux).obtener_num_personajes()-1);
+		if( tablero[index][i++] )
+			aux=aux.left();
+		else
+			aux=aux.right();
+	}
+
+	//Cuarto: actualizamos las estructuras(no se actualizan en el archivo pasado como argumento al programa).
+	tablero.erase(tablero.begin()+index);
+	personajes.erase(personajes.begin()+index);
 }
 
 /**

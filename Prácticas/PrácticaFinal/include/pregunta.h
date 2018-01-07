@@ -105,6 +105,12 @@ class Pregunta{
 		int obtener_num_personajes() const;
 
 		/**
+		 * @brief Asigna 'n' como el número de personajes.
+		 * @param n Nuevo número de personajes.
+		 */
+		void set_num_personajes(int n);
+
+		/**
 		  * @brief Devuelve true si el nodo es de personaje.
 		  */
 		bool es_personaje() const;
