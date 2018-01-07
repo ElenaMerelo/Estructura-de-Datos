@@ -87,12 +87,14 @@ void QuienEsQuien::mostrar_estructuras_leidas(){
 
 }
 
+//Busca el índice del vector 'tablero' que ocupa 'personaje'.
 int QuienEsQuien::buscar_indice_personaje(string personaje){
 	for(int i=0; i < personajes.size(); i++){
 			if( personajes[i].compare(personaje) == 0 )
 				return i;
 		}
 }
+
 
 void QuienEsQuien::mostrar_personajes_levantados(const set<string> & personajes_levantados){
 	// Escribe la cabecera del tablero
@@ -107,11 +109,12 @@ void QuienEsQuien::mostrar_personajes_levantados(const set<string> & personajes_
 	int indice_personaje;
 	string nombre_personaje;
 	
+	//Mostramos los personajes y sus atributos.
 	for(set<string>::iterator personaje = personajes_levantados.begin();
 		personaje!= personajes_levantados.end();
 		personaje++){
 
-		indice_personaje=buscar_indice_personaje(*personaje);
+		indice_personaje=buscar_indice_personaje(*personaje); 
 		nombre_personaje = this->personajes[indice_personaje];
 		
 		for(int i = 0; i < tablero[indice_personaje].size(); i++){
@@ -244,25 +247,33 @@ vector<bool> convertir_a_vector_bool(int n, int digitos) {
   return ret;
 }
 
+/*
+Cuenta el número de personajes con atributos iguales a 'at'.
+A tener en cuenta: 'at' no tiene que tener el mismo tamaño que 'atributos', solamente
+tiene que cumplir que at.size() <= atributos.size().
+*/
 int QuienEsQuien::count_personajes(vector<bool> &at){
 	int n=0;
 	int x=0;
 	for(vector<vector<bool> >::iterator i=tablero.begin();
 	i!=tablero.end();
 	++i){
+		x=0;
 		for(int j=0; j<at.size(); j++){
-			if( (*i)[j] == at[j] )
-				x++;
+			if( (*i)[j] == at[j] )	//Si x alcanza el valor 'at.size()', significa que los atributos del personaje
+				x++;				//coinciden con at. 
 		}
 		if ( x==at.size() ){
 			n++;
 		}
-		x=0;
 	}
-
 	return n;
 }
 
+/*
+Prácticamente igual que la función QuienEsQuien::count_personajes, pero
+esta vez 'atrib' SÍ debe tener el mismo tamaño que 'atributos.
+*/
 string QuienEsQuien::buscar_personaje(const vector<bool> &atrib){
 	int indice=0;
 	int x=0;
@@ -281,6 +292,22 @@ string QuienEsQuien::buscar_personaje(const vector<bool> &atrib){
 	return personajes[indice];
 }
 
+/*
+Función recursiva para crear el árobl de preguntas.
+Explicación: 
+	Argumentos:
+	- 'n' representa el nodo donde se van a crear los nuevos hijos.
+	- 'index' es usado para saber cuando parar la recursividad, es decir, en cada llamada hacemos '1+index' y paramos cuando 'index > atributos.size()'.
+		- Para en <= porque la primera llamada se hace en QuienEsQuien::crear_arbol() empezando en 1 ( crear_arbol_recursivo(arbol.root(), 1, aux); ).
+	- 'at' es usado para saber QUÉ atributos deben cumplir los personajes en cada nodo. En cada iteración, dependiendo de si se ha ido a la izquierda o a la
+	derecha, se añade un 1 o un 0 respectivamente, es decir, en cada llamada,'at' contiene los primeros 'index' atributos que cumplen los personajes que cuelgan de 'n'.
+		- No se pasa por referencia porque si se pasara, 'at' se 'corrompería' al empezar la recursividad por el lado derecho del árbol.
+	
+	Inserción de los nodos:
+	- Antes de hacer la inserción de un nuevo nodo, se comrprueba si es un personaje, y en caso afirmativo, se inserta su nombre en lugar de la pregunta.
+	- También se comprueba que el número de personajes del nodo donde se va a realizar la inserción sea mayor estricto que 1 ((*n).obtener_num_personajes() > 1)
+	para evitar crear preguntas redundantes.
+*/
 void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, vector<bool> at){
 	if(!n.null() && index <= atributos.size()){
 
@@ -317,7 +344,10 @@ void QuienEsQuien::crear_arbol_recursivo(bintree<Pregunta>::node n, int index, v
 	}
 }
 
-
+/*
+Se inicializa la raíz del árbol de preguntas con el primer atributo, con el número total de personajes que hay (que
+es lo que devuelve 'count_personajes(aux)' al ser 'aux' vacío.)
+*/
 bintree<Pregunta> QuienEsQuien::crear_arbol()
 {
 	vector<bool> aux;
@@ -334,6 +364,7 @@ void QuienEsQuien::usar_arbol(bintree<Pregunta> arbol_nuevo){
 	arbol = arbol_nuevo;
 }
 
+// Análogo a QuienEsQuien::buscar_personaje.
 bool QuienEsQuien::personaje_repetido(vector<bool> at){
 	int x=0;
 	for(int i=0; i < tablero.size(); i++){
@@ -345,9 +376,14 @@ bool QuienEsQuien::personaje_repetido(vector<bool> at){
 		if( x==atributos.size() )
 			return true;
 	}
-	return false;
+	return false; // Si sale del bucle significa que no ha encntrado ninguna coincidencia.
 }
 
+
+/*
+Función auxiliar encargada de leer los atributos del nuevo personaje, y asegurarse de que
+los atributos leídos no están repetidos.
+*/
 vector<bool> QuienEsQuien::leer_atributos(){
 	int atri;
 	vector<bool> at;
@@ -368,6 +404,8 @@ vector<bool> QuienEsQuien::leer_atributos(){
 	return at;
 }
 
+
+//Controla el juego.
 void QuienEsQuien::iniciar_juego(){
 	if(!arbol.empty()){
     	jugada_actual=arbol.root();
@@ -381,7 +419,6 @@ void QuienEsQuien::iniciar_juego(){
 			cin >> nombre;
 			vector<bool> at=leer_atributos();
 			aniade_personaje(nombre, at);
-			escribir_arbol_completo();
 		}
 		
 		while( (*jugada_actual).obtener_num_personajes() != 1 ){
