@@ -5,6 +5,7 @@
 #include <math.h>
 #include <algorithm>
 #include <string.h>
+#include <stack>
 
 void QuienEsQuien::copiar_quien_es_quien(const QuienEsQuien &quienEsQuien){
 	this->personajes= quienEsQuien.personajes;
@@ -348,6 +349,8 @@ void QuienEsQuien::iniciar_juego(){
 				jugada_actual=jugada_actual.right();
 			else if( respuesta.compare("p") == 0 )
 				mostrar_personajes_levantados(informacion_jugada(jugada_actual));
+			else if( respuesta.compare("q") == 0 )
+				mostrar_preguntas_formuladas(preguntas_formuladas(jugada_actual));
 			else 
 				cout << "Respuesta incorrecta. Escriba \"y\", \"n\" o \"p\"." << endl;
 		}
@@ -378,6 +381,35 @@ void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bint
 			personajes_restantes(personajes_levantados, n.left());
 		if(!n.right().null())		
 			personajes_restantes(personajes_levantados, n.right());
+	}
+}
+
+void QuienEsQuien::preguntas_formuladas_recursivo(stack<pair<string, bool> > & p, bintree<Pregunta>::node n){
+	if( !n.null() && ( n != arbol.root() ) ){
+		if( n.parent().left() == n ){
+			pair<string, bool> aux((*n.parent()).obtener_pregunta(),1);
+			p.push(aux);
+		}
+		if( n.parent().right() == n ){
+			pair<string, bool> aux((*n.parent()).obtener_pregunta(),0);
+			p.push(aux);
+		}
+		preguntas_formuladas_recursivo(p, n.parent());
+		
+	}
+}
+
+stack<pair<string, bool> > QuienEsQuien::preguntas_formuladas(bintree<Pregunta>::node jugada){
+	stack<pair<string, bool> > preguntas_respuesta;
+	preguntas_formuladas_recursivo(preguntas_respuesta, jugada);
+	return preguntas_respuesta;
+}
+
+void QuienEsQuien::mostrar_preguntas_formuladas(stack<pair<string, bool> >  preguntas_respuestas){
+	cout << "El personaje oculto tiene las siguientes características: " << endl;
+	while(!preguntas_respuestas.empty()){
+		cout << preguntas_respuestas.top().first << " --- " << (preguntas_respuestas.top().second ? "Sí" : "No") << endl;
+		preguntas_respuestas.pop();
 	}
 }
 

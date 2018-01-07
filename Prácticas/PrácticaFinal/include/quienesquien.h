@@ -17,6 +17,7 @@
 #include <cassert>
 #include <set>
 #include <sstream>
+#include <stack>
 
 #include "pregunta.h"
 #include "bintree.h"
@@ -185,6 +186,9 @@ public:
 	  */
 	void escribir_arbol_completo() const;
 
+	/**
+	 * @brief Métodos que modifica el árbol de preguntas para que no haya preguntas redundantes.
+	 */
   void eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node n);
 
 	/**
@@ -194,6 +198,20 @@ public:
 	*/
 	void eliminar_nodos_redundantes();
 
+	/**
+	 * @brief Método auxiliar de preguntas_formuladas.
+	 */
+	void preguntas_formuladas_recursivo(stack<pair<string, bool> > & p, bintree<Pregunta>::node n);
+
+	/**
+	 * @brief Muestra las preguntas y las respuestas que se han hecho hasta el momento 'jugada'.
+	 */
+	stack<pair<string, bool> > preguntas_formuladas(bintree<Pregunta>::node jugada);
+
+	/**
+	 * @brief Muestra las preguntas hechas hasta el momento.
+	 */
+	void mostrar_preguntas_formuladas(stack<pair<string, bool> > preguntas_respuestas);
 	/**
 	 * @brief Inicializa el juego.
 	 * @post  Si la partida anterior no había terminado se
