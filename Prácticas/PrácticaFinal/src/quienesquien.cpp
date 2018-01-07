@@ -456,6 +456,7 @@ void QuienEsQuien::iniciar_juego(){
   }
 }
 
+//Inserta en 'personajes_levantados' los personajes restantes.
 void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bintree<Pregunta>::node n){
 	if((*n).obtener_num_personajes()==1)		
 		personajes_levantados.insert((*n).obtener_personaje());
@@ -467,10 +468,14 @@ void QuienEsQuien::personajes_restantes(set<string> & personajes_levantados,bint
 	}
 }
 
+/*
+Función recursiva que va ascendiendo a partir del nodo 'n' y añade la pregunta y la respuesta dada del nodo,
+es decir, construye en 'p' el camino más corto desde 'arbol.root()' hasta 'jugada_actual'.
+*/
 void QuienEsQuien::preguntas_formuladas_recursivo(stack<pair<string, bool> > & p, bintree<Pregunta>::node n){
 	if( !n.null() && ( n != arbol.root() ) ){
 		if( n.parent().left() == n ){
-			pair<string, bool> aux((*n.parent()).obtener_pregunta(),1);
+			pair<string, bool> aux((*n.parent()).obtener_pregunta(),1); //Si es el hijo izquierdo, significa que el jugador respondió "Sí".
 			p.push(aux);
 		}
 		if( n.parent().right() == n ){
@@ -526,16 +531,16 @@ void QuienEsQuien::escribir_arbol_completo() const{
 }
 
 void QuienEsQuien::eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node n){
-	if( !n.null() && (*n).obtener_num_personajes() > 1 ) {	
-		if(!n.left().null() && n.right().null()){
-			if( n == arbol.root() ){
+	if( !n.null() && (*n).obtener_num_personajes() > 1 ) { // Si es una hoja, no puede ser redundante.	
+		if(!n.left().null() && n.right().null()){ // Comprobamos la primera situación de redundancia.
+			if( n == arbol.root() ){ // Si es la raíz, solo hay que 'subir' la parte izquierda y continuar.
 				arbol.assign_subtree(arbol, n.left());
 				eliminar_nodos_redundantes_recursivo(arbol.root());
 			}		
 			else{
 				bintree<Pregunta> subarbol;
-				subarbol.assign_subtree(arbol, n.left());
-				bintree<Pregunta>::node padre=n.parent();
+				subarbol.assign_subtree(arbol, n.left()); //Cortamos la parte izquierda del árbol y lo
+				bintree<Pregunta>::node padre=n.parent(); //insertamos en el nodo superior al del padre.
 				if( padre.left() == n ){
 					arbol.insert_left(padre, subarbol);
 					eliminar_nodos_redundantes_recursivo(padre.left());
@@ -545,15 +550,15 @@ void QuienEsQuien::eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node 
 				}
 			}
 		}
-		else if( n.left().null() && !n.right().null() ){			
-			if( n == arbol.root() ){
+		else if( n.left().null() && !n.right().null() ){ // Comprobamos la segunda situación de redundancia.
+			if( n == arbol.root() ){ // Si es la raíz, solo hay que 'subir' la parte derecha y continuar.
 				arbol.assign_subtree(arbol, n.right());
 				eliminar_nodos_redundantes_recursivo(arbol.root());
 			}
 			else{
 				bintree<Pregunta> subarbol;
-				subarbol.assign_subtree(arbol, n.right());
-				bintree<Pregunta>::node padre=n.parent();
+				subarbol.assign_subtree(arbol, n.right()); //Cortamos la parte derecha del árbol y lo
+				bintree<Pregunta>::node padre=n.parent(); //insertamos en el nodo superior al del padre.
 				if( padre.left() == n ){
 					arbol.insert_left(padre, subarbol);
 					eliminar_nodos_redundantes_recursivo(padre.left());
@@ -563,10 +568,10 @@ void QuienEsQuien::eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node 
 				}
 			}
 		}
-		else if( n.left().null() && n.right().null() ){
+		else if( n.left().null() && n.right().null() ){ //Comprobamos si ha habido algún fallo en la construcción del árbol.
 			cerr<<"Arbol mal contruido (dos personajes iguales)."<<endl;
 		}else{
-			eliminar_nodos_redundantes_recursivo(n.left());
+			eliminar_nodos_redundantes_recursivo(n.left()); //Continuamos con los siguientes.
 			eliminar_nodos_redundantes_recursivo(n.right());
 		}		
 	}
@@ -583,6 +588,8 @@ float QuienEsQuien::profundidad_promedio_hojas(){
 }
 
 void QuienEsQuien::aniade_personaje(string nombre, vector<bool> caracteristicas){
+	//Primero: buscamos el nodo hoja donde 'correspondería' el nuevo personaje y guardamos el índice del
+	//último atributo que hemos comprobado.
 	bintree<Pregunta>::node aux=arbol.root();
 	bool nodo_hoja_encontrado=false;
 	int indice=0;
@@ -598,9 +605,13 @@ void QuienEsQuien::aniade_personaje(string nombre, vector<bool> caracteristicas)
 		}
 	}
 
+	//Segundo: buscamos el primer atributo en el que el nuevo personaje y el personaje del nodo hoja encontrado anteriormente difieren.
 	int indice_otro_personaje = buscar_indice_personaje((*aux).obtener_personaje());
 	while( tablero[indice_otro_personaje][indice] == caracteristicas[indice]){ indice++; }
 
+	//Tercero: creamos el subárbol correspondiente a la nueva situación:
+	//	- Como raíz ponemos un nodo con la pregunta asociada al atributo número 'indice' y con número de personajes 2.
+	//	- Insertamos los hijos a la izquierda o a la derecha, dependiendo el atributo en el que difieren.
 	bintree<Pregunta> subarbol = bintree<Pregunta>(Pregunta(atributos[indice], 2));
 	if(caracteristicas[indice]){
 		subarbol.insert_left(subarbol.root(), Pregunta(nombre, 1));		
@@ -610,6 +621,7 @@ void QuienEsQuien::aniade_personaje(string nombre, vector<bool> caracteristicas)
 		subarbol.insert_right(subarbol.root(), Pregunta(nombre, 1));
 	}
 	
+	//Cuarto: Insertamos el subárbol en la misma posición donde se encontraba 'aux'.
 	if(aux.parent().left()==aux)
 		arbol.insert_left(aux.parent(), subarbol);
 	else
