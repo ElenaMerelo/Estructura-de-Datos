@@ -334,10 +334,56 @@ void QuienEsQuien::usar_arbol(bintree<Pregunta> arbol_nuevo){
 	arbol = arbol_nuevo;
 }
 
+bool QuienEsQuien::personaje_repetido(vector<bool> at){
+	int x=0;
+	for(int i=0; i < tablero.size(); i++){
+		x=0;
+		for(int j=0; j < atributos.size(); j++){
+			if( tablero[i][j] == at[j] )
+				x++;
+		}
+		if( x==atributos.size() )
+			return true;
+	}
+	return false;
+}
+
+vector<bool> QuienEsQuien::leer_atributos(){
+	int atri;
+	vector<bool> at;
+	
+	cout << "Introduce un número en decimal para los atributos.\n"
+		 << "El número, pasado a binario, serán los atributos. Ej:\n"
+		 << "El número 10 (decimal), corresponde a los atributos 1010 (en binario).\n"
+		 << "Debe tener " << atributos.size() << " cifras." << endl;
+	cin >> atri;
+	at=convertir_a_vector_bool(atri, atributos.size());
+
+	while( personaje_repetido(at) ){
+		cout << "Ya existe un personaje con estos atributos. Introduzca otros." << endl;
+		cin >> atri;
+		at=convertir_a_vector_bool(atri, atributos.size());
+	}
+	
+	return at;
+}
+
 void QuienEsQuien::iniciar_juego(){
 	if(!arbol.empty()){
     	jugada_actual=arbol.root();
     	string respuesta;
+
+		cout << "¿Desea añadir un personaje?" << endl;
+		cin >> respuesta;
+		if( respuesta.compare("y") == 0 ){
+			cout << "Introduce el nombre del personaje a añadir: " << endl;
+			string nombre;
+			cin >> nombre;
+			vector<bool> at=leer_atributos();
+			aniade_personaje(nombre, at);
+			escribir_arbol_completo();
+		}
+		
 		while( (*jugada_actual).obtener_num_personajes() != 1 ){
 			cout << (*jugada_actual) << endl;
 			
@@ -499,10 +545,43 @@ float QuienEsQuien::profundidad_promedio_hojas(){
 	return -1;
 }
 
+void QuienEsQuien::aniade_personaje(string nombre, vector<bool> caracteristicas){
+	bintree<Pregunta>::node aux=arbol.root();
+	bool nodo_hoja_encontrado=false;
+	int indice=0;
+	for(int i=0; i < caracteristicas.size() && !nodo_hoja_encontrado; i++){
+		if( caracteristicas[i] ){
+			aux=aux.left();
+		}else{
+			aux=aux.right();
+		}
+		if( (*aux).es_personaje() ){
+			nodo_hoja_encontrado=true;
+			indice=i;
+		}
+	}
+
+	int indice_otro_personaje = buscar_indice_personaje((*aux).obtener_personaje());
+	while( tablero[indice_otro_personaje][indice] == caracteristicas[indice]){ indice++; }
+
+	bintree<Pregunta> subarbol = bintree<Pregunta>(Pregunta(atributos[indice], 2));
+	if(caracteristicas[indice]){
+		subarbol.insert_left(subarbol.root(), Pregunta(nombre, 1));		
+		subarbol.insert_right(subarbol.root(), Pregunta((*aux).obtener_personaje(), 1));
+	}else{
+		subarbol.insert_left(subarbol.root(), Pregunta((*aux).obtener_personaje(), 1));
+		subarbol.insert_right(subarbol.root(), Pregunta(nombre, 1));
+	}
+	
+	if(aux.parent().left()==aux)
+		arbol.insert_left(aux.parent(), subarbol);
+	else
+		arbol.insert_right(aux.parent(), subarbol);
+}
+
 /**
  * @brief Genera numero enteros positivos aleatorios en el rango [min,max).
 **/
-
 int generaEntero(int min, int max){
     int tam= max -min;
     return ((rand()%tam)+min);

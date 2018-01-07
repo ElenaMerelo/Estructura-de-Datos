@@ -212,6 +212,20 @@ public:
 	 * @brief Muestra las preguntas hechas hasta el momento.
 	 */
 	void mostrar_preguntas_formuladas(stack<pair<string, bool> > preguntas_respuestas);
+
+	/**
+	 * @brief Comprueba si hay algún personaje con los mismos atributos que 'at'.
+	 * @param at Vector de bool que contiene los atributos a comrpobar.
+	 * @return True si existe un personaje con los mismos atributos que at, False, en caso contrario.
+	 */
+	bool personaje_repetido(vector<bool> at);
+
+	/**
+	 * @brief Lee los atributos de la entrada estándar.
+	 * @return Vector de bool conteniendo los atributos leídos.
+	 */
+	vector<bool> leer_atributos();
+
 	/**
 	 * @brief Inicializa el juego.
 	 * @post  Si la partida anterior no había terminado se
@@ -252,6 +266,13 @@ public:
 	  * @pre El árbol de preguntas debe haber sido construido previamente.
 	  */
 	float profundidad_promedio_hojas();
+
+	/**
+	 * @brief Añade un nuevo personaje(modifica el árbol de preguntas)
+	 * @param nombre Nombre del nuevo personaje.
+	 * @param caracteristicas Caracteristicas del nuevo personaje.
+	 */
+	void aniade_personaje(string nombre, vector<bool> caracteristicas);
 
 	/**
 	  * @brief Rellena los datos del QuienEsQuien con un tablero calculado aleatoriamente.
