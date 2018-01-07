@@ -3,6 +3,9 @@
  * @brief Fichero cabecera del QuienEsQuien.
  *
  * Almacena el árbol de preguntas para jugar al ¿Quién es quién?.
+ * 
+ * @author Elena Merelo Molina.
+ * @author Antonio Gámiz Delgado.
  */
 
 #ifndef _QUIENESQUIEN_H_
@@ -64,7 +67,8 @@ private:
 
 	/**
 	  * @brief Copia el quien es quien pasado como argumento en la clase
-	  */
+	  * @param quienEsQuien Objeto a copiar.
+		*/
 	void copiar_quien_es_quien(const QuienEsQuien &quienEsQuien);
 
 public:
@@ -137,18 +141,21 @@ public:
 
 	/**
 	 * @brief Función auxiliar que, dado un nombre de un personaje, devuelve el índice que ocupa.
+	 * @param personaje Nombre del personaje a buscar.
 	 * @return Índice que ocupa el personaje.
 	 */
 	int buscar_indice_personaje(string personaje);
 
 	/**
 	 * @brief Escribe en la salida estándar los personajes restantes junto con sus atributos.
+	 * @param personajes_levantados 'set<string>' donde se insertarán los personajes buscados.
 	 */
 	void mostrar_personajes_levantados(const set<string> & personajes_levantados);
 
   /**
 	 * @brief Cuenta el número de personajes que tiene el atributo @ e atributo.
 	 * @param at Vector de 'bool' que contiene los atributos que deben cumplir los personajes a contar.
+	 * @return Número de personajes que tienen los atributos contenidos en 'at'.
 	 */
 	int count_personajes(vector<bool> &at);
 
@@ -170,14 +177,13 @@ public:
 
 	/**
 	  * @brief Este método construye el árbol de preguntas para todos los personajes del tablero.
+		* @return Devuelve el árbol de preguntas creado.
 	  */
 	bintree<Pregunta> crear_arbol();
 
 	/**
 	  * @brief Sustituye el árbol actual por el árbol pasado por parámetro.
-	  *
 	  * @param arbol_nuevo Árbol de preguntas que sustituye al actual.
-	  *
 	  */
 	void usar_arbol(bintree<Pregunta> arbol_nuevo);
 
@@ -187,7 +193,8 @@ public:
 	void escribir_arbol_completo() const;
 
 	/**
-	 * @brief Métodos que modifica el árbol de preguntas para que no haya preguntas redundantes.
+	 * @brief Método que modifica el árbol de preguntas para que no haya preguntas redundantes.
+	 * @param n Nodo.
 	 */
   void eliminar_nodos_redundantes_recursivo(bintree<Pregunta>::node n);
 
@@ -200,11 +207,15 @@ public:
 
 	/**
 	 * @brief Método auxiliar de preguntas_formuladas.
+	 * @param p Pila donde se almacenan en objetos 'pair' las preguntas hechas junto con la respuesta dada.
+	 * @param n Nodo.
 	 */
 	void preguntas_formuladas_recursivo(stack<pair<string, bool> > & p, bintree<Pregunta>::node n);
 
 	/**
 	 * @brief Muestra las preguntas y las respuestas que se han hecho hasta el momento 'jugada'.
+	 * @param jugada Nodo del árbol de preguntas a partir del cuál se quieren saber las preguntas realizadas.
+	 * @return Pila que contiene en objetos 'pair' las preguntas realizadas junto con la respuesta dada.
 	 */
 	stack<pair<string, bool> > preguntas_formuladas(bintree<Pregunta>::node jugada);
 
@@ -271,12 +282,14 @@ public:
 	 * @brief Añade un nuevo personaje(modifica el árbol de preguntas)
 	 * @param nombre Nombre del nuevo personaje.
 	 * @param caracteristicas Caracteristicas del nuevo personaje.
+	 * @post Modifica el árbol de preguntas.
 	 */
 	void aniade_personaje(string nombre, vector<bool> caracteristicas);
 
 	/**
 	 * @brief Elimina un personaje(modifica el árbol de preguntas)
 	 * @param personaje Nombre del personaje a eliminar.
+	 * @post Modifica el árbol de preguntas.
 	 */
 	void elimina_personaje(string personaje);
 
