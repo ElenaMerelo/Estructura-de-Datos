@@ -10,6 +10,11 @@ APOmin<T>::APOmin(const APOmin<T> &a){
 }
 
 template <class T>
+APOmin<T>::APOmin(vector<T> v){
+  insert(v);
+}
+
+template <class T>
 APOmin<T>& APOmin<T>::operator=(const APOmin<T> &a){
   data= a.data;
 }
@@ -23,35 +28,33 @@ para que nos salga el número exacto de niveles.*/
 double APOmin<T>::num_levels(){
   if(data.size() == 0)
     return 0.0;
+
   double num= log2(data.size());
   double parte_entera, decimales= modf(num, &parte_entera);
-  if(decimales != 0.0)
-    parte_entera++;
 
-  return parte_entera;
+
+  return parte_entera++;
 }
 
-/*template <class T>
+template <class T>
+//Forma con iteradores, más eficiente
 //Al estar ordenados los elementos de menor a mayor, buscamos únicamente en el último nivel
-T& APOmin<T>::maximo(){
+T APOmin<T>::maximo(){
   typename vector<T>::iterator i= data.begin();
   T max= *i;
 
   //Movemos i al último nivel
-  //advance(i,pow(2,num_levels()-1)-1);
-  /*while(i != data.end()){
+  advance(i,pow(2,num_levels()-1)-2);
+  while(i != data.end()){
     if(*i > max)
       max= *i;
     i++;
   }
-  advance(i,pow(2,num_levels()-1)-1);
-  cout << *i;
-  for(; i != data.end(); i++)
-    if(*i > max)
-      max= *i;
 
   return max;
-} */
+}
+
+/*FORMA FÁCIL
 template <class T>
 T APOmin<T>::maximo(){
   T max= data[0];
@@ -60,7 +63,7 @@ T APOmin<T>::maximo(){
       max= data[i];
 
   return max;
-}
+}*/
 
 template <class T>
 int APOmin<T>::size(){
@@ -90,6 +93,13 @@ void APOmin<T>::insert(const T& element){
   }
 }
 
+template <class T>
+void APOmin<T>::insert(vector<T> v){
+  typename vector<T>::iterator i;
+
+  for(i= v.begin(); i != v.end(); i++)
+    insert(*i);
+}
 
 template <class T>
 void APOmin<T>::show_elements(){

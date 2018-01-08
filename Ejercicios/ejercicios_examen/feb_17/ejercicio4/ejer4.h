@@ -21,6 +21,9 @@ public:
   //Constructor de copia
   APOmin(const APOmin<T> &a);
 
+  //Constructor a partir de un vector
+  APOmin(vector<T>  v);
+
   //Operador de asignación
   APOmin<T>& operator=(const APOmin<T> &p);
 
@@ -44,6 +47,9 @@ public:
 
   //Inserta un nuevo elemento
   void insert(const T& element);
+
+  //Inserta un vector
+  void insert(vector<T> v);
 
   //Muestra el árbol parcialmente ordenado
   void show_elements();
