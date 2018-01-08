@@ -31,7 +31,7 @@ public:
   double num_levels();
 
   //Método que devuelve el máximo elemento de un APOmin
-  T& maximo();
+  T maximo();
 
   //Devuelve el tamaño del árbol, su número de nodos
   int size();

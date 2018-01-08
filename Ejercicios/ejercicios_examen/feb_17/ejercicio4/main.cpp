@@ -8,7 +8,7 @@ Author: Elena Merelo Molina
 
 int main(){
   //Probamos el constructor de copia y el que se le pasa el tamaño del árbol
-  APOmin<int> a1, a2(5);
+  APOmin<int> a2, a1(5);
 
   cout << "\nAPOmin 1: ";
   a1.show_elements();
@@ -36,7 +36,7 @@ int main(){
 
   cout <<"\nAPOmin 2 después de insertar elementos: ";
   a2.show_elements();
-  //cout << "\nEl elemento máximo del APOmin 2 es: " << a2.maximo();
+  cout << "\nEl elemento máximo del APOmin 2 es: " << a2.maximo();
 
 
 }

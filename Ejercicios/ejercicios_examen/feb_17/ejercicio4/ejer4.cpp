@@ -31,7 +31,7 @@ double APOmin<T>::num_levels(){
   return parte_entera;
 }
 
-template <class T>
+/*template <class T>
 //Al estar ordenados los elementos de menor a mayor, buscamos únicamente en el último nivel
 T& APOmin<T>::maximo(){
   typename vector<T>::iterator i= data.begin();
@@ -43,12 +43,21 @@ T& APOmin<T>::maximo(){
     if(*i > max)
       max= *i;
     i++;
-  }*/
-  advance(i,pow(2,num_levels())-1);
+  }
+  advance(i,pow(2,num_levels()-1)-1);
   cout << *i;
   for(; i != data.end(); i++)
     if(*i > max)
       max= *i;
+
+  return max;
+} */
+template <class T>
+T APOmin<T>::maximo(){
+  T max= data[0];
+  for(int i= 1; i< data.size(); i++)
+    if(data[i] > max)
+      max= data[i];
 
   return max;
 }
