@@ -38,6 +38,9 @@ int main(){
   //Contamos los niveles tomando el de la raíz como 0
   cout << "\nNúmero de niveles: " << a2.num_levels();
   cout << "\nEl elemento máximo del APOmin 2 es: " << a2.maximo();
+  cout << "\nDespués de eliminar el máximo: ";
+  a2.show_elements();
+  cout << "\nEl máximo de APOmin 2 es ahora: " << a2.maximo();
 
 
 }

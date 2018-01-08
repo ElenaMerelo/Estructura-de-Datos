@@ -36,6 +36,9 @@ public:
   //Método que devuelve el máximo elemento de un APOmin
   T maximo();
 
+  //Elimina el máximo elemento de un APOmin
+  void pop_max();
+
   //Devuelve el tamaño del árbol, su número de nodos
   int size();
 
@@ -54,8 +57,6 @@ public:
   //Muestra el árbol parcialmente ordenado
   void show_elements();
 
-  //Elimina el máximo elemento de un APOmin
-  //void pop_max();
 
 };
 #endif

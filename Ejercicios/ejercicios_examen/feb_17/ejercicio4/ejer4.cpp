@@ -66,6 +66,12 @@ T APOmin<T>::maximo(){
 }*/
 
 template <class T>
+void APOmin<T>::pop_max(){
+  swap(data[data.size()], maximo());
+  data.pop_back();
+}
+
+template <class T>
 int APOmin<T>::size(){
   return data.size();
 }
