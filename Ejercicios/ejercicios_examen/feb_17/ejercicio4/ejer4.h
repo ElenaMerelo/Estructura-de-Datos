@@ -2,8 +2,9 @@
 #define ejer4_h
 #include <vector>
 #include <cmath>  //pow, modf, log2
-#include <iterator>   //advance
+#include <iterator>   //advance, iter_swap
 #include <iostream> //cout
+#include <cassert>  //assert
 
 using namespace std;
 
@@ -35,6 +36,9 @@ public:
 
   //Método que devuelve el máximo elemento de un APOmin
   T maximo();
+
+  //Devuelve la posición en que se encuentra el elemento máximo
+  int position_max();
 
   //Elimina el máximo elemento de un APOmin
   void pop_max();

@@ -44,13 +44,12 @@ T APOmin<T>::maximo(){
   T max= *i;
 
   //Movemos i al último nivel
-  advance(i,pow(2,num_levels()-1)-2);
+  advance(i, pow(2,num_levels()-1)-2);
   while(i != data.end()){
     if(*i > max)
       max= *i;
     i++;
   }
-
   return max;
 }
 
@@ -66,8 +65,32 @@ T APOmin<T>::maximo(){
 }*/
 
 template <class T>
+int APOmin<T>::position_max(){
+  bool max_not_found= true;
+  int i= 0;
+  T max= maximo();
+
+  while(max_not_found == true){
+    i++;
+    if(data[i] == max)
+      max_not_found= false;
+  }
+  return i;
+}
+
+template <class T>
 void APOmin<T>::pop_max(){
-  swap(data[data.size()], maximo());
+  assert(data.size() > 0);
+  typename vector<T>::iterator pos_max= data.begin();
+  typename vector<T>::iterator last_pos= data.end()-1;
+
+  //Movemos el iterador a donde está el máximo
+  int i= position_max();
+  advance(pos_max, i);
+  T max= maximo();
+  //Muevo el máximo a la última posición y lo elimino
+
+  iter_swap(pos_max, last_pos);
   data.pop_back();
 }
 
