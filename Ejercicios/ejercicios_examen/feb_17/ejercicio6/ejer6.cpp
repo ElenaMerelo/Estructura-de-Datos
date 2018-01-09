@@ -195,7 +195,7 @@ double ArbolBinario<T>::num_levels(){
 }
 
 template <class T>
-Nodo get_nodo(T etiqueta){
+typename ArbolBinario<T>::Nodo ArbolBinario<T>::get_nodo(T etiqueta){
   //Recorro el árbol por niveles y almaceno las etiquetas en v
   vector<T> v;
   in_order(laraiz, v);
@@ -206,7 +206,7 @@ Nodo get_nodo(T etiqueta){
 
   Nodo n_drcha= new nodo;
   n_drcha= laraiz;
-  vector<T>::iterator i= v.begin();
+  typename vector<T>::iterator i= v.begin();
 
   //Buscamos por los hijos izquierda y derecha a la vez
   while(n_izqda != NULL && n_drcha != NULL){
@@ -216,21 +216,21 @@ Nodo get_nodo(T etiqueta){
     if(*i == n_drcha->etiqueta)
       return n_drcha;
     i++;
-    n_izqda= n->izqda;
-    n_drcha= n->drcha;
+    n_izqda= n_izqda->izqda;
+    n_drcha= n_drcha->drcha;
   }
   //Si termina el bucle y no ha coincidido ningún nodo con la etiqueta pasada como parámetro devolvemos 0
   return NULL;
 }
 
 template <class T>
-Nodo ArbolBinario<T>::at(int position){
+typename ArbolBinario<T>::Nodo ArbolBinario<T>::at(int position){
   assert(position > 0 && position < size());
   //Recorro el árbol por niveles y almaceno las etiquetas en v
   vector<T> v;
   in_order(laraiz, v);
 
-  vector<T>::iterator i= v.begin();
+  typename vector<T>::iterator i= v.begin();
   advance(i, position);
   return get_nodo(*i);
 }
@@ -251,6 +251,18 @@ int ArbolBinario<T>::trayectoria(int position){
     level--;
   }
   return trayectoria;
+}
+
+template <class Tbase>
+void ArbolBinario<Tbase>::insertar(Tbase elemento){
+  if(laraiz != NULL)
+    insertar(elemento, laraiz);
+  else{
+    laraiz= new nodo;
+    laraiz->etiqueta= elemento;
+    laraiz->izqda= NULL;
+    laraiz->drcha= NULL;
+  }
 }
 
 template <class Tbase>
