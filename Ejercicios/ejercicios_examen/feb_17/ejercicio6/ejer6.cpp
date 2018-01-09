@@ -183,11 +183,11 @@ inversa, el logaritmo en base 2 del número de nodos que tengamos. Si la operaci
 es exacta es que el árbol está completo, sino redondeamos para que nos salga el
 número exacto de niveles. Sumamos dos al final para que el nivel de la raíz sea 1.*/
 double ArbolBinario<T>::num_levels(){
-  int size= size();
-  if(size == 0)
+  int tamanio= size();
+  if(tamanio == 0)
     return 0.0;
 
-  double num= log2(size);
+  double num= log2(tamanio);
   double parte_entera, decimales= modf(num, &parte_entera);
 
   parte_entera += 2;
@@ -243,7 +243,7 @@ int ArbolBinario<T>::trayectoria(int position){
   int trayectoria= 0;
   Nodo n= new nodo;
   n= at(position);
-  
+
   double level= num_levels();
   while(n->padre != NULL){  //Otra opción sería haber puesto while(level != 0)
     trayectoria += n->etiqueta *level;

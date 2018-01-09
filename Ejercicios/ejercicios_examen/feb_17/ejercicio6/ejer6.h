@@ -4,6 +4,9 @@
 #include <iostream>
 #include <cassert>
 #include <vector>
+#include <cmath>
+#include <iterator>
+
 using namespace std;
 
 template <class Tbase>
@@ -178,6 +181,7 @@ public:
    @param n nodo de partida
    @param v vector en el que se almacenan los nodos en orden
    */
+   void in_order(Nodo n, vector<Tbase> &v);
 
   /**
    @brief Obtiene el número de niveles de un árbol, empezando a contar desde 1
@@ -190,7 +194,7 @@ public:
    @param p posición de la que se quiere conocer el nodo
    @return nodo en la posición position
    */
-   Nodo get_nodo(T etiqueta);
+   Nodo get_nodo(Tbase etiqueta);
 
    /**
     @brief Obtiene el nodo que está en la posición pasada como parámetro
