@@ -198,9 +198,14 @@ void ArbolBinario<T>::etiquetas_entre(int n1, int n2, vector<T> &v){
   /*Hacemos ahora la operación inversa a la de obtener el número de niveles; por ser
   un árbol binario y ya lo hemos recorrido in order, para acceder al nodo en el
   nivel k hemos de ir a la posición 2^k -1, hasta la posición 2^k.*/
-  typename vector<T>::iterator i= aux.begin(), j=aux.begin();
+  typename vector<T>::iterator i= aux.begin(), j= aux.begin();
   advance(i, pow(2, n1) -1);
-  advance(j, pow(2,n2)+1);
+  if(n2 == num_niveles)
+    j= aux.end();
+  else
+    //Movemos j hasta el próximo nodo que hay después del último del nivel n2, así abarcamos el nivel entero
+    advance(j, pow(2,n2+1)-1);
+
   while( i != j){
     v.push_back(*i);
     i++;

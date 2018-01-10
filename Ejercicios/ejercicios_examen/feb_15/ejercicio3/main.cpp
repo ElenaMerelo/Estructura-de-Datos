@@ -27,10 +27,17 @@ int main(){
   cin >> n1;
   cin >> n2;
 
-  vector<int> etiquetas;
+  vector<int> etiquetas, recorrido;
+  ab1.in_order(ab1.raiz(), recorrido);
   ab1.etiquetas_entre(n1,n2,etiquetas);
 
   typename vector<int>::iterator i;
+  cout << "\nRecorrido in order del árbol: ";
+  for(i= recorrido.begin(); i != recorrido.end(); i++)
+    cout << " " << *i;
+
+  cout << "\nEtiquetas entre los niveles " << n1 << " y " << n2 << ": ";
+
   for(i= etiquetas.begin(); i != etiquetas.end(); i++)
     cout << " " << *i;
 }
