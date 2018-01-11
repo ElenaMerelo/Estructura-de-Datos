@@ -30,11 +30,11 @@ void dictionary::show_elements(){
 }
 
 dictionary::iterator::iterator(const dictionary::iterator &i){
-  my_iterator= i;
+  my_iterator= i.my_iterator;
 }
 
 dictionary::iterator& dictionary::iterator::operator=(const dictionary::iterator &i){
-  my_iterator= i;
+  my_iterator= i.my_iterator;
   return *this;
 }
 
