@@ -12,3 +12,25 @@ Se supone implementada una función bool primo (int x) que devuelve true si el e
 es primo.
 Author: Elena Merelo Molina
 */
+#include <ejer5.h>
+
+int main(){
+  list<string> my_list;
+  my_list.push_back("patata");
+  my_list.push_back("luriluri");
+  dictionary d1, d2(my_list), d3(d2), d4(d1); //Probamos así todos los constructores y el operator=
+
+  cout << "\nDiccionario 1: ";
+  d1.show_elements();
+
+  cout << "\nDiccionario 2: ";
+  d2.show_elements();
+
+  cout << "\nDiccionario 3: ";
+  d3.show_elements();
+
+  cout << "\nDiccionario 4: ";
+  d4.show_elements();
+
+
+}

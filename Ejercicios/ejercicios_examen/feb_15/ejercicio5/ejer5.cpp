@@ -5,12 +5,24 @@ dictionary::dictionary(const list<string> info){
     data[i]= *j;
 }
 
-bool is_prime(int number){
+bool dictionary::is_prime(int number){
   for(int i= 2;i < sqrt(number); i++)
     if(number%i == 0)
       return false;
 
     return true;
+}
+
+void dictionary::insert(int key, string value){
+  data.insert(pair<int,string>(key, value));
+}
+
+void dictionary::show_elements(){
+  iterator i;
+  for(i= data.begin(); i != data.end(); i++)
+    cout << " " << i->first << " " << i->second;
+
+  cout << "\n";
 }
 
 dictionary::iterator::iterator(const iterator &i){
@@ -29,6 +41,14 @@ iterator& dictionary::iterator::operator++(){
   return *this;
 }
 
-map<int, list<string> >& operator*(){
+map<int, list<string> >& dictionary::iterator::operator*(){
+  return *my_iterator;
+}
 
+iterator dictionary::iterator::begin(){
+  return data.begin();
+}
+
+iterator dictionary::iterator::end(){
+  return data.end();
 }

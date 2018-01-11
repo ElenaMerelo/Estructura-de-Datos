@@ -9,6 +9,8 @@ using namespace std;
 class dictionary{
 private:
   map<int, list<string> > data;
+  //friend class iterator;
+
 public:
   //Constructor vacío
   dictionary(){ }
@@ -19,7 +21,7 @@ public:
   }
 
   //Operador de asignación
-  map<int, list<string> >& operator=(const dictionary &d){
+  dictionary& operator=(const dictionary &d){
     data= d.data;
     return *this;
   }
@@ -28,6 +30,12 @@ public:
 
   //Construye un dictionary a partir de una list<string>
   dictionary(const list<string> info);
+
+  //Inserta el valor value con la clave key
+  void insert(int key, string value);
+
+  //Muestra las claves y sus correspondientes valores
+  void show_elements();
 
   class iterator{
   private:
@@ -45,10 +53,8 @@ public:
 
     map<int, list<string> >& operator*();
 
-    iterator begin(){ return data.begin(); }
+    iterator begin();
 
-    iterator end(){ return data.end(); }
+    iterator end();
   };
-
-
 };
