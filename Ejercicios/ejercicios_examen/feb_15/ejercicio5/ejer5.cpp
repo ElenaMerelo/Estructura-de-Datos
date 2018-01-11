@@ -1,12 +1,7 @@
 /*Metemos los elementos de la list<string> en el dictionary iterando sobre sus
 elementos en orden, poniendo como clave desde j hasta info.size().*/
-dictionary::dictionary(const list<string> &info){
-  typename list<string>::iterator i;
-  int j= 0;
-  for(i= info.begin(); i != info.end(); i++){
-    data[j]= *i;
-    j++;
-  }
+dictionary::dictionary(list<string> info){
+    data.insert(pair<int, list<string> >(0, info));
 }
 
 bool dictionary::is_prime(int number){
@@ -17,29 +12,34 @@ bool dictionary::is_prime(int number){
     return true;
 }
 
-void dictionary::insert(int key, string value){
-  data.insert(pair<int, string>(key, value));
+void dictionary::insert(int key, list<string> value){
+  data.insert(pair<int, list<string> >(key, value));
 }
 
 void dictionary::show_elements(){
   typename map<int, list<string> >::iterator i;
-  for(i= data.begin(); i != data.end(); i++)
-    cout << " " << i->first << " " << i->second;
+  typename list<string>::iterator j;
 
   cout << "\n";
+  for(i= data.begin(); i != data.end(); i++){
+    cout << " " << i->first;
+    for(j= i->second.begin(); j != i->second.end(); j++)
+      cout << " " << *j;
+  }
+
 }
 
-dictionary::iterator::iterator(const iterator &i){
+dictionary::iterator::iterator(const dictionary::iterator &i){
   my_iterator= i;
 }
 
-iterator& dictionary::iterator::operator=(const iterator &i){
+dictionary::iterator& dictionary::iterator::operator=(const dictionary::iterator &i){
   my_iterator= i;
   return *this;
 }
 
-iterator& dictionary::iterator::operator++(){
-  while(!is_prime(*my_iterator))
+dictionary::iterator& dictionary::iterator::operator++(){
+  while(!is_prime(my_iterator->first))
     my_iterator++;
 
   return *this;
@@ -49,18 +49,18 @@ map<int, list<string> >& dictionary::iterator::operator*(){
   return *my_iterator;
 }
 
-iterator dictionary::iterator::begin(){
+dictionary::iterator dictionary::iterator::begin(){
   return data.begin();
 }
 
-iterator dictionary::iterator::end(){
+dictionary::iterator dictionary::iterator::end(){
   return data.end();
 }
 
-bool dictionary::iterator::operator==(const iterator &other){
+bool dictionary::iterator::operator==(const dictionary::iterator &other){
   return other.my_iterator == my_iterator;
 }
 
-bool dictionary::iterator::operator!=(const iterator &other){
+bool dictionary::iterator::operator!=(const dictionary::iterator &other){
   return other.my_iterator != my_iterator;
 }

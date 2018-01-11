@@ -15,13 +15,24 @@ Author: Elena Merelo Molina
 #include <ejer5.h>
 
 int main(){
-  list<string> my_list;
-  my_list.push_back("patata");
-  my_list.push_back("luriluri");
+  list<string> l1, l2, l3;
+  l1.push_back("patata");
+  l1.push_back("luriluri");
+
+  l2.push_back("dvddafjksd");
+  l2.push_back("hola");
+  l2.push_back("mantecado");
+
+  l3.push_back("otra");
+  l3.push_back("lista");
+  l3.push_back("no sé qué más poner");
 
   //Probamos todos los constructores y el operador de asignación
-  dictionary d2(my_list), d3(d2);
+  dictionary d2(l1), d3(d2);
   dictionary d1, d4= d1;
+
+  d1.insert(2, l2);
+  d1.insert(6, l3);
 
   cout << "\nDiccionario 1: ";
   d1.show_elements();

@@ -6,6 +6,9 @@
 
 using namespace std;
 
+#ifndef ejer5_h
+#define ejer5_h
+
 class dictionary{
 private:
   map<int, list<string> > data;
@@ -29,17 +32,17 @@ public:
   bool is_prime(int number);
 
   //Construye un dictionary a partir de una list<string>
-  dictionary(const list<string> &info);
+  dictionary(list<string> info);
 
-  //Inserta el valor value con la clave key
-  void insert(int key, string value);
+  //Inserta la list de string value con la clave key
+  void insert(int key, list<string> value);
 
   //Muestra las claves y sus correspondientes valores
   void show_elements();
 
   class iterator{
   private:
-    typedef typename map<int, list<string> >::iterator my_iterator;
+    typename map<int, list<string> >::iterator my_iterator;
     friend class dictionary;
 
   public:
@@ -63,3 +66,4 @@ public:
   };
 };
 #include <ejer5.cpp>
+#endif
