@@ -56,5 +56,9 @@ public:
     iterator begin();
 
     iterator end();
+
+    bool operator==(const iterator &other);
+
+    bool operator!=(const iterator &other);
   };
 };

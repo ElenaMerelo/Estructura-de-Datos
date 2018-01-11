@@ -14,7 +14,7 @@ bool dictionary::is_prime(int number){
 }
 
 void dictionary::insert(int key, string value){
-  data.insert(pair<int,string>(key, value));
+  data.insert(pair<int, string>(key, value));
 }
 
 void dictionary::show_elements(){
@@ -51,4 +51,12 @@ iterator dictionary::iterator::begin(){
 
 iterator dictionary::iterator::end(){
   return data.end();
+}
+
+bool dictionary::iterator::operator==(const iterator &other){
+  return other.my_iterator == my_iterator;
+}
+
+bool dictionary::iterator::operator!=(const iterator &other){
+  return other.my_iterator != my_iterator;
 }
