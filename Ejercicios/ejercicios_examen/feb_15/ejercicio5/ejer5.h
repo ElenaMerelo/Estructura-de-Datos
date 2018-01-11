@@ -29,7 +29,7 @@ public:
   bool is_prime(int number);
 
   //Construye un dictionary a partir de una list<string>
-  dictionary(const list<string> info);
+  dictionary(const list<string> &info);
 
   //Inserta el valor value con la clave key
   void insert(int key, string value);
@@ -62,3 +62,4 @@ public:
     bool operator!=(const iterator &other);
   };
 };
+#include <ejer5.cpp>

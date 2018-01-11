@@ -1,8 +1,12 @@
 /*Metemos los elementos de la list<string> en el dictionary iterando sobre sus
-elementos en orden, poniendo como clave desde i hasta info.size().*/
-dictionary::dictionary(const list<string> info){
-  for(int i= 0; i< info.size(); i++)
-    data[i]= *j;
+elementos en orden, poniendo como clave desde j hasta info.size().*/
+dictionary::dictionary(const list<string> &info){
+  typename list<string>::iterator i;
+  int j= 0;
+  for(i= info.begin(); i != info.end(); i++){
+    data[j]= *i;
+    j++;
+  }
 }
 
 bool dictionary::is_prime(int number){
@@ -18,7 +22,7 @@ void dictionary::insert(int key, string value){
 }
 
 void dictionary::show_elements(){
-  iterator i;
+  typename map<int, list<string> >::iterator i;
   for(i= data.begin(); i != data.end(); i++)
     cout << " " << i->first << " " << i->second;
 

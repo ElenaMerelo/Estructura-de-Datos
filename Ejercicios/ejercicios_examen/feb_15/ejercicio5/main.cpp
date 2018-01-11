@@ -18,7 +18,10 @@ int main(){
   list<string> my_list;
   my_list.push_back("patata");
   my_list.push_back("luriluri");
-  dictionary d1, d2(my_list), d3(d2), d4(d1); //Probamos así todos los constructores y el operator=
+
+  //Probamos todos los constructores y el operador de asignación
+  dictionary d2(my_list), d3(d2);
+  dictionary d1, d4= d1;
 
   cout << "\nDiccionario 1: ";
   d1.show_elements();
