@@ -12,7 +12,6 @@ using namespace std;
 class dictionary{
 private:
   map<int, list<string> > data;
-  //friend class iterator;
 
 public:
   //Constructor vacío
@@ -54,11 +53,11 @@ public:
 
     iterator& operator++();
 
-    map<int, list<string> >& operator*();
+    pair<int, list<string> >& operator*();
 
-    iterator begin();
+    iterator begin(){ return data.begin(); }
 
-    iterator end();
+    iterator end(){ return data.end(); }
 
     bool operator==(const iterator &other);
 

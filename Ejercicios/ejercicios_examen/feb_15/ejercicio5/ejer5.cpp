@@ -39,23 +39,24 @@ dictionary::iterator& dictionary::iterator::operator=(const dictionary::iterator
 }
 
 dictionary::iterator& dictionary::iterator::operator++(){
+
   while(!is_prime(my_iterator->first))
     my_iterator++;
 
   return *this;
 }
 
-map<int, list<string> >& dictionary::iterator::operator*(){
+pair<int, list<string> >& dictionary::iterator::operator*(){
   return *my_iterator;
 }
 
-dictionary::iterator dictionary::iterator::begin(){
+/*dictionary::iterator dictionary::iterator::begin(){
   return data.begin();
 }
 
 dictionary::iterator dictionary::iterator::end(){
   return data.end();
-}
+}*/
 
 bool dictionary::iterator::operator==(const dictionary::iterator &other){
   return other.my_iterator == my_iterator;
