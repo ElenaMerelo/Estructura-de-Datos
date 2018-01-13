@@ -1,15 +1,16 @@
 /*Metemos los elementos de la list<string> en el dictionary iterando sobre sus
 elementos en orden, poniendo como clave desde j hasta info.size().*/
-dictionary::dictionary(list<string> info){
-    data.insert(pair<int, list<string> >(0, info));
-}
 
-bool dictionary::is_prime(int number){
+bool is_prime(int number){
   for(int i= 2;i < sqrt(number); i++)
     if(number%i == 0)
       return false;
 
-    return true;
+  return true;
+}
+
+dictionary::dictionary(list<string> info){
+    data.insert(pair<int, list<string> >(0, info));
 }
 
 void dictionary::insert(int key, list<string> value){
@@ -17,8 +18,8 @@ void dictionary::insert(int key, list<string> value){
 }
 
 void dictionary::show_elements(){
-  typename map<int, list<string> >::iterator i;
-  typename list<string>::iterator j;
+  map<int, list<string> >::iterator i;
+  list<string>::iterator j;
 
   cout << "\n";
   for(i= data.begin(); i != data.end(); i++){
@@ -28,6 +29,10 @@ void dictionary::show_elements(){
   }
 
 }
+
+/*void dictionary::iterator::initialize(){
+
+}*/
 
 dictionary::iterator::iterator(const dictionary::iterator &i){
   my_iterator= i.my_iterator;
@@ -46,8 +51,8 @@ dictionary::iterator& dictionary::iterator::operator++(){
   return *this;
 }
 
-pair<int, list<string> >& dictionary::iterator::operator*(){
-  return *my_iterator;
+pair<int, list<string> > dictionary::iterator::operator*(){
+  return make_pair(my_iterator->first, my_iterator->second);
 }
 
 /*dictionary::iterator dictionary::iterator::begin(){

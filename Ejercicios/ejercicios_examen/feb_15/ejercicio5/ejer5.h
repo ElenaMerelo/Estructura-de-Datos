@@ -1,6 +1,7 @@
 #include <map>
 #include <list>
 #include <string>
+#include <utility>
 #include <iostream>
 #include <cmath>
 
@@ -8,6 +9,8 @@ using namespace std;
 
 #ifndef ejer5_h
 #define ejer5_h
+
+bool is_prime(int number);
 
 class dictionary{
 private:
@@ -28,8 +31,6 @@ public:
     return *this;
   }
 
-  bool is_prime(int number);
-
   //Construye un dictionary a partir de una list<string>
   dictionary(list<string> info);
 
@@ -41,11 +42,13 @@ public:
 
   class iterator{
   private:
-    typename map<int, list<string> >::iterator my_iterator;
+    map<int, list<string> >::iterator my_iterator;
     friend class dictionary;
 
   public:
     iterator(){ }
+
+    //void initialize();
 
     iterator(const iterator &i);
 
@@ -53,7 +56,7 @@ public:
 
     iterator& operator++();
 
-    pair<int, list<string> >& operator*();
+    pair<int, list<string> > operator*();
 
     iterator begin(){ return data.begin(); }
 
