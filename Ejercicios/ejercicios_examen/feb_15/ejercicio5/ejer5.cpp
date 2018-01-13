@@ -18,9 +18,8 @@ void dictionary::insert(int key, list<string> value){
 }
 
 void dictionary::show_elements(){
-  map<int, list<string> >::iterator i;
+  map<int, list<string> >::iterator i= data.begin();
   list<string>::iterator j;
-
   cout << "\n";
   for(i= data.begin(); i != data.end(); i++){
     cout << " " << i->first;
@@ -30,43 +29,27 @@ void dictionary::show_elements(){
 
 }
 
-/*void dictionary::iterator::initialize(){
-
-}*/
-
-dictionary::iterator::iterator(const dictionary::iterator &i){
-  my_iterator= i.my_iterator;
-}
-
-dictionary::iterator& dictionary::iterator::operator=(const dictionary::iterator &i){
-  my_iterator= i.my_iterator;
+dictionary::iterator& dictionary::iterator::operator=(const dictionary::iterator &other){
+  i= other.i;
   return *this;
 }
 
 dictionary::iterator& dictionary::iterator::operator++(){
-
-  while(!is_prime(my_iterator->first))
-    my_iterator++;
+  while(!is_prime(i->first))
+    i++;
 
   return *this;
 }
 
 pair<int, list<string> > dictionary::iterator::operator*(){
-  return make_pair(my_iterator->first, my_iterator->second);
+  return make_pair(parent.i->first, parent.i->second);
 }
 
-/*dictionary::iterator dictionary::iterator::begin(){
-  return data.begin();
-}
-
-dictionary::iterator dictionary::iterator::end(){
-  return data.end();
-}*/
 
 bool dictionary::iterator::operator==(const dictionary::iterator &other){
-  return other.my_iterator == my_iterator;
+  return other.i == i;
 }
 
 bool dictionary::iterator::operator!=(const dictionary::iterator &other){
-  return other.my_iterator != my_iterator;
+  return other.i != i;
 }

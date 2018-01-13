@@ -33,18 +33,25 @@ int main(){
 
   d1.insert(2, l2);
   d1.insert(6, l3);
+  dictionary::iterator it;
+  list<string>::iterator j;
 
-  cout << "\nDiccionario 1: ";
+  cout << "\nDiccionario 1 usando mi iterador: \n";
+  for(it= d1.begin(); it != d1.end(); it++){
+    cout << it->first << " ";
+    for(j= it->second.begin(); j != it->second.end(); j++)
+      cout << *j;
+  }
+
+  cout << "\nDiccionario 1 iterando normal: \n";
   d1.show_elements();
 
-  cout << "\nDiccionario 2: ";
+  /*cout << "\nDiccionario 2: ";
   d2.show_elements();
 
   cout << "\nDiccionario 3: ";
   d3.show_elements();
 
   cout << "\nDiccionario 4: ";
-  d4.show_elements();
-
-
+  d4.show_elements();*/
 }

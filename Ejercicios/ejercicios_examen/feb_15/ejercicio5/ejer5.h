@@ -40,32 +40,33 @@ public:
   //Muestra las claves y sus correspondientes valores
   void show_elements();
 
-  class iterator{
+  friend class iterator{
   private:
-    map<int, list<string> >::iterator my_iterator;
-    friend class dictionary;
+    map<int, list<string> >::iterator i;
+    dictionary& parent;
 
   public:
+    iterator(dictionary& d, map<int, list<string> >::iterator other): parent(d), i(other){}
+
+    iterator(dictionary &other):parent(other), i(map<int, list<string> >::iterator it= other.data.begin()){}
+
+    iterator(dictionary &other, bool): parent(other), i(map<int, list<string> >::iterator it= other.data.end()){}
+
     iterator(){ }
-
-    //void initialize();
-
-    iterator(const iterator &i);
-
-    iterator& operator=(const iterator &i);
+    iterator& operator=(iterator &other);
 
     iterator& operator++();
 
     pair<int, list<string> > operator*();
 
-    iterator begin(){ return data.begin(); }
+    bool operator==(iterator &other);
 
-    iterator end(){ return data.end(); }
-
-    bool operator==(const iterator &other);
-
-    bool operator!=(const iterator &other);
+    bool operator!=(iterator &other);
   };
+
+  iterator begin(){ return iterator(*this); }
+
+  iterator end(){ return iterator(*this, true); }
 };
 #include <ejer5.cpp>
 #endif
