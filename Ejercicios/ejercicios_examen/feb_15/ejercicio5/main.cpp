@@ -27,24 +27,26 @@ int main(){
   l3.push_back("lista");
   l3.push_back("no sé qué más poner");
 
+  list<string> l4(l2);
+  l4.push_back("cocholate");
+
+
   //Probamos todos los constructores y el operador de asignación
   dictionary d2(l1), d3(d2);
   dictionary d1, d4= d1;
 
   d1.insert(2, l2);
   d1.insert(6, l3);
+  d1.insert(14, l1);
+  d1.insert(17, l4);
+
   dictionary::iterator it;
-  list<string>::iterator j;
 
   cout << "\nDiccionario 1 usando mi iterador: \n";
-  for(it= d1.begin(); it != d1.end(); it++){
-    cout << it->first << " ";
-    for(j= it->second.begin(); j != it->second.end(); j++)
-      cout << *j;
-  }
+  d1.show_elements_my_it();
 
   cout << "\nDiccionario 1 iterando normal: \n";
-  d1.show_elements();
+  d1.show_elements_normal();
 
   /*cout << "\nDiccionario 2: ";
   d2.show_elements();

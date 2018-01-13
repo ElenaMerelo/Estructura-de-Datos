@@ -17,20 +17,41 @@ void dictionary::insert(int key, list<string> value){
   data.insert(pair<int, list<string> >(key, value));
 }
 
-void dictionary::show_elements(){
-  map<int, list<string> >::iterator i= data.begin();
-  list<string>::iterator j;
+void dictionary::show_elements_normal(){
+  map<int, list<string> >::iterator m;
+  list<string>::iterator n;
   cout << "\n";
-  for(i= data.begin(); i != data.end(); i++){
-    cout << " " << i->first;
-    for(j= i->second.begin(); j != i->second.end(); j++)
-      cout << " " << *j;
+  for(m= data.begin(); m != data.end(); m++){
+    cout << " " << m->first;
+    for(n= m->second.begin(); n != m->second.end(); n++)
+      cout << " " << *n;
   }
 
 }
 
-dictionary::iterator& dictionary::iterator::operator=(const dictionary::iterator &other){
-  i= other.i;
+void dictionary::show_elements_my_it(){
+  dictionary::iterator my_i;
+  list<string>::iterator my_j;
+
+  for(my_i= data.begin(); my_i != data.end(); ++my_i){
+    cout << my_i.first();
+    for(my_j= my_i.begin(); my_j != my_i.end(); my_j++)
+      cout << " " << *my_j;
+  }
+
+}
+
+dictionary::iterator& dictionary::iterator::operator=(iterator other){ 
+      i= other.i;
+      j= other.j;
+
+      return *this;
+    }
+    
+
+dictionary::iterator& dictionary::iterator::operator=(const map<int, list<string> >::iterator &other){
+  i= other;
+
   return *this;
 }
 
@@ -42,14 +63,47 @@ dictionary::iterator& dictionary::iterator::operator++(){
 }
 
 pair<int, list<string> > dictionary::iterator::operator*(){
-  return make_pair(parent.i->first, parent.i->second);
+  return make_pair(i->first, i->second);
 }
 
-
-bool dictionary::iterator::operator==(const dictionary::iterator &other){
-  return other.i == i;
+bool dictionary::iterator::operator==(dictionary::iterator other){
+  return other.i == i && other.j == j;
 }
 
-bool dictionary::iterator::operator!=(const dictionary::iterator &other){
-  return other.i != i;
+bool dictionary::iterator::operator!=(const map<int, list<string> >::iterator &other){
+  return other != i;
+}
+
+dictionary::iterator dictionary::begin(){
+  map<int, list<string> >::iterator map_it= data.begin();
+  list<string>::iterator list_it= map_it->second.begin();
+  dictionary::iterator it(map_it, list_it);
+  return it;
+} 
+
+dictionary::iterator dictionary::end(){
+  map<int, list<string> >::iterator map_it= data.end();
+  list<string>::iterator list_it= map_it->second.end();
+  dictionary::iterator it(map_it, list_it);
+  return it;
+}
+
+int dictionary::iterator::first(){
+  return i->first;
+}
+
+list<string> dictionary::iterator::second(){
+  return i->second; // o return j;
+}
+
+list<string>::iterator dictionary::iterator::begin(){
+  list<string>::iterator other_j= i->second.begin();
+
+  return other_j;
+}
+
+list<string>::iterator dictionary::iterator::end(){
+  list<string>::iterator other_j= i->second.end();
+
+  return other_j;
 }

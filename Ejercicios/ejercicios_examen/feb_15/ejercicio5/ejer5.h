@@ -38,35 +38,55 @@ public:
   void insert(int key, list<string> value);
 
   //Muestra las claves y sus correspondientes valores
-  void show_elements();
+  void show_elements_normal();
 
-  friend class iterator{
+  //Muestra las claves y sus correspondientes valores iterando sobre las claves primas
+  void show_elements_my_it();
+
+  class iterator{
   private:
     map<int, list<string> >::iterator i;
-    dictionary& parent;
-
+    list<string>::iterator j;
+    
   public:
-    iterator(dictionary& d, map<int, list<string> >::iterator other): parent(d), i(other){}
-
-    iterator(dictionary &other):parent(other), i(map<int, list<string> >::iterator it= other.data.begin()){}
-
-    iterator(dictionary &other, bool): parent(other), i(map<int, list<string> >::iterator it= other.data.end()){}
-
     iterator(){ }
-    iterator& operator=(iterator &other);
+
+    iterator(const iterator &other):i(other.i), j(other.j){}
+
+    iterator(map<int, list<string> >::iterator other_i, list<string>::iterator other_j){
+      i= other_i;
+      j= other_j;
+    }
+
+    iterator& operator=(iterator other);
+
+    iterator& operator=(const map<int, list<string> >::iterator &other);
 
     iterator& operator++();
 
     pair<int, list<string> > operator*();
 
-    bool operator==(iterator &other);
+    bool operator==(iterator other);
 
-    bool operator!=(iterator &other);
+    bool operator!=(const map<int, list<string> >::iterator &other);
+
+    //Devuelve la clave del mapa
+    int first();
+
+    //Valor correspondiente a una clave 
+    list <string> second();
+
+    list<string>::iterator begin();
+
+    list<string>::iterator end();
   };
 
-  iterator begin(){ return iterator(*this); }
+  //Iterador al comienzo del diccionario, esto es, a la primera clave y primer string de la lista
+  iterator begin();
 
-  iterator end(){ return iterator(*this, true); }
+  //Iterador al final del diccionario, esto es, a la última clave y último string de la lista
+  iterator end();
+
 };
 #include <ejer5.cpp>
 #endif
