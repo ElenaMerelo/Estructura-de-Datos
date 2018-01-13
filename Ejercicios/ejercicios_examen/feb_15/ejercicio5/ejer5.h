@@ -46,19 +46,15 @@ public:
   class iterator{
   private:
     map<int, list<string> >::iterator i;
-    list<string>::iterator j;
     
   public:
     iterator(){ }
 
-    iterator(const iterator &other):i(other.i), j(other.j){}
+    iterator(const iterator &other):i(other.i){}
 
-    iterator(map<int, list<string> >::iterator other_i, list<string>::iterator other_j){
+    iterator(map<int, list<string> >::iterator other_i){
       i= other_i;
-      j= other_j;
     }
-
-    iterator& operator=(iterator other);
 
     iterator& operator=(const map<int, list<string> >::iterator &other);
 

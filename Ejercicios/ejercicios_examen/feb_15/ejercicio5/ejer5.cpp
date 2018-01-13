@@ -25,6 +25,8 @@ void dictionary::show_elements_normal(){
     cout << " " << m->first;
     for(n= m->second.begin(); n != m->second.end(); n++)
       cout << " " << *n;
+
+    cout << "\n";
   }
 
 }
@@ -35,19 +37,12 @@ void dictionary::show_elements_my_it(){
 
   for(my_i= data.begin(); my_i != data.end(); ++my_i){
     cout << my_i.first();
-    for(my_j= my_i.begin(); my_j != my_i.end(); my_j++)
+    for(my_j= my_i.begin(); my_j != my_i.end(); ++my_j)
       cout << " " << *my_j;
+    cout << "\n";
   }
 
 }
-
-dictionary::iterator& dictionary::iterator::operator=(iterator other){ 
-      i= other.i;
-      j= other.j;
-
-      return *this;
-    }
-    
 
 dictionary::iterator& dictionary::iterator::operator=(const map<int, list<string> >::iterator &other){
   i= other;
@@ -57,7 +52,7 @@ dictionary::iterator& dictionary::iterator::operator=(const map<int, list<string
 
 dictionary::iterator& dictionary::iterator::operator++(){
   while(!is_prime(i->first))
-    i++;
+    ++i;
 
   return *this;
 }
@@ -67,7 +62,7 @@ pair<int, list<string> > dictionary::iterator::operator*(){
 }
 
 bool dictionary::iterator::operator==(dictionary::iterator other){
-  return other.i == i && other.j == j;
+  return other.i == i;
 }
 
 bool dictionary::iterator::operator!=(const map<int, list<string> >::iterator &other){
@@ -76,15 +71,13 @@ bool dictionary::iterator::operator!=(const map<int, list<string> >::iterator &o
 
 dictionary::iterator dictionary::begin(){
   map<int, list<string> >::iterator map_it= data.begin();
-  list<string>::iterator list_it= map_it->second.begin();
-  dictionary::iterator it(map_it, list_it);
+  dictionary::iterator it(map_it);
   return it;
 } 
 
 dictionary::iterator dictionary::end(){
   map<int, list<string> >::iterator map_it= data.end();
-  list<string>::iterator list_it= map_it->second.end();
-  dictionary::iterator it(map_it, list_it);
+  dictionary::iterator it(map_it);
   return it;
 }
 
@@ -93,17 +86,15 @@ int dictionary::iterator::first(){
 }
 
 list<string> dictionary::iterator::second(){
-  return i->second; // o return j;
+  return i->second;
 }
 
 list<string>::iterator dictionary::iterator::begin(){
-  list<string>::iterator other_j= i->second.begin();
 
-  return other_j;
+  return i->second.begin();
 }
 
 list<string>::iterator dictionary::iterator::end(){
-  list<string>::iterator other_j= i->second.end();
 
-  return other_j;
+  return i->second.end();
 }
