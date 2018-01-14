@@ -203,16 +203,17 @@ void ArbolBinario<T>::insert(T elemento, Nodo n){
 
 template <class T>
 int ArbolBinario<T>::number_of_paths(Nodo n, int k){
-  int sum;
   /*Vamos recorriendo todos los nodos del árbol y obteniendo la suma de las
   etiquetas a partir de él. Si ambas sumas son 0 será porque no tienen más hijos, no hay más caminos
   por recorrer y por lo tanto habremos acabado.*/
   if(n == 0)
     return 0;
   else{
-    if(number_of_paths(n, k) == k)
+    if(suma_camino_drcha(n) == k)
       return 1 + number_of_paths(n->izqda, k) + number_of_paths(n->drcha, k);
-    else if(number_of_paths(n, k) != k)
+    if(suma_camino_izqda(n) == k)
+      return 1 + number_of_paths(n->izqda, k) + number_of_paths(n->drcha, k);
+    else
       return 0 + number_of_paths(n->izqda, k) + number_of_paths(n->drcha, k);
   }
 }
@@ -230,6 +231,7 @@ int ArbolBinario<T>::suma_k(Nodo n, int k){
     return sum;
   }
 }*/
+
 
 template <class T>
 int ArbolBinario<T>::number_of_paths(int k){
