@@ -192,14 +192,6 @@ public:
 
    /**
    @brief Obtiene el número de caminos en los que la suma de las etiquetas de los nodos que los componen es k
-   @param n nodo a partir del cual se suman las etiquetas
-   @param k suma que buscamos
-   @return número de caminos cuyas etiquetas suman k
-   */
-   //int suma_k(Nodo n, int k);
-
-   /**
-   @brief Obtiene el número de caminos en los que la suma de las etiquetas de los nodos que los componen es k
    @param ab árbol binario del que se quiere conocer el número de caminos con suma k
    @param k suma que buscamos
    @return número de caminos cuyas etiquetas suman k
@@ -219,6 +211,12 @@ public:
    @return suma de las etiquetas
    */
    int suma_camino_drcha(Nodo n);
+
+   /**
+   @brief Muestra los elementos in order del árbol
+   @param n nodo desde el cual se empieza a recorrer
+   */
+   void show_elements_in_order(Nodo n);
 
 private:
   /**

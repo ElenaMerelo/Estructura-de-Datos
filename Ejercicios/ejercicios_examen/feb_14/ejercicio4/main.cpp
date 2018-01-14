@@ -23,6 +23,8 @@ int main(){
   }
   cout << "\nÁrbol binario 1: \n";
   cout << ab1;
+  cout << "\nLos elementos del árbol in order: ";
+  ab1.show_elements_in_order(ab1.raiz());
   cout << "\nEl número de caminos que suman 5 es: " << ab1.number_of_paths(5);
 
 

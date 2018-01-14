@@ -218,21 +218,6 @@ int ArbolBinario<T>::number_of_paths(Nodo n, int k){
   }
 }
 
-/*
-template <class T>
-int ArbolBinario<T>::suma_k(Nodo n, int k){
-  if(n == 0)
-    return 0;
-  else{
-    if(suma_camino_izqda(n) == k || suma_camino_drcha(n) == k)
-      sum++;
-    sum += suma_k(n->izqda, k);
-    sum += suma_k(n->drcha, k);
-    return sum;
-  }
-}*/
-
-
 template <class T>
 int ArbolBinario<T>::number_of_paths(int k){
   return number_of_paths(laraiz, k);
@@ -256,4 +241,14 @@ int ArbolBinario<T>::suma_camino_drcha(Nodo n){
     n= n->drcha;
   }
   return sum;
+}
+
+template <class T>
+void ArbolBinario<T>::show_elements_in_order(Nodo n){
+  //Fin de la recursión si llegamos a un nodo nulo
+  if(n== 0)
+    return;
+  show_elements_in_order(n->izqda);
+  cout << " " << n->etiqueta;
+  show_elements_in_order(n->drcha);
 }
