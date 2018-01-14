@@ -158,8 +158,8 @@ public:
    Lee un árbol de flujo y lo almacena en t. El formato de entrada se
    puede consultar en la función de salida. @see ArbolBinario<T>::operator<<
    */
-  template <class T>
-  friend istream& operator>>(istream& flujo, ArbolBinario<T> & t);
+  template <class Tbase>
+  friend istream& operator>>(istream& flujo, ArbolBinario<Tbase> & t);
 
   /**
    @brief Operador de salida
@@ -173,21 +173,8 @@ public:
    de un espacio en blanco y la etiqueta del nodo.
    @see ArbolBinario<T>::escribe_arbol
    */
-  template <class T>
-  friend ostream& operator<<(ostream& flujo,const ArbolBinario<T> & t);
-
-  /**
-   @brief Obtiene el recorrido in_order de un árbol binario
-   @param n nodo de partida
-   @param v vector en el que se almacenan los nodos en orden
-   */
-   void in_order(Nodo n, vector<T> &v);
-
-  /**
-   @brief Obtiene el número de niveles de un árbol, empezando a contar desde 1
-   @return número de niveles del árbol
-   */
-   double num_levels();
+  template <class Tbase>
+  friend ostream& operator<<(ostream& flujo,const ArbolBinario<Tbase> & t);
 
    /**
    @brief Inserta un nuevo nodo en el árbol
@@ -209,7 +196,7 @@ public:
    @param k suma que buscamos
    @return número de caminos cuyas etiquetas suman k
    */
-   int suma_k(Nodo n, int k);
+   //int suma_k(Nodo n, int k);
 
    /**
    @brief Obtiene el número de caminos en los que la suma de las etiquetas de los nodos que los componen es k
@@ -217,7 +204,7 @@ public:
    @param k suma que buscamos
    @return número de caminos cuyas etiquetas suman k
    */
-   int number_of_paths(const ArbolBinario<T> &ab, int k);
+   int number_of_paths(int k);
 
    /**
    @brief Suma el valor de las etiquetas de los hijos izquierdos de un nodo

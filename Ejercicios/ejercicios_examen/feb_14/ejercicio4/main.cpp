@@ -8,3 +8,22 @@ b) Construir el AVL y el APO que resultan de insertar (en ese orden) los
 elementos del conjunto de enteros {45,23,12,20,15,22,24,55,52}.
 Author: Elena Merelo Molina
 */
+#include <ejer4.h>
+
+int main(){
+  ArbolBinario<int> ab1;
+  int e;
+  cout << "\nIntroduzca datos enteros para el árbol binario 1(número <0 para terminar): ";
+  cin>> e;
+
+  while(e >= 0){
+    ab1.insert(e);
+    cout << "\nIntroduzca entero(<0 para terminar): ";
+    cin >> e;
+  }
+  cout << "\nÁrbol binario 1: \n";
+  cout << ab1;
+  cout << "\nEl número de caminos que suman 5 es: " << ab1.number_of_paths(5);
+
+
+}
