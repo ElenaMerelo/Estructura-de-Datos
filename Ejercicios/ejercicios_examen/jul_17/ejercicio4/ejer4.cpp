@@ -24,7 +24,7 @@ template <class T>
 queue<T>& queue<T>::operator=(const queue<T> &q){
   s1= q.s1;
   s2= q.s2;
-
+/*
   stack<T> aux1= q.s1;
   stack<T> aux2= q.s2;
 
@@ -37,7 +37,7 @@ queue<T>& queue<T>::operator=(const queue<T> &q){
   while(!aux2.empty()){
     s1.push(aux2.top());
     aux2.pop();
-  }
+  }*/
 
   return *this;
 }

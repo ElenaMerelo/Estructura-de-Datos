@@ -22,7 +22,7 @@ int main(){
   else
     cout << "\nq2 no está vacía";
 
-  //q3.push(8);
+  q3.push(8);
   q3.pop();
 
   cout << "\nElementos de q3: ";
