@@ -19,3 +19,36 @@
 + set, multiset, map, multimap all have constructors, destructor, operator=, begin, end, rbegin, rend, cbegin, cend, crbegin, crend, empty, size, max_size, insert, erase, swap, clear, emplace, emplace_hint, find, count, lower_bound, upper_bound, equal_range, get_allocator.
 
 + Moreover, map has at and operator[], compared to the other associative containers.
+
++ queues are a type of container adaptor, specifically designed to operate in a FIFO context (first-in first-out), where elements are inserted into one end of the container and extracted from the other.
+
+  queues are implemented as containers adaptors, which are classes that use an encapsulated object of a specific container class as its underlying container, providing a specific set of member functions to access its elements. Elements are pushed into the "back" of the specific container and popped from its "front".
+
+  Operations:
+  ~~~  
+  empty
+  size
+  front
+  back
+  push
+  pop
+
+  (c++11) swap, emplace
+  ~~~
+
++ Stacks are a type of container adaptor, specifically designed to operate in a LIFO context (last-in first-out), where elements are inserted and extracted only from one end of the container.
+
+  stacks are implemented as containers adaptors, which are classes that use an encapsulated object of a specific container class as its underlying container, providing a specific set of member functions to access its elements. Elements are pushed/popped from the "back" of the specific container, which is known as the top of the stack.
+
+  Operations:
+  ~~~
+  empty    
+  size
+  top
+  push
+  pop
+
+  (c++11) swap, emplace
+  ~~~
+
+    The standard container classes vector, deque and list fulfill these requirements. By default, if no container class is specified for a particular stack class instantiation, the standard container deque is used.
